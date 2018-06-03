@@ -1,0 +1,5 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
+import GLOBAL_CONFIG from '../config/config'
+import axios from 'axios'
+import BScroll from 'better-scroll'
