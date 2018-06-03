@@ -5,7 +5,29 @@
 
 
 #开发环境
-"devDependencies": {
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "better-scroll": "^1.11.1",
+    "echarts": "^4.1.0",
+    "express": "^4.16.3",
+    "expose-loader": "^0.7.5",
+    "express-session": "^1.15.6",
+    "hoek": "^4.2.1",
+    "iview": "^2.14.0",
+    "jquery": "^3.3.1",
+    "prettier": "^1.12.1",
+    "vue": "^2.5.2",
+    "vue-awesome-swiper": "^3.1.3",
+    "vue-resource": "^1.5.0",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "ajv": "^6.5.0",
+    "ajv-keywords": "^3.2.0",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
@@ -35,6 +57,8 @@
     "sass-loader": "^7.0.1",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
+    "style-loader": "^0.21.0",
+    "swiper": "^3.4.2",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
     "vue-loader": "^13.3.0",
