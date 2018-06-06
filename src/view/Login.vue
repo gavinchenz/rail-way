@@ -3,10 +3,7 @@
     <header id="login-header">
       <a class="login-a" href="javascript:;">
         <img id="login-img" src="../assets/images/login1.png"/>
-        <p id="login-p">
-          {{msg}}
-          <span id="login-span">{{subTitle}}</span>
-        </p>
+        <p id="login-p">{{msg}}</p>
       </a>
     </header>
     <form class="login-t" action="/Home">
@@ -37,7 +34,6 @@ export default {
   data () {
     return {
       msg:"大数据中心应用系统",
-      subTitle:"Large Data Center Application System",
       technicalTel:"技术支持电话：18502978368",
       company:"西安九索数据技术股份有限公司",
       loginTit:"用户登录",
@@ -64,10 +60,12 @@ export default {
 .my-login{
   width:100%;
   height:100%;
+  background: url(../assets/images/bg-03.jpg) no-repeat;
+  background-size:cover;
 }
 #login-header{
   width:100%;
-  height: 100px;
+  height: 80px;
   padding-top:20px;
 }
 .login-a{
@@ -86,12 +84,10 @@ export default {
   flex:1;
   height:100%;
   color:#fff;
-  font-size:28px;
+  font-size:34px;
   text-align: left;
-}
-#login-span{
-  display:block;
-  font-size:14px;
+  line-height:54px;
+  letter-spacing: 1.5px;
 }
 .login-t{
   box-sizing: border-box;

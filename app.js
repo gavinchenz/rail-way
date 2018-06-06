@@ -8,7 +8,21 @@ const app = express();
 
 
 //引入路由配置
-const indexNav= require("./router/indexNav");
+
+//二级页面路由配置
+const homesRouter= require("./router/homes");
+
+//系统管理相关
+const accountsRouter= require("./router/accounts");
+const authirityRouter= require("./router/authirity");
+const modelParameterRouter= require("./router/modelParameter");
+const departmentRouter= require("./router/department");
+const dataDictionaryRouter= require("./router/dataDictionary");
+const systemConfigurationRouter= require("./router/systemConfiguration");
+const caseManagementRouter= require("./router/caseManagement");
+const lawEnforcementLogRouter= require("./router/lawEnforcementLog");
+const interfacePushRouter= require("./router/interfacePush");
+const clusterOperationRouter= require("./router/clusterOperation");
 
 
 app.use(express.json());
@@ -28,7 +42,19 @@ app.use(cors({//用来限制头部文件中的信息
 }));
 
 //注册路由表
-app.use("/indexNav",indexNav);
+
+app.use("/home",homesRouter);
+
+app.use("/accounts",accountsRouter);
+app.use("/authirity",authirityRouter);
+app.use("/modelParameter",modelParameterRouter);
+app.use("/department",departmentRouter);
+app.use("/dataDictionary",dataDictionaryRouter);
+app.use("/systemConfiguration",systemConfigurationRouter);
+app.use("/caseManagement",caseManagementRouter);
+app.use("/lawEnforcementLog",lawEnforcementLogRouter);
+app.use("/interfacePush",interfacePushRouter);
+app.use("/clusterOperation",clusterOperationRouter);
 
 
 //指定服务静态文件夹

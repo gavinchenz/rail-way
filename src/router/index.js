@@ -51,6 +51,10 @@ export default new Router({
     mode: "history",
     routes: [{
             path: '/',
+            redirect: '/login', //指定默认路由（重定向）
+        },
+        {
+            path: '/login',
             name: 'Login',
             // 页面级组件懒加载，等同于component: Login，下同
             component: resolve => require(["../view/Login"], resolve)
@@ -62,17 +66,33 @@ export default new Router({
         },
         {
             path: '/Home',
+            redirect: '/Home/Search',
             name: 'Home',
             component: resolve => require(["../view/Home"], resolve),
             children: [{
+                    path: 'DataAccessSituation',
+                    name: 'DataAccessSituation',
+                    component: resolve => require(["../view/DataAccessSituation"], resolve)
+                },
+                {
                     path: 'search',
                     name: 'Search',
                     component: resolve => require(["../view/Search"], resolve)
                 },
                 {
-                    path: 'DataAccessSituation',
-                    name: 'DataAccessSituation',
-                    component: resolve => require(["../view/DataAccessSituation"], resolve)
+                    path: 'ComprehensiveStudy',
+                    name: 'ComprehensiveStudy',
+                    component: resolve => require(["../view/ComprehensiveStudy"], resolve)
+                },
+                {
+                    path: 'ComprehensiveEarlyWarning',
+                    name: 'ComprehensiveEarlyWarning',
+                    component: resolve => require(["../view/ComprehensiveEarlyWarning"], resolve)
+                },
+                {
+                    path: 'AccountManagement',
+                    name: 'AccountManagement',
+                    component: resolve => require(["../view/AccountManagement"], resolve)
                 },
                 {
                     path: 'DataFeatureLibrary',
@@ -103,16 +123,6 @@ export default new Router({
                     path: 'NationalSiteInformation',
                     name: 'NationalSiteInformation',
                     component: resolve => require(["../view/NationalSiteInformation"], resolve)
-                },
-                {
-                    path: 'ComprehensiveStudy',
-                    name: 'ComprehensiveStudy',
-                    component: resolve => require(["../view/ComprehensiveStudy"], resolve)
-                },
-                {
-                    path: 'ComprehensiveEarlyWarning',
-                    name: 'ComprehensiveEarlyWarning',
-                    component: resolve => require(["../view/ComprehensiveEarlyWarning"], resolve)
                 },
                 {
                     path: 'SingleObjectiveAnalysis',
@@ -173,11 +183,6 @@ export default new Router({
                     path: 'ModelParameterSetting',
                     name: 'ModelParameterSetting',
                     component: resolve => require(["../view/ModelParameterSetting"], resolve)
-                },
-                {
-                    path: 'AccountManagement',
-                    name: 'AccountManagement',
-                    component: resolve => require(["../view/AccountManagement"], resolve)
                 },
                 {
                     path: 'DepartmentManagement',

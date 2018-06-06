@@ -24,14 +24,15 @@ export default {
 <style scoped>
 .common-module {
   box-sizing: border-box;
-  width:10%;
-  height:10%;
+  width:12%;
+  height:33%;
   margin:20px;
   border:2px solid #6F95DE;
-  box-shadow:0 0 6px 5px #4065A0;
-  border-radius: 8px;
+  background: rgba(13, 25, 74, 0.7); 
   padding-top:10px;
   color:#fff;
+  box-shadow:0 0 3px 4px #4065A0;
+  border-radius: 8px;
 }
 .common-module  .iconfont{
   display: block;

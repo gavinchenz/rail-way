@@ -1,17 +1,18 @@
 <template>
   <div class="index-notice">
-    <p class="notice-header">
-      公告提醒
-      <span class="header-span-left">NEWS</span>
-      <a :href="moreNotice" class="header-span-right">查看更多</a>
-    </p>
     <div class="notice-box">
       <ul class="notice-list">
-        <p class="list-p">公告</p>
+        <p class="notice-header">
+          公告提醒
+          <a :href="moreNotice" class="header-span-right">查看更多</a>
+        </p>
         <li class="list-li"  v-for="(notice,index) in noticeList" :key="notice"><a href="">{{notice}}</a></li>
       </ul>
       <ul class="news-list">
-        <p class="list-p">通知</p>
+        <p class="notice-header">
+          通知提醒
+          <a :href="moreNotice" class="header-span-right">查看更多</a>
+        </p>
         <li class="list-li"  v-for="(news,index) in newsList" :key="news"><a href="">{{news}}</a></li>
       </ul>
     </div>
@@ -51,9 +52,6 @@ export default {
   font-weight:bold;
   color:#fff; 
 }
-.notice-header .header-span-left{
-  font-size:12px;
-}
 .notice-header .header-span-right{
   font-size:12px;
   float: right;
@@ -69,7 +67,6 @@ export default {
 .notice-list,.news-list{
   width:50%;
   height:90%;
-  background:rgba(255,255,255,.3);  
   overflow-y: hidden;  
 }
 .notice-list{
@@ -89,6 +86,7 @@ export default {
   color:#fff;
   text-align: left;
   text-indent: 10px;
+  background:rgba(255,255,255,.3);  
 }
 .list-li a{
   height:20px;

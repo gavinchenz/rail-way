@@ -63,3 +63,20 @@ img {
 i {
     display: block;
 }
+
+.vue-body {
+    flex: 1;
+    text-align: left;
+}
+
+.panel-heading {
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+    border-bottom: 1px solid #eeeff1;
+    padding: 15px;
+    font-weight: bold;
+}
+
+.panel-body {
+    padding: 10px;
+}

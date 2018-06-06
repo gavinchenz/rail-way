@@ -1,7 +1,8 @@
 <template>
   <div class="search-components">
     <select class="search-select" v-model="selected">
-      <option  value="">手机号码</option>
+      <option  value="">全部</option>
+      <option>手机号码</option>
       <option>身份证</option>
       <option>车次</option>
       <option>票号</option>
@@ -45,6 +46,8 @@ export default {
   text-indent: 10px;
   border-right:1px solid #e0e0e0;
   cursor: pointer;  
+  font-weight: bold;
+  font-size:14px;
 }
 .search-input{
   flex:1;
@@ -52,6 +55,7 @@ export default {
   outline:none;
   text-indent: 20px;
   color:#000;
+  font-size:16px;
 }
 .search-btn{
   display:block;

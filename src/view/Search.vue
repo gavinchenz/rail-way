@@ -95,10 +95,13 @@ export default {
 
 <style scoped>
 .my-search{
+  flex:1;
   color:#fff;
   text-align:left;
   text-indent: 10px;
   font-size:14px;
+  background: url(../assets/images/bg-03.jpg) no-repeat;
+  background-size:cover;
 }
 .search-box{
   width:60%;
