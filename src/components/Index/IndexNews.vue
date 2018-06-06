@@ -11,9 +11,9 @@
       </div>
       <a class="news-a" :href="goWorking">
         <i class="iconfont icon-arrowright"></i>
-      </a> 
+      </a>
     </div>
-   </div> 
+   </div>
 </template>
 
 <script>
@@ -29,7 +29,7 @@ export default {
   methods:{
 
   }
-}
+};
 </script>
 
 <style scoped>

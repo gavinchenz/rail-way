@@ -2,9 +2,8 @@
    <div class="index-data-situation">
     <p class="data-situation-p">数据情况</p>
     <div class="data-situation-box" id="myChart">
-      
     </div>
-   </div> 
+   </div>
 </template>
 
 <script>
@@ -50,7 +49,7 @@ export default {
         });
     }
   }
-}
+};
 </script>
 
 <style scoped>

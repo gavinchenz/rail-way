@@ -32,7 +32,7 @@ export default {
   methods:{
 
   }
-}
+};
 </script>
 
 <style scoped>
@@ -50,7 +50,7 @@ export default {
   text-align: left;
   font-size:18px;
   font-weight:bold;
-  color:#fff; 
+  color:#fff;
 }
 .notice-header .header-span-right{
   font-size:12px;
@@ -67,7 +67,7 @@ export default {
 .notice-list,.news-list{
   width:50%;
   height:90%;
-  overflow-y: hidden;  
+  overflow-y: hidden;
 }
 .notice-list{
   margin-right:60px;
@@ -86,7 +86,7 @@ export default {
   color:#fff;
   text-align: left;
   text-indent: 10px;
-  background:rgba(255,255,255,.3);  
+  background:rgba(255,255,255,.3);
 }
 .list-li a{
   height:20px;

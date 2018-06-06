@@ -28,10 +28,10 @@ export default {
       }
     },
     getUserId:function(){
-      
+
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -59,9 +59,9 @@ export default {
   margin-bottom:20px;
 }
 .user-btn{
-  height: 38px; 
-  line-height:38px; 
-  font-size:16px; 
+  height: 38px;
+  line-height:38px;
+  font-size:16px;
   color:#fff;
   outline:none;
   background: #007BFF;
@@ -74,6 +74,6 @@ export default {
   height: 10px;
   font-size:10px;
   color:#FF6F66;
-  letter-spacing: 1px;  
+  letter-spacing: 1px;
 }
 </style>

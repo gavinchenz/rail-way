@@ -14,10 +14,10 @@ export default {
   },
   methods:{
     getKeyId:function(){
-      
+
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -31,7 +31,7 @@ export default {
 .key-img{
   width: 100px;
   height: 100px;
-  border-radius: 50%;  
+  border-radius: 50%;
   border: 6px solid rgb(0, 123, 255);
   background: url(../../assets/images/udisk.png) no-repeat center;
   flex-shrink: 0;
@@ -44,10 +44,10 @@ export default {
   float:right;
   width:53%;
   border:none;
-  border-radius:  0 8px 8px 0; 
-  height: 38px; 
-  line-height:38px; 
-  font-size:16px; 
+  border-radius:  0 8px 8px 0;
+  height: 38px;
+  line-height:38px;
+  font-size:16px;
   color:#fff;
   outline:none;
   background: #007BFF;
@@ -56,6 +56,6 @@ export default {
   margin-top:95px;
   z-index:0;
   text-align: center;
-  text-indent:15px; 
+  text-indent:15px;
 }
 </style>
