@@ -56,17 +56,21 @@ export default new Router({
         {
             path: '/login',
             name: 'Login',
+            // 添加该字段，表示进入这个路由是需要登录的
+            meta: {requireAuth: false},
             // 页面级组件懒加载，等同于component: Login，下同
             component: resolve => require(["../view/Login"], resolve)
         },
         {
             path: '/index',
             name: 'Index',
+            meta: {requireAuth: true},// 添加该字段，表示进入这个路由是需要登录的
             component: resolve => require(["../view/Index"], resolve)
         },
         {
             path: '/Home',
             redirect: '/Home/Search',
+            meta: {requireAuth: true},// 添加该字段，表示进入这个路由是需要登录的
             name: 'Home',
             component: resolve => require(["../view/Home"], resolve),
             children: [{

@@ -1,0 +1,8 @@
+// create by jh 2017-12-07
+export const CHANGE_LOGIN_STATUS = 'CHANGE_LOGIN_STATUS'
+export const SET_USERINFO = 'SET_USERINFO'
+export const SET_DICT_GROUPS = 'SET_DICT_GROUPS'
+export const SET_AUTH = 'SET_AUTH'
+export const CLEAR_AUTH = 'CLEAR_AUTH'
+export const SAVE_CASE_OBJ_SIGN = 'SAVE_CASE_OBJ_SIGN'
+export const SAVE_INVESTIGATE_TREE = 'SAVE_INVESTIGATE_TREE'
