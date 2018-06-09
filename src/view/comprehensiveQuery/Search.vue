@@ -24,6 +24,10 @@ export default {
     SearchComponents,
     SearchCommonModule
   },
+  mounted(){
+    console.log(this.$router.query)
+    console.log(this.$router.query)
+  },
   data () {
     return {
      searchCommonList:[
@@ -90,7 +94,7 @@ export default {
       ]
     }
   }
-}
+};
 </script>
 
 <style scoped>

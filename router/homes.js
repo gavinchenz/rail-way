@@ -9,152 +9,160 @@ router.get("/SecondaryPageRouterData",(req,res)=>{
         firstGroup:[
             {
                 pageName:'数据接入情况',
-                pagePath:'Home/DataAccessSituation'
+                pagePath:'DataAccessSituation'
             },
             {
                 pageName:'数据特征库',
-                pagePath:'Home/DataFeatureLibrary'
+                pagePath:'DataFeatureLibrary'
             },
             {
                 pageName:'数据处理记录',
-                pagePath:'Home/DataFeatureLibrary'
+                pagePath:'DataFeatureLibrary'
             }
         ]
     },
     {
         secondGroup:[
             {
-                pageName:'综合研判',
-                pagePath:'Home/ComprehensiveStudy'
-            },  
+                pageName:'融合数据查询',
+                pagePath:'search'
+            },
             {
-                pageName:'单目标分析',
-                pagePath:'Home/SingleObjectiveAnalysis'
-            },  
+                pageName:'实名制数据查询',
+                pagePath:'RealNameDataQuery'
+            },
             {
-                pageName:'多目标分析',
-                pagePath:'Home/MultiobjectiveAnalysis'
-            },  
+                pageName:'实名制数据查询',
+                pagePath:'RealNameDataQuery'
+            },
             {
-                pageName:'涉嫖建模分析',
-                pagePath:'Home/WhoringModelingAnalysis'
-            },  
+                pageName:'重点人员库',
+                pagePath:'KeyStaffBank'
+            },
             {
-                pageName:'涉毒建模分析',
-                pagePath:'Home/DrugModelingAnalysis'
-            },  
+                pageName:'售处信息维护',
+                pagePath:'SaleInfoMaintenance'
+            },
             {
-                pageName:'涉恐建模分析',
-                pagePath:'Home/TerrorModelingAnalysis'
-            },  
+                pageName:'窗口信息维护',
+                pagePath:'WindowInfoMaintenance'
+            },
             {
-                pageName:'侵财建模分析',
-                pagePath:'Home/InvadeMoneyModelingAnalysis'
-            },  
+                pageName:'全国站点信息',
+                pagePath:'NationalSiteInformation'
+            },
             {
-                pageName:'维稳建模分析',
-                pagePath:'Home/MainStabilityModelingAnalysis'
-            },  
+                pageName:'查询结果',
+                pagePath:'NationalSiteInformation'
+            },
             {
-                pageName:'中间库',
-                pagePath:'Home/IntermediateLibrary'
-            },  
-            {
-                pageName:'任务列表',
-                pagePath:'Home/TaskList'
-            }  
+                pageName:'上传',
+                pagePath:'NationalSiteInformation'
+            }
         ]
     },
     {
         thirdGroup:[
             {
-                pageName:'综合预警',
-                pagePath:'Home/ComprehensiveEarlyWarning'
-            },  
+                pageName:'综合研判',
+                pagePath:'ComprehensiveStudy'
+            },
             {
-                pageName:'预警告警推送',
-                pagePath:'Home/WarningPush'
-            }               
+                pageName:'单目标分析',
+                pagePath:'SingleObjectiveAnalysis'
+            },
+            {
+                pageName:'多目标分析',
+                pagePath:'MultiobjectiveAnalysis'
+            },
+            {
+                pageName:'涉嫖建模分析',
+                pagePath:'WhoringModelingAnalysis'
+            },
+            {
+                pageName:'涉毒建模分析',
+                pagePath:'DrugModelingAnalysis'
+            },
+            {
+                pageName:'涉恐建模分析',
+                pagePath:'TerrorModelingAnalysis'
+            },
+            {
+                pageName:'侵财建模分析',
+                pagePath:'InvadeMoneyModelingAnalysis'
+            },
+            {
+                pageName:'维稳建模分析',
+                pagePath:'MainStabilityModelingAnalysis'
+            },
+            {
+                pageName:'中间库',
+                pagePath:'IntermediateLibrary'
+            },
+            {
+                pageName:'任务列表',
+                pagePath:'TaskList'
+            }
         ]
     },
     {
         fourthGroup:[
             {
-                pageName:'融合数据查询',
-                pagePath:'Home/search'
-            },  
-            {
-                pageName:'实名制数据查询',
-                pagePath:'Home/RealNameDataQuery'
-            },  
-            {
-                pageName:'实名制数据查询',
-                pagePath:'Home/RealNameDataQuery'
-            },  
-            {
-                pageName:'重点人员库',
-                pagePath:'Home/KeyStaffBank'
-            },  
-            {
-                pageName:'售处信息维护',
-                pagePath:'Home/SaleInfoMaintenance'
+                pageName:'综合预警',
+                pagePath:'ComprehensiveEarlyWarning'
             },
             {
-                pageName:'窗口信息维护',
-                pagePath:'Home/WindowInfoMaintenance'
-            },  
-            {
-                pageName:'全国站点信息',
-                pagePath:'Home/NationalSiteInformation'
-            }                                                                           
+                pageName:'预警告警推送',
+                pagePath:'WarningPush'
+            }
         ]
     },
     {
         fifthGroup:[
             {
                 pageName:'模型参数设置',
-                pagePath:'Home/ModelParameterSetting'
-            },  
+                pagePath:'ModelParameterSetting'
+            },
             {
                 pageName:'账号管理',
-                pagePath:'Home/AccountManagement'
+                pagePath:'AccountManagement'
             },
             {
                 pageName:'部门管理',
-                pagePath:'Home/DepartmentManagement'
-            },  
+                pagePath:'DepartmentManagement'
+            },
             {
                 pageName:'权限管理',
-                pagePath:'Home/AuthirityManagement'
-            },  
+                pagePath:'AuthirityManagement'
+            },
             {
                 pageName:'权限管理',
-                pagePath:'Home/AuthirityManagement'
-            },  
+                pagePath:'AuthirityManagement'
+            },
             {
                 pageName:'数据字典',
-                pagePath:'Home/DataDictionary'
+                pagePath:'DataDictionary'
             },
             {
                 pageName:'系统配置',
-                pagePath:'Home/SystemConfiguration'
-            },  
+                pagePath:'SystemConfiguration'
+            },
             {
                 pageName:'案件管理',
-                pagePath:'Home/CaseManagement'
+                pagePath:'CaseManagement'
             },
             {
                 pageName:'执法日志',
-                pagePath:'Home/LawEnforcementLog'
-            },  
+                pagePath:'LawEnforcementLog'
+            },
             {
                 pageName:'接口推送',
-                pagePath:'Home/InterfacePush'
-            },  
+                pagePath:'InterfacePush'
+            },
             {
                 pageName:'集群运行',
-                pagePath:'Home/ClusterOperation'
-            },                      
+                pagePath:'ClusterOperation'
+            }
         ]
     }
 ];

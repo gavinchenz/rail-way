@@ -12,7 +12,7 @@ export default {
       msg:"数据特征库 DataFeatureLibrary"
     }
   }
-}
+};
 </script>
 
 <style scoped>

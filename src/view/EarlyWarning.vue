@@ -5,59 +5,62 @@
         <img id="login-img" src="../assets/images/login1.png"/>
         <p id="login-p">{{msg}}</p>
       </a>
-      <ul class="header-ul">
-        <li class="header-li" v-for="currentRouter in currentRouterList" :key="currentRouter.pageName" >
-          <a :href="currentRouter.pagePath" class="header-a">{{currentRouter.pageName}}</a>
-        </li>
-      </ul>
+      <p class="header-ul">
+        <a class="header-page" @click="changePage(0)">综合预警</a>
+        <a class="header-page" @click="changePage(1)">预警告警推送</a>
+      </p>
       <div class="header-right">
         <span class="right-btn fullScreen">全屏</span>
-        <span class="right-btn lockScreen">锁屏{{this.condition}}</span>
-        <span class="right-btn signOut">退出{{this.$route.query.condition}}</span>
+        <span class="right-btn lockScreen">锁屏</span>
+        <span class="right-btn signOut">退出</span>
       </div>
      </div>
-   <router-view/>
+   <router-view class="main-content" :is="pageName"/>
   </div>
 </template>
 
 <script>
+  //综合预警
+  import ComprehensiveEarlyWarning from '@/view/earlyWarning/ComprehensiveEarlyWarning'
+  import WarningPush from '@/view/earlyWarning/WarningPush'
+  //引入路由配置数据
   import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
 export default {
-  name: 'Home',
+  name: 'EarlyWarning',
   components:{
-
+    ComprehensiveEarlyWarning,
+    WarningPush
   },
   data () {
     return {
       msg:"大数据中心应用系统",
       routerList:[],
+      currentRouterList:[],
       condition:null,
-      currentRouterList:[
-            {
-                pageName:'数据接入情况',
-                pagePath:'DataAccessSituation'
-            },
-            {
-                pageName:'数据特征库',
-                pagePath:'DataFeatureLibrary'
-            },
-            {
-                pageName:'数据处理记录',
-                pagePath:'DataProcessingRecord'
-            }
-      ]
+      pageName:"comprehensive-early-warning"
     }
   },
   created(){
       homeSecondaryPageRouterApi.getSecondaryPageRouterDataList((data)=> {
         this.routerList=data;
         console.log(this.routerList);
+        this.currentRouterList=data[3];
+        console.log(this.currentRouterList);
       });
   },
   methods:{
+    changePage:function(index){
+       if(index==0){
+        this.pageName="comprehensive-early-warning"
+       }else if(index==1){
+        this.pageName="warning-push"
+       }
+
+       $(".tab").eq(index).addClass("tab1").siblings().removeClass('tab1');
+    },
     //获取路由参数
     getParams:function(){
-      this.condition=this.$route.query.condition
+      // this.condition=this.$route.query.condition
     },
     getCurrentRouterList(){
       if(this.condition==1){
@@ -74,15 +77,10 @@ export default {
       console.log("wo kan kan "+this.currentRouterList);
     }
   },
-  mounted(){
-    this.condition=this.$router.query.condition;
-    console.log(this.condition)
-    console.log(1)
-  },
   watch:{
 
   }
-}
+};
 </script>
 
 <style scoped>
@@ -147,19 +145,16 @@ export default {
   display: inline-block;
   text-align: left;
 }
-.header-li{
+.header-page{
   float: left;
+  height:100%;
   display:inline-block;
   margin:0 10px;
-}
-.header-li a{
-  display: block;
-  width:100%;
   font-size:14px;
   line-height:50px;
   color:#fff;
 }
-.header-li a:hover{
+.header-page:hover{
   background:rgba(255,255,255,.3);
   font-weight: bold;
 }
@@ -173,6 +168,10 @@ export default {
   cursor: pointer;
 }
 .switchPage{
+  flex:1;
+}
+.main-content{
+  width:100%;
   flex:1;
 }
 </style>

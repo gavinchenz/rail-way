@@ -12,7 +12,7 @@ export default {
       msg:"数据处理记录 DataProcessingRecord"
     }
   }
-}
+};
 </script>
 
 <style scoped>

@@ -21,11 +21,12 @@
 </template>
 
 <script>
-import IndexCommonModule from "../components/Index/IndexCommomModule";
-import IndexNotice from "../components/Index/IndexNotice";
-import IndexDataSituation from "../components/Index/IndexDataSituation";
-import SearchComponents from "../components/Search/SearchComponents";
-
+  import IndexCommonModule from "../components/Index/IndexCommomModule";
+  import IndexNotice from "../components/Index/IndexNotice";
+  import IndexDataSituation from "../components/Index/IndexDataSituation";
+  import SearchComponents from "../components/Search/SearchComponents";
+  //引入路由配置数据
+  import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
 export default {
   name: 'Index',
   components:{
@@ -39,23 +40,23 @@ export default {
       navList:[
         {
           tit:"数据接入",
-          mylink:"/Home/DataAccessSituation"
+          mylink:"/DataAccess"
         },
         {
           tit:"综合查询",
-          mylink:"/Home/Search"
+          mylink:"/ComprehensiveQuery"
         },
         {
           tit:"建模分析",
-          mylink:"/Home/ComprehensiveStudy"
-        },        
+          mylink:"/ModelingAnalysis"
+        },
         {
           tit:"综合预警",
-          mylink:"/Home/ComprehensiveEarlyWarning"
+          mylink:"/EarlyWarning"
         },
         {
           tit:"系统管理",
-          mylink:"/Home/AccountManagement"
+          mylink:"/SystemManagement"
         }
       ],
       commonTits:[
@@ -69,13 +70,13 @@ export default {
           icon:"icon-logistic",
           content:"数据接入",
           path:"",
-          mylink:"/DataFeatureLibrary"                     
+          mylink:"/DataFeatureLibrary"
         },
         {
           icon:"icon-wxbsousuotuiguang",
           content:"智能搜索",
           path:"",
-          mylink:"/Search"  
+          mylink:"/Search"
         },
         {
           icon:"icon-earth",
@@ -130,8 +131,16 @@ export default {
       //设置在新页面打开
       window.open(routeData.href, '_blank');
     }
-  }
-}
+  },
+  created(){
+    homeSecondaryPageRouterApi.getSecondaryPageRouterDataList((data)=> {
+      this.routerList=data;
+      console.log(this.routerList);
+      this.currentRouterList=data[0];
+      console.log(this.currentRouterList);
+    });
+  },
+};
 </script>
 
 <style scoped>
