@@ -1,24 +1,29 @@
 <template>
   <div class="vue-body">
+    <Breadcrumb class="router-box">
+        <BreadcrumbItem to="index">首页</BreadcrumbItem>
+        <BreadcrumbItem to="/ComprehensiveQuery?condition=2">综合查询</BreadcrumbItem>
+        <BreadcrumbItem>重点人员库</BreadcrumbItem>
+    </Breadcrumb>
     <div class="header-box">
       <ul class="key-staff-bank">
         <li class="header-li">
           <label class="tit-label">姓名</label>
-          <Input class="tit-input" v-model="userName" placeholder="请输入姓名" clearable style="width: 200px"></Input> 
+          <Input class="tit-input" v-model="userName" placeholder="请输入姓名" clearable style="width: 200px"></Input>
           <label class="tit-label">身份证号</label>
-          <Input class="tit-input" v-model="idCard" placeholder="请输入身份证号" clearable style="width: 200px"></Input>   
+          <Input class="tit-input" v-model="idCard" placeholder="请输入身份证号" clearable style="width: 200px"></Input>
           <label class="tit-label">车牌号</label>
-          <Input class="tit-input" v-model="plateNumber" placeholder="请输入车牌号" clearable style="width: 200px"></Input>                   
+          <Input class="tit-input" v-model="plateNumber" placeholder="请输入车牌号" clearable style="width: 200px;"></Input>
         </li>
-        <li class="header-li">        
+        <li class="header-li">
           <label class="tit-label">籍贯</label>
-          <Input class="tit-input" v-model="nativePlace" placeholder="请输入籍贯" clearable style="width: 200px"></Input>    
+          <Input class="tit-input" v-model="nativePlace" placeholder="请输入籍贯" clearable style="width: 200px"></Input>
           <label class="tit-label">住址</label>
-          <Input class="tit-input" v-model="address" placeholder="请输入住址" clearable style="width: 200px"></Input>                 
+          <Input class="tit-input" v-model="address" placeholder="请输入住址" clearable style="width: 200px"></Input>
         </li>
         <li class="header-li">
           <Button class="btn" type="primary">查询</Button>
-          <Button class="btn" type="ghost">重置</Button> 
+          <Button class="btn" type="ghost">重置</Button>
         </li>
       </ul>
     </div>
@@ -48,7 +53,7 @@ export default {
         {
             title: '车次',
             key: 'trainNumber',
-            sortable: true            
+            sortable: true
         },
         {
             title: '发站',
@@ -58,37 +63,37 @@ export default {
         {
             title: '到站',
             key: 'destination',
-            sortable: true            
+            sortable: true
         },
         {
             title: '车厢',
             key: 'carriage',
-            sortable: true            
+            sortable: true
         },
         {
             title: '席位',
             key: 'seat',
-            sortable: true            
+            sortable: true
         },
         {
             title: '证件类型',
             key: 'certificatesType',
-            sortable: true            
+            sortable: true
         },
         {
             title: '证件号',
             key: 'idNumber',
-            sortable: true            
+            sortable: true
         },
         {
             title: '姓名',
             key: 'name',
-            sortable: true            
+            sortable: true
         },
         {
             title: '售处',
             key: 'sellingPlace',
-            sortable: true            
+            sortable: true
         }
       ],
       data: [
@@ -199,11 +204,11 @@ export default {
             idNumber: '2016-10-03',
             name: '2016-10-03',
             sellingPlace: '2016-10-03',
-        }               
+        }
       ]
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -226,26 +231,24 @@ export default {
       .tit-label{
         float:left;
         margin:0 10px;
-       vertical-align: middle;      
+       vertical-align: middle;
       }
       .tit-input{
         float:left;
-        display:inline-block;        
         margin-left:5px;
-        vertical-align: middle;
+        line-height:50px;
       }
       .btn{
         margin-left:20px;
       }
-    } 
+    }
   }
 }
 .table-box{
-  margin:15px 10px 0; 
+  margin:15px 10px 0;
   .table-content{
     height:700px;
-    
-  } 
+  }
   .table-page{
     margin:15px 0;
   }

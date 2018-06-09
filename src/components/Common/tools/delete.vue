@@ -30,5 +30,5 @@
         this.$emit('delFile', fileId);
       }
     }
-  }
+  };
 </script>

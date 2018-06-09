@@ -80,3 +80,54 @@ i {
 .panel-body {
     padding: 10px;
 }
+.router-box{
+  height:30px;
+  line-height:30px;
+  margin:15px 10px 0;
+}
+.header-box{
+  margin:15px 10px 0;
+  border:1px solid #eeeff1;
+  height:100px;
+  padding:15px;
+  border-radius:5px;
+  font-size: 14px;
+  color:#000;
+  text-align: center;
+  line-height: 50px;
+}
+.header-li{
+    height:50px;
+    text-align: left;
+    margin:3px 0;
+}
+.tit-label{
+    float:left;
+    margin:0 10px;
+    vertical-align: middle;
+}
+.header-li .tit-input{
+    float:left;
+    margin-left:5px;
+    line-height:50px;
+}
+.header-li .select-col{
+  float:left;
+  margin-left:5px;
+  width:202px;
+}
+.btn{
+    margin-left:20px;
+}
+.table-box{
+    margin:30px 10px 0;
+}
+.table-content{
+    height:600px;
+}
+.btn-box{
+    height:50px;
+}
+.table-page{
+    margin:15px 0;
+}
