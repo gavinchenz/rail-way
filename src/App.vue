@@ -5,15 +5,15 @@
 </template>
 
 <script>
-	import {mapMutations,mapGetters} from 'vuex'
-    import {getCurrentInfo} from './service/getData'
-    import {setStore} from '@/config/mUtils'
-    import {process_error} from '@/config/process_request_conf'
+    import {mapMutations,mapGetters} from 'vuex'//vuex修改和订阅
+    import {getCurrentInfo} from './service/getData'//异步获取当前用户信息
+    import {setStore} from '@/config/mUtils'//保存及获取单次会话信息
+    import {process_error} from '@/config/process_request_conf'//进程及异常处理
     import NoPermission from '@/components/Common/tools/noPermission.vue' //无权限查看的模板
-    import sysInfo from '@/config/sys_config_info'
-	export default {
-	  name: 'App',
-	  data() {
+    import sysInfo from '@/config/sys_config_info'//系统信息
+    export default {
+        name: "app",
+        data() {
             return {
               authList:[],
               noShow: false
@@ -53,13 +53,13 @@
             // 输出版权信息和版本信息
             exportCopyRightInfo(){
                 console.info(`系统名称：${sysInfo.LOGO_TITLE} \n版本信息：${sysInfo.VERSION} \n版权信息：${sysInfo.FOOTER_COPYRIGHT}`);
-            }
+            }            
         },
         mounted() {
           this.exportCopyRightInfo();
           this.getCurrentInfoFn()
         }
-	};
+    };
 </script>
 
 <style>

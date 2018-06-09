@@ -24,7 +24,7 @@ export default {
   name: 'IndexNotice',
   data () {
     return {
-        moreNotice:"/Search",
+        moreNotice:"Home/Search",
         noticeList:["公告1","公告2","公告3","公告4","公告5","公告6","公告7","公告8","公告9","公告10","公告11","公告12","公告13"],
         newsList:["通知1","通知2","通知3","通知4","通知5","通知6","通知7","通知8","通知9","通知10","通知11","通知12","通知13"]
     }

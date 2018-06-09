@@ -11,9 +11,9 @@
       </div>
       <a class="news-a" :href="goWorking">
         <i class="iconfont icon-arrowright"></i>
-      </a>
+      </a> 
     </div>
-   </div>
+   </div> 
 </template>
 
 <script>
@@ -21,8 +21,8 @@ export default {
   name: 'IndexNews',
   data () {
     return {
-      moreNews:"/Search",
-      goWorking:"/Search",
+      moreNews:"Home/Search",
+      goWorking:"Home/Search",
       working:"无代办事项"
     }
   },

@@ -6,13 +6,13 @@
         <p id="login-p">{{msg}}</p>
       </a>
       <ul class="header-ul">
-        <li class="header-li" v-for="item in routerList.firstGroup" :key="item.pageName" >
-          <a :href="item.pagePath" class="header-a">{{item.pageName}}</a>
+        <li class="header-li" v-for="currentRouter in currentRouterList" :key="currentRouter.pageName" >
+          <a :href="currentRouter.pagePath" class="header-a">{{currentRouter.pageName}}</a>
         </li>
       </ul>
       <div class="header-right">
         <span class="right-btn fullScreen">全屏</span>
-        <span class="right-btn lockScreen" @click="getCurrentRouterList($route.query.condition)">锁屏</span>
+        <span class="right-btn lockScreen">锁屏{{this.condition}}</span>
         <span class="right-btn signOut">退出{{this.$route.query.condition}}</span>
       </div>
      </div>
@@ -31,37 +31,20 @@ export default {
     return {
       msg:"大数据中心应用系统",
       routerList:[],
+      condition:null,
       currentRouterList:[
             {
                 pageName:'数据接入情况',
-                pagePath:'Home/DataAccessSituation'
+                pagePath:'DataAccessSituation'
             },
             {
                 pageName:'数据特征库',
-                pagePath:'Home/DataFeatureLibrary'
+                pagePath:'DataFeatureLibrary'
             },
             {
                 pageName:'数据处理记录',
-                pagePath:'Home/DataFeatureLibrary'
+                pagePath:'DataProcessingRecord'
             }
-      ],
-      firstNav:[
-        {
-          tit:"目标查询",
-          path:"/Home/Search"
-        },
-        {
-          tit:"数据接入",
-          path:"/Home/DataAccessSituation"
-        },
-        {
-          tit:"综合预警",
-          path:"/Home/Search"
-        },
-        {
-          tit:"系统管理",
-          path:"/Home/AccountManagement"
-        },
       ]
     }
   },
@@ -75,28 +58,28 @@ export default {
     //获取路由参数
     getParams:function(){
       this.condition=this.$route.query.condition
-      console.log(this.$route.query.id)
-      console.log(this.id)
     },
-    getCurrentRouterList(index){
-      console.log("index="+index);
-      if(index==1){
-        that.currentRouterList=that.routerList.firstGroup;
-      }else if(index==2){
-        that.currentRouterList=that.routerList.secondGroup;
-      }else if(index==3){
-        that.currentRouterList=that.routerList.thirdGroup;
-      }else if(index==4){
-        that.currentRouterList=that.routerList.fourthGroup;
+    getCurrentRouterList(){
+      if(this.condition==1){
+        this.currentRouterList=this.routerList.firstGroup;
+      }else if(this.condition==2){
+        this.currentRouterList=this.routerList.secondGroup;
+      }else if(this.condition==3){
+        this.currentRouterList=this.routerList.thirdGroup;
+      }else if(this.condition==4){
+        this.currentRouterList=this.routerList.fourthGroup;
       }else{
-        that.currentRouterList=that.routerList.fifthGroup;
+        this.currentRouterList=this.routerList.fifthGroup;
       }
-      console.log("wo kan kan "+that.currentRouterList);
+      console.log("wo kan kan "+this.currentRouterList);
     }
   },
-  mounted:function(){
-    this.getParams
-    this.getCurrentRouterList
+  mounted(){
+    this.getParams()
+   // this.getCurrentRouterList()
+  },
+  watch:{
+
   }
 }
 </script>
@@ -164,6 +147,7 @@ export default {
   text-align: left;
 }
 .header-li{
+  float: left;
   display:inline-block;
   margin:0 10px;
 }

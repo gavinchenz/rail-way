@@ -28,7 +28,7 @@ export default {
   height:33%;
   margin:20px;
   border:2px solid #6F95DE;
-  background: rgba(13, 25, 74, 0.7);
+  background: rgba(13, 25, 74, 0.7); 
   padding-top:10px;
   color:#fff;
   box-shadow:0 0 3px 4px #4065A0;

@@ -8,11 +8,13 @@
       <option>票号</option>
     </select>
     <input type="text" class="search-input" v-model="searchMsg" placeholder="可输入您要查找的相关信息"/>
-    <button class="search-btn"><i class="iconfont icon-search"></i></button>
+    <button class="search-btn" @click="getSearchMsg"><i class="iconfont icon-search"></i></button>
+    <button class="search-btn" @click="getUpMsg"><i class="iconfont icon-up"></i></button>
   </div>
 </template>
 
 <script>
+  var searchStr="123"
 export default {
   name: 'SearchComponents',
   data () {
@@ -22,7 +24,12 @@ export default {
     }
   },
   methods:{
-
+    getSearchMsg(searchStr){
+      this.$router.push({ name: 'QueryResult', params: { userId: searchStr }})
+    },
+    getUpMsg(searchStr){
+      this.$router.push({ name: 'Upload', params: { userId: searchStr }})
+    }    
   }
 };
 </script>
@@ -31,7 +38,6 @@ export default {
 .search-components{
   width:96%;
   height: 50px;
-  background: #fff;
   margin:25px auto 0;
   border-radius: 3px;
   display: flex;
@@ -40,7 +46,7 @@ export default {
 }
 .search-select{
   width:99px;
-  height:80%;
+  height:50px;
   border:none;
   outline:none;
   text-indent: 10px;
@@ -48,6 +54,8 @@ export default {
   cursor: pointer;  
   font-weight: bold;
   font-size:14px;
+  line-height: 50px;
+
 }
 .search-input{
   flex:1;
@@ -56,6 +64,7 @@ export default {
   text-indent: 20px;
   color:#000;
   font-size:16px;
+  line-height: 50px;
 }
 .search-btn{
   display:block;
@@ -64,13 +73,15 @@ export default {
   border:none;
   outline:none; 
   background:#0A2753; 
-  border-radius: 0 3px 3px 0;
+  border-radius:3px;
   color:#fff;
   font-size:25px;
   cursor: pointer;
+  margin-left: 5px;
 }
 .search-btn i{
   font-size:35px;
   font-weight:bold;
 }
+
 </style>

@@ -101,6 +101,7 @@ new Vue({
     el: '#app',
     router,
     axios,
+    store,
     components: { App },
     render: (createElement) => {
         return createElement(App);

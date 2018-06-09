@@ -126,9 +126,8 @@ export default {
     getNextPage(index,router){
       var id=index+1;
       var path=router;
-      console.log(id);
-      console.log(path);
       var routeData = this.$router.resolve({path:path,query:{condition:id}})
+      //设置在新页面打开
       window.open(routeData.href, '_blank');
     }
   }

@@ -2,8 +2,9 @@
    <div class="index-data-situation">
     <p class="data-situation-p">数据情况</p>
     <div class="data-situation-box" id="myChart">
+      
     </div>
-   </div>
+   </div> 
 </template>
 
 <script>
@@ -11,8 +12,8 @@ export default {
   name: 'IndexDataSituation',
   data () {
     return {
-      moreNews:"/Search",
-      goWorking:"/Search",
+      moreNews:"Home/Search",
+      goWorking:"Home/Search",
       working:"无代办事项"
     }
   },
@@ -49,7 +50,7 @@ export default {
         });
     }
   }
-};
+}
 </script>
 
 <style scoped>

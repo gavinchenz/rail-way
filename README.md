@@ -3,6 +3,7 @@
 > A Vue.js project
 >用Vue-cli+Webpack+Vuex+Express+Axios+Echarst+Swiper搭建前端view
 
+
 #开发环境
   "dependencies": {
     "axios": "^0.18.0",
