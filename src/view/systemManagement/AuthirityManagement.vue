@@ -1,5 +1,10 @@
 <template>
  <div class="vue-body">
+    <Breadcrumb class="router-box">
+        <BreadcrumbItem to="index">首页</BreadcrumbItem>
+        <BreadcrumbItem to="/SystemManagement?condition=5">系统管理</BreadcrumbItem>
+        <BreadcrumbItem>权限管理</BreadcrumbItem>
+    </Breadcrumb>   
     <div class='panel-body'>
     <PowerSearch :searchInfo="searchData" @search="search" @addPower="addOrUpdData('')"></PowerSearch>
     <br>
@@ -57,7 +62,7 @@
 <script>
   import {getOperGroupList, saveOperGroup, operaterByGroupList, viewOperGroup, deleteOperGroup, saveOperGroupInitUse} from '../../service/getData'
   import Paging from '../../components/common/tools/paging'
-  import PowerSearch from '../../components/power/power-search'
+  import PowerSearch from '../../components/systemManagement/power-search'
   import {process_error} from '../../config/process_request_conf' //请求成功返回的状态
   export default {
     name: 'AuthirityManagement',
@@ -157,11 +162,11 @@
                     width: '23px',
                     height: '23px'
                   },
-                  directives: [{
+                 /* directives: [{
                     name: 'auth',
                     value: -1,
                     expression: '1-1-1-15'
-                  }],
+                  }],*/
                   on: {
                     click: () => {
                       this.addOrUpdData(params.row);
@@ -180,11 +185,11 @@
                     width: '23px',
                     height: '23px'
                   },
-                  directives: [{
+                  /*directives: [{
                     name: 'auth',
                     value: -1,
                     expression: '1-1-1-14'
-                  }],
+                  }],*/
                   on: {
                     click: () => {
                       this.delData(params.row.id);
@@ -420,6 +425,7 @@
     color: #fff;
     background: #2d8cf0;
   }
-
-
+.router-box{
+  border-bottom: 1px solid #eeeff1;
+}
 </style>

@@ -1,8 +1,30 @@
 <template>
   <div class="vue-body">
+    <Breadcrumb class="router-box">
+        <BreadcrumbItem to="index">首页</BreadcrumbItem>
+        <BreadcrumbItem to="/SystemManagement?condition=5">系统管理</BreadcrumbItem>
+        <BreadcrumbItem>账号管理</BreadcrumbItem>
+    </Breadcrumb>
     <div class='panel-body'>
-      <UserSearch :filters="filter" :searchInfo="searchData" :dutylist="dutylist" :departList="departList" @radioSelect="radioSelect" @addUserinfo="addUserinfo" @addUpload="addUpload"  @selectData="selectData" @loadData="loadData" @search="search" @resat="resat" ref="searchInfo"></UserSearch>
-    <Table :row-class-name="rowClassName" height="520" :loading="showLoading" :columns="columns" :data="userData"  @on-sort-change="sortClick" :stripe="showStripe"  size="small"></Table>
+      <UserSearch :filters="filter"
+      :searchInfo="searchData"
+      :dutylist="dutylist"
+      :departList="departList"
+      @radioSelect="radioSelect"
+      @addUserinfo="addUserinfo"
+      @addUpload="addUpload"
+      @selectData="selectData"
+      @loadData="loadData"
+      @search="search"
+      @resat="resat"
+      ref="searchInfo"></UserSearch>
+    <Table :row-class-name="rowClassName" height="520"
+    :loading="showLoading"
+    :columns="columns"
+    :data="userData"
+    @on-sort-change="sortClick"
+    :stripe="showStripe"
+    size="small"></Table>
     <Paging :pages="searchData.page" @pageChange="pageChangeFn"></Paging>
     <!--新增用户页面-->
     <Modal v-model="openFlag" :title="openTitle" @on-visible-change="winChange" width="750px">
@@ -138,7 +160,7 @@
         <span ref="header">上传用户信息</span>
       </p>
       <div>
-          <Row v-auth="1-1-1-8" style="vertical-align: middle">
+          <Row  style="vertical-align: middle">  //v-auth="1-1-1-8"
             <Col span="5"style="text-align: center;margin-top:10px"><span>模板</span></Col>
             <Col span="19">
               <a href="api/uf/userinfo/download"><Button style="background: #1c2438;color: #fff;margin-bottom:10px" icon="ios-cloud-download">下载模板</Button></a>
@@ -175,7 +197,7 @@
       </div>
       <div slot="footer">
         <Button type="primary" @click="" :loading="loadingStatus" v-if="file !== null">{{ loadingStatus ? '上传...' : '上传' }}</Button>
-        <Button type="ghost" v-auth="1-1-1-7"  title="清空所选文件" @click="clear">清空</Button>
+        <Button type="ghost"    title="清空所选文件" @click="clear">清空</Button>  //v-auth="1-1-1-7"
       </div>
     </Modal>
     </div>
@@ -184,11 +206,11 @@
 </template>
 
 <script>
-import { getDept, getDeptChildren, getAllDuty, delUser, recoverUser, saveUser, userAll, ableSwitch, operGroupAllList} from '../../service/getData.js';//一部请求链接
-import UserSearch from '../../components/userManagement/userSearch';//用户的查询
+import { getDept, getDeptChildren, getAllDuty, delUser, recoverUser, saveUser, userAll, ableSwitch, operGroupAllList} from '../../service/getData';//一部请求链接
+import UserSearch from '../../components/systemManagement/userSearch';//用户的查询
 import Paging from '../../components/common/tools/paging';//分页
 import { idCard } from '../../components/common/validateFun';//校验
-import UserInfo from '../../components/userManagement/userinfo'
+import UserInfo from '../../components/systemManagement/userinfo'
 import {process_error} from '../../config/process_request_conf' //请求成功返回的状态
 export default {
   name: "AccountManagement",
@@ -257,7 +279,8 @@ export default {
                   type: 'primary',
                   size: 'large',
                   value: params.row.able === true, //控制开关的打开或关闭状态，官网文档属性是value
-                  disabled: params.row.username === 'admin' ||  !this.$store.state.auth.has('1-1-1-4')
+                  //disabled: params.row.username === 'admin' ||  !this.$store.state.auth.has('1-1-1-4')
+                  disabled:false
                 },
                 on: {
                   'on-change': (value) => {//触发事件是on-change,用双引号括起来，
@@ -296,11 +319,11 @@ export default {
                     icon: 'edit'
                   },
                   attrs:{title:"编辑"},
-                  directives: [{
+                /*  directives: [{
                     name: 'auth',
                     value: -1,
                     expression: '1-1-1-2'
-                  }],
+                  }],*/
                   style: {
                     marginRight: '10px',
                     color: '#2d8cf0',
@@ -325,11 +348,11 @@ export default {
                     width: '23px',
                     height: '23px'
                   },
-                  directives: [{
+                 /* directives: [{
                     name: 'auth',
                     value: -1,
                     expression: '1-1-1-3'
-                  }],
+                  }],*/
                   on: {
                     click: () => {
                       this.delData(params);
@@ -345,11 +368,11 @@ export default {
                     shape: 'circle',
                     icon: 'reply'
                   },
-                  directives: [{
+                  /*directives: [{
                     name: 'auth',
                     value: -1,
                     expression: '1-1-1-5'
-                  }],
+                  }],*/
                   attrs:{title:"恢复"},
                   style: {
                     color: '#ff9900',
@@ -829,4 +852,7 @@ export default {
     text-align: center;
     line-height: 18px
   }
+.router-box{
+  border-bottom: 1px solid #eeeff1;
+}
 </style>

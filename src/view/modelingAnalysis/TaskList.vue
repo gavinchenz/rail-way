@@ -9,7 +9,7 @@
       <ul class="task-list">
         <li class="header-li">
           <label class="tit-label">案件</label>
-          <Select class="tit-input" v-model="caseType" filterable>
+          <Select class="tit-select" v-model="caseType" filterable clearable style="width:200px">
               <Option v-for="item in caseList" :value="item.value" :key="item.value">{{ item.label }}</Option>
           </Select>
           <label class="tit-label">任务名称</label>
@@ -235,11 +235,5 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.select-col{
-  float:left;
-  margin-left:5px;
-  width:202px;
-
-}
+<style scoped >
 </style>

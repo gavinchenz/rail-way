@@ -22,6 +22,7 @@
       </div>
      </div>
    <router-view class="main-content" :is="pageName"/>
+   <footer class="footer"></footer>
   </div>
 </template>
 
@@ -36,7 +37,7 @@
   import QueryResult from './comprehensiveQuery/QueryResult'
   import Upload from './comprehensiveQuery/Upload'
   //引入路由配置数据
-  import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
+  // import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
 export default {
   name: 'ComprehensiveQuery',
   components:{
@@ -122,6 +123,13 @@ export default {
   flex-direction: column;
   color:#fff;
   justify-content: flex-start;
+}
+.main-content{
+  flex: 1;
+  overflow-y: auto;
+}
+.footer{
+  height: 0px;
 }
 .home-header{
   width: 100%;

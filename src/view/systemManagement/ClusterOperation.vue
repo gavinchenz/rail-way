@@ -1,11 +1,10 @@
 <template>
   <div class="vue-body">
-    <div class="panel-heading">
-      <Breadcrumb>
-        <BreadcrumbItem>系统管理</BreadcrumbItem>
+    <Breadcrumb class="router-box">
+        <BreadcrumbItem to="index">首页</BreadcrumbItem>
+        <BreadcrumbItem to="/SystemManagement?condition=5">系统管理</BreadcrumbItem>
         <BreadcrumbItem>集群运行</BreadcrumbItem>
-      </Breadcrumb>
-    </div>
+    </Breadcrumb> 
     <div class="panel-body">
       <Row>
         <Col span="24">
@@ -28,7 +27,7 @@
 </template>
 
 <script>
-  import clusterOperationApi from '../../api/clusterOperationApi';
+  // import clusterOperationApi from '../../api/clusterOperationApi';
   export default {
     name: 'ClusterOperation',
     data () {
@@ -60,5 +59,7 @@
 </script>
 
 <style scoped>
-
+.router-box{
+  border-bottom: 1px solid #eeeff1;
+}
 </style>

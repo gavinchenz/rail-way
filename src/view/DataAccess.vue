@@ -17,6 +17,7 @@
       </div>
      </div>
    <router-view class="main-content" :is="pageName"/>
+   <footer class="footer"></footer>   
   </div>
 </template>
 
@@ -25,7 +26,7 @@
   import DataFeatureLibrary from "./dataAccess/DataFeatureLibrary";
   import DataProcessingRecord from "./dataAccess/DataProcessingRecord";
   //引入路由配置数据
-  import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
+  // import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
 export default {
   name: 'DataAccess',
   components:{

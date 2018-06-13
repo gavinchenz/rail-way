@@ -1,11 +1,10 @@
 <template>
   <div class="vue-body">
-    <div class="panel-heading">
-      <Breadcrumb>
-        <BreadcrumbItem>系统管理</BreadcrumbItem>
+    <Breadcrumb class="router-box">
+        <BreadcrumbItem to="index">首页</BreadcrumbItem>
+        <BreadcrumbItem to="/SystemManagement?condition=5">系统管理</BreadcrumbItem>
         <BreadcrumbItem>接口推送</BreadcrumbItem>
-      </Breadcrumb>
-    </div>
+    </Breadcrumb>    
     <div class="panel-body">
       <Row>
         <Col span="24">
@@ -28,7 +27,7 @@
 </template>
 
 <script>
-  import interfacePushApi from '../../api/interfacePushApi'
+  // import interfacePushApi from '../../api/interfacePushApi'
   export default {
     name: 'InterfacePush',
     data () {
@@ -58,7 +57,7 @@
 </script>
 
 <style scoped>
-  .case-management{
-    height:100%;
-  }
+.router-box{
+  border-bottom: 1px solid #eeeff1;
+}
 </style>

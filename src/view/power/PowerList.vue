@@ -155,11 +155,11 @@
                     width: '23px',
                     height: '23px'
                   },
-                  directives: [{
+                 /* directives: [{
                     name: 'auth',
                     value: -1,
                     expression: '1-1-1-15'
-                  }],
+                  }],*/
                   on: {
                     click: () => {
                       this.addOrUpdData(params.row);
@@ -178,11 +178,11 @@
                     width: '23px',
                     height: '23px'
                   },
-                  directives: [{
+                 /* directives: [{
                     name: 'auth',
                     value: -1,
                     expression: '1-1-1-14'
-                  }],
+                  }],*/
                   on: {
                     click: () => {
                       this.delData(params.row.id);

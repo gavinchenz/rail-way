@@ -24,12 +24,13 @@
       </div>
      </div>
    <router-view class="main-content" :is="pageName"/>
+   <footer class="footer"></footer>
   </div>
 </template>
 
 <script>
   //系统管理
-  import ModelParameterSetting from './systemManagement/ModelParameterSetting'
+
   import AccountManagement from './systemManagement/AccountManagement'
   import DepartmentManagement from './systemManagement/DepartmentManagement'
   import AuthirityManagement from './systemManagement/AuthirityManagement'
@@ -37,21 +38,23 @@
   import SystemConfiguration from './systemManagement/SystemConfiguration'
   import CaseManagement from './systemManagement/CaseManagement'
   import LawEnforcementLog from './systemManagement/LawEnforcementLog'
+  import ModelParameterSetting from './systemManagement/ModelParameterSetting'
+  // import SystemConfiguration from './systemManagement/SystemConfiguration'
   import InterfacePush from './systemManagement/InterfacePush'
   import ClusterOperation from './systemManagement/ClusterOperation'
 
   //引入路由配置数据
-  import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
+  // import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
 export default {
   name: 'SystemManagement',
   components:{
-    ModelParameterSetting,
     AccountManagement,
     DepartmentManagement,
     AuthirityManagement,
     DataDictionary,
     SystemConfiguration,
     CaseManagement,
+    ModelParameterSetting,
     LawEnforcementLog,
     InterfacePush,
     ClusterOperation
@@ -66,13 +69,12 @@ export default {
     }
   },
   created(){
-      console.log("created")
-      homeSecondaryPageRouterApi.getSecondaryPageRouterDataList((data)=> {
-        this.routerList=data;
-        console.log(this.routerList);
-        this.currentRouterList=data[0];
-        console.log(this.currentRouterList);
-      });
+      // homeSecondaryPageRouterApi.getSecondaryPageRouterDataList((data)=> {
+      //   this.routerList=data;
+      //   console.log(this.routerList);
+      //   this.currentRouterList=data[0];
+      //   console.log(this.currentRouterList);
+      // });
   },
   methods:{
     changePage:function(index){

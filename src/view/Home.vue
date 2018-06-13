@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
+  // import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
 export default {
   name: 'Home',
   components:{

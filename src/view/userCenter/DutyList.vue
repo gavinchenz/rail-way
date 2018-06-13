@@ -56,11 +56,11 @@
                       width:'23px',
                       height:'23px'
                     },
-                    directives: [{
+                    /*directives: [{
                       name: 'auth',
                       value: -1,
                       expression: '1-1-3-2'
-                    }],
+                    }],*/
                     on: {
                       click: () => {
                         this.editData(params.row);
@@ -74,11 +74,11 @@
                       okText:'删除',
                       transfer: true
                     },
-                    directives: [{
+                   /* directives: [{
                       name: 'auth',
                       value: -1,
                       expression: '1-1-3-3'
-                    }],
+                    }],*/
                     on: {
                      'on-ok' : () => {
                         this.delData(params.row.id)
@@ -109,11 +109,11 @@
                       okText:'恢复',
                       transfer: true
                     },
-                    directives: [{
+                    /*directives: [{
                       name: 'auth',
                       value: -1,
                       expression: '1-1-3-4'
-                    }],
+                    }],*/
                     on: {
                       'on-ok': () => {
                         this.recoverData(params.row.id);

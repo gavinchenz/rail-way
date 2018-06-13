@@ -80,7 +80,8 @@ export default async(url = '', data = {}, type = 'GET',headerConfig = {},method 
 
       let auth = sessionStorage.getItem('token') || '';
       requestObj.open(type, url, true);
-      requestObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      requestObj.setRequestHeader("Content-type", "application/json");
+    //  requestObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       requestObj.setRequestHeader("Authorization", auth);
       requestObj.send(sendData);
 

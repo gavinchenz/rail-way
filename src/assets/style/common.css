@@ -68,7 +68,6 @@ i {
     flex: 1;
     text-align: left;
 }
-
 .panel-heading {
     width: 100%;
     border-radius: 4px 4px 0 0;
@@ -76,14 +75,43 @@ i {
     padding: 15px;
     font-weight: bold;
 }
-
 .panel-body {
     padding: 10px;
+}
+.header-from{
+    border:1px solid #eeeff1;
+    border-radius: 5px;
+    margin:10px;
+}
+.form-item{
+    margin:20px 0;
+    color:#000;
+}
+.header-from .col-label{
+  width: 80px;
+  text-align: center;
+  margin-left:10px;
+  font-size: 14px;
+}
+.header-from .col-select{
+  text-align:left;
+  font-size: 14px;
+}
+.col-checkbox{
+  width: 800px;
 }
 .router-box{
   height:30px;
   line-height:30px;
   margin:15px 10px 0;
+}
+.main-content{
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.footer{
+  height: 0px;
 }
 .ivu-icon{
   font-size:16px;
@@ -111,6 +139,11 @@ i {
 }
 .header-li .tit-input{
     float:left;
+    margin-left:5px;
+    line-height:50px;
+}
+.header-li .tit-select{
+      float:left;
     margin-left:5px;
     line-height:50px;
 }

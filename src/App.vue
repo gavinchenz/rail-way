@@ -9,7 +9,7 @@
     import {getCurrentInfo} from './service/getData'//异步获取当前用户信息
     import {setStore} from '@/config/mUtils'//保存及获取单次会话信息
     import {process_error} from '@/config/process_request_conf'//进程及异常处理
-    import NoPermission from '@/components/Common/tools/noPermission.vue' //无权限查看的模板
+    import NoPermission from '@/components/common/tools/noPermission.vue' //无权限查看的模板
     import sysInfo from '@/config/sys_config_info'//系统信息
     export default {
         name: "app",

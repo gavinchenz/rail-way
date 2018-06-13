@@ -6,7 +6,7 @@
         <p id="login-p">{{msg}}</p>
       </a>
     </header>
-    <form class="login-t" action="/Home">
+    <form class="login-t" action="/index">
       <h5 class="f-h5" v-text="loginTit"></h5>
       <ul class="f-ul">
         <li class="f-li"  @click="changeTab(0)">用户登录</li>

@@ -1,6 +1,10 @@
-
 <template >
   <div class="vue-body">
+    <Breadcrumb class="router-box">
+        <BreadcrumbItem to="index">首页</BreadcrumbItem>
+        <BreadcrumbItem to="/SystemManagement?condition=5">系统管理</BreadcrumbItem>
+        <BreadcrumbItem>部门管理</BreadcrumbItem>
+    </Breadcrumb>      
     <div class='panel-body'>
   <div class="deparDox">
     <Row :gutter="10" justify="start" type="flex" style="flex-wrap: nowrap">
@@ -48,7 +52,7 @@
               </span>
             </FormItem>
           </Col>
-          <Col span="3" v-auth="1-1-2-2" style="text-align: right">
+          <Col span="3"  style="text-align: right">  //v-auth="1-1-2-2"
           <Form>
             <FormItem :label-width="10">
               <Button  @click="addModal()" style="margin-right: 10px"  type="success"  icon="plus" title="新增机构信息" >新增</Button>
@@ -105,7 +109,7 @@
   import {getAllDepart,departTree,saveDepart,recoverDepart,delDepart} from '@/service/getData'
   import Paging from '@/components/common/tools/paging'
   import {process_error} from '@/config/process_request_conf'
-  import DepartInfo from '@/components/userManagement/info'
+  import DepartInfo from '@/components/systemManagement/info'
   export default {
     name: "DepartmentManagement",
     components:{Paging},
@@ -158,11 +162,11 @@
                       icon:'edit',
                     },
                     attrs:{title:"编辑"},
-                    directives: [{
+                   /* directives: [{
                       name: 'auth',
                       value: -1,
                       expression: '1-1-2-2'
-                    }],
+                    }],*/
                     style: {
                       marginRight: '10px',
                       color:'#2d8cf0',
@@ -182,11 +186,11 @@
                       okText:'删除',
                       transfer: true
                     },
-                    directives: [{
+                   /* directives: [{
                       name: 'auth',
                       value: -1,
                       expression: '1-1-2-3'
-                    }],
+                    }],*/
                     style: {
                       marginRight: '5px'
                     },
@@ -220,11 +224,11 @@
                       okText:'恢复',
                       transfer: true
                     },
-                    directives: [{
+                    /*directives: [{
                       name: 'auth',
                       value: -1,
                       expression: '1-1-2-4'
-                    }],
+                    }],*/
                     style: {
                       marginRight: '5px'
                     },
@@ -463,4 +467,7 @@
       margin-bottom: 18px
     }
   }
+.router-box{
+  border-bottom: 1px solid #eeeff1;
+}
 </style>

@@ -14,15 +14,15 @@ export default {
 
     [CHANGE_LOGIN_STATUS](state,bool){
         sessionStorage.setItem('isLogin', bool);
-        state.isLogin = bool;        
+        state.isLogin = bool;
     },
 
     [SET_USERINFO](state,data){
         setStore('userInfo', data);
-        state.userInfo = data;        
+        state.userInfo = data;
     },
 
-    [SET_DICT_GROUPS](state,data){       
+    [SET_DICT_GROUPS](state,data){
         if (!!data) {
             setStore('dictGroups',data);
             for (let i = 0; i < data.length; i++) {
@@ -30,7 +30,7 @@ export default {
                 let val = data[i].dicts;
                 state.dictGroups.set(key, val);
             }
-        }        
+        }
     },
 
     [SET_AUTH](state,data){
@@ -39,7 +39,7 @@ export default {
             let key = data[i];
             let val = '';
             state.auth.set(key, val);
-        }        
+        }
     },
 
     [CLEAR_AUTH](state){
@@ -49,7 +49,7 @@ export default {
     },
     [SAVE_CASE_OBJ_SIGN](state,data){
         setStore('save_case_Info', data);
-        state.save_case_Info = data;         
+        state.save_case_Info = data;
     },
     [SAVE_INVESTIGATE_TREE](state,data){
         if (!!data.length) {
@@ -59,6 +59,6 @@ export default {
                 let val = data[i].children;
                 state.dictGroups.set(key, val);
             }
-        }         
+        }
     }
 }

@@ -26,7 +26,7 @@
   import IndexDataSituation from "../components/Index/IndexDataSituation";
   import SearchComponents from "../components/Search/SearchComponents";
   //引入路由配置数据
-  import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
+  // import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
 export default {
   name: 'Index',
   components:{

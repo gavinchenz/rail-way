@@ -16,6 +16,7 @@
       </div>
      </div>
    <router-view class="main-content" :is="pageName"/>
+   <footer class="footer"></footer>
   </div>
 </template>
 
@@ -24,7 +25,7 @@
   import ComprehensiveEarlyWarning from '@/view/earlyWarning/ComprehensiveEarlyWarning'
   import WarningPush from '@/view/earlyWarning/WarningPush'
   //引入路由配置数据
-  import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
+  // import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
 export default {
   name: 'EarlyWarning',
   components:{

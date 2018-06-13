@@ -203,7 +203,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped >
 .select-col{
   float:left;
   margin-left:5px;

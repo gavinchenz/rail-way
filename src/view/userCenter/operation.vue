@@ -179,11 +179,11 @@
                     width: '23px',
                     height: '23px'
                   },
-                  directives: [{
+                  /*directives: [{
                     name: 'auth',
                     value: -1,
                     expression: '1-1-1-11'
-                  }],
+                  }],*/
                   on: {
                     click: () => {
                       this.eideRowData(params.row)
@@ -202,11 +202,11 @@
                     width: '23px',
                     height: '23px'
                   },
-                  directives: [{
+                 /* directives: [{
                     name: 'auth',
                     value: -1,
                     expression: '1-1-1-10'
-                  }],
+                  }],*/
                   on: {
                     click: () => {
                       this.delRowData(params.row.id)

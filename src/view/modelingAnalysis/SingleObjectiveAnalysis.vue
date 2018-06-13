@@ -5,22 +5,28 @@
         <BreadcrumbItem to="/ModelingAnalysis?condition=3">建模分析</BreadcrumbItem>
         <BreadcrumbItem>单目标分析</BreadcrumbItem>
     </Breadcrumb>
-    <div class="header-box">
-      <ul class="single-objective-analysis">
-        <li class="header-li">
-          <label class="tit-label">时间范围</label>
-          <Col span="12" class="select-col">
-            <DatePicker class="data-picker" type="daterange" show-week-numbers placement="bottom-end" placeholder="请输入时间范围" style="width: 200px"></DatePicker>
-          </Col>
-          <label class="tit-label">身份证号</label>
-          <Input class="tit-input" v-model="SaleName" placeholder="请输入身份证号" clearable style="width: 300px"></Input>
-          <Button class="btn" type="primary">查询</Button>
-          <Button class="btn" type="ghost">重置</Button>
-        </li>
-      </ul>
-    </div>
+    <Form :model="formItem" class="header-from">
+        <FormItem class="form-item">
+            <Row :gutter="16">
+                <Col span="2" class="col-label">时间范围</Col>
+                <Col span="4">
+                    <DatePicker type="date" placeholder="选择日期" placement="bottom-end" v-model="formItem.dateRange"></DatePicker>
+                </Col>
+                <Col span="2" class="col-label">身份证号</Col>
+                <Col span="4">
+                    <Input v-model="formItem.inputId" placeholder="请输入身份证号" clearable></Input>
+                </Col>
+                <Col span="2" class="col-label">
+                    <Button type="primary" icon="ios-search" @click="getSearch" >查询</Button>
+                </Col>
+                <Col span="2" class="col-label">
+                    <Button type="ghost" @click="resat" icon="refresh">重置</Button>
+                </Col>
+            </Row>
+        </FormItem>
+    </Form>
     <div class="table-box">
-      <Table class="table-content" border :columns="columns" :data="data"></Table>
+      <Table class="table-content"  border ref="selection" :columns="columns" :data="data"></Table>
       <Page class="table-page" :total="100" show-sizer></Page>
     </div>
   </div>
@@ -28,184 +34,95 @@
 
 <script>
 export default {
-  name: 'SingleObjectiveAnalysis',
-  components:{
+    name: 'SingleObjectiveAnalysis',
+    components:{
 
-  },
-  data () {
-    return {
-      animal: '所有',
-      SaleNumber: '',
-      SaleName: '',
-      SaleStationName: '',
-      columns: [
-        {
-            title: '乘车日期',
-            key: 'date',
-            sortable: true
-        },
-        {
-            title: '车次',
-            key: 'trainNumber',
-            sortable: true
-        },
-        {
-            title: '发站',
-            key: 'departureStation',
-            sortable: true
-        },
-        {
-            title: '到站',
-            key: 'destination',
-            sortable: true
-        },
-        {
-            title: '车厢',
-            key: 'carriage',
-            sortable: true
-        },
-        {
-            title: '席位',
-            key: 'seat',
-            sortable: true
-        },
-        {
-            title: '证件类型',
-            key: 'certificatesType',
-            sortable: true
-        },
-        {
-            title: '证件号',
-            key: 'idNumber',
-            sortable: true
-        },
-        {
-            title: '姓名',
-            key: 'name',
-            sortable: true
-        },
-        {
-            title: '售处',
-            key: 'sellingPlace',
-            sortable: true
+    },
+    data () {
+        return {
+            formItem: {
+                    dateRange: '',
+                    inputId: ''
+            },              
+            columns: [
+                {
+                    type: 'selection',
+                    width: 60,
+                    fixed: 'left'
+                },            
+                {
+                    title: '身份证号',
+                    width: 400,
+                    key: 'idCardNumber',
+                    sortable: true
+                },
+                {
+                    title: '姓名',
+                    width:100,
+                    key: 'name',
+                    sortable: true
+                },
+                {
+                    title: '年龄',
+                    width: 100,
+                    key: 'age',
+                    sortable: true
+                },
+                {
+                    title: '籍贯',
+                    width: 100,
+                    key: 'nativePlace',
+                    sortable: true
+                },
+                {
+                    title: '乘车次数',
+                    width: 130,
+                    key: 'rideTimes',
+                    sortable: true
+                },
+                {
+                    title: '行踪轨迹',
+                    width: 400,
+                    key: 'trajectory',
+                    sortable: true
+                },
+                {
+                    title: '操作',
+                    width: 200,
+                    key: 'handle',
+                    fixed: 'right',                    
+                    sortable: true
+                }
+            ],
+            data: [
+                {
+                    idCardNumber: '610111199012119922',
+                    name: '张某',
+                    age: 34,
+                    nativePlace: '安康',
+                    rideTimes: '2',
+                    trajectory: '西安到安康，西安到延安，西安到渭南',
+                    handle: ''
+                }
+            ]
         }
-      ],
-      data: [
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
+    },
+    methods:{
+        //重置
+        resat() {
+          this.formItem.dateRange = '';
+          this.formItem.inputId = '';
         },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
+        //查询
+        getSearch(){
+           console.log(this.formItem);
+           console.log(this.formItem.inputId);
         }
-      ]
     }
-  }
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped >
 .select-col{
   float:left;
   margin-left:5px;

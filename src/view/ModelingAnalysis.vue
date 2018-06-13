@@ -7,15 +7,16 @@
       </a>
       <p class="header-ul">
         <a class="header-page" @click="changePage(0)">综合研判</a>
-        <a class="header-page" @click="changePage(1)">单目标分析</a>
-        <a class="header-page" @click="changePage(2)">多目标分析</a>
-        <a class="header-page" @click="changePage(3)">涉嫖建模分析</a>
-        <a class="header-page" @click="changePage(4)">涉毒建模分析</a>
-        <a class="header-page" @click="changePage(5)">涉恐建模分析</a>
-        <a class="header-page" @click="changePage(6)">侵财建模分析</a>
-        <a class="header-page" @click="changePage(7)">维稳建模分析</a>
-        <a class="header-page" @click="changePage(8)">中间库</a>
-        <a class="header-page" @click="changePage(9)">任务列表</a>
+        <a class="header-page" @click="changePage(1)">自定义分析</a>
+        <a class="header-page" @click="changePage(2)">单目标分析</a>
+        <a class="header-page" @click="changePage(3)">多目标分析</a>
+        <a class="header-page" @click="changePage(4)">涉票建模分析</a>
+        <a class="header-page" @click="changePage(5)">涉毒建模分析</a>
+        <a class="header-page" @click="changePage(6)">涉恐建模分析</a>
+        <a class="header-page" @click="changePage(7)">侵财建模分析</a>
+        <a class="header-page" @click="changePage(8)">维稳建模分析</a>
+        <a class="header-page" @click="changePage(9)">中间库</a>
+        <a class="header-page" @click="changePage(10)">任务列表</a>
       </p>
       <div class="header-right">
         <span class="right-btn fullScreen">全屏</span>
@@ -24,15 +25,17 @@
       </div>
      </div>
    <router-view class="main-content" :is="pageName"/>
+   <footer class="footer"></footer>
   </div>
 </template>
 
 <script>
   //建模分析
+  import CustomAnalysis from './modelingAnalysis/CustomAnalysis'
   import ComprehensiveStudy from './modelingAnalysis/ComprehensiveStudy'
   import SingleObjectiveAnalysis from './modelingAnalysis/SingleObjectiveAnalysis'
   import MultiobjectiveAnalysis from './modelingAnalysis/MultiobjectiveAnalysis'
-  import WhoringModelingAnalysis from './modelingAnalysis/WhoringModelingAnalysis'
+  import TicketRelatedModelingAnalysis from './modelingAnalysis/TicketRelatedModelingAnalysis'
   import DrugModelingAnalysis from './modelingAnalysis/DrugModelingAnalysis'
   import TerrorModelingAnalysis from './modelingAnalysis/TerrorModelingAnalysis'
   import InvadeMoneyModelingAnalysis from './modelingAnalysis/InvadeMoneyModelingAnalysis'
@@ -41,14 +44,15 @@
   import TaskList from './modelingAnalysis/TaskList'
 
   //引入路由配置数据
-  import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
+  // import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
 export default {
   name: 'ModelingAnalysis',
   components:{
+    CustomAnalysis,
     ComprehensiveStudy,
     SingleObjectiveAnalysis,
     MultiobjectiveAnalysis,
-    WhoringModelingAnalysis,
+    TicketRelatedModelingAnalysis,
     DrugModelingAnalysis,
     TerrorModelingAnalysis,
     InvadeMoneyModelingAnalysis,
@@ -79,20 +83,22 @@ export default {
        if(index==0){
         this.pageName="comprehensive-study"
        }else if(index==1){
-        this.pageName="single-objective-analysis"
+        this.pageName="custom-analysis"
        }else if(index==2){
-        this.pageName="multiobjective-analysis"
+        this.pageName="single-objective-analysis"
        }else if(index==3){
-        this.pageName="whoring-modeling-analysis"
+        this.pageName="multiobjective-analysis"
        }else if(index==4){
-        this.pageName="drug-modeling-analysis"
+        this.pageName="ticket-related-modeling-analysis"
        }else if(index==5){
-        this.pageName="terror-modeling-analysis"
+        this.pageName="drug-modeling-analysis"
        }else if(index==6){
-        this.pageName="invade-money-modeling-analysis"
+        this.pageName="terror-modeling-analysis"
        }else if(index==7){
-        this.pageName="main-stability-modeling-analysis"
+        this.pageName="invade-money-modeling-analysis"
        }else if(index==8){
+        this.pageName="main-stability-modeling-analysis"
+       }else if(index==9){
         this.pageName="intermediate-library"
        }else{
         this.pageName="task-list"
@@ -182,7 +188,7 @@ export default {
 }
 .header-ul{
   float: left;
-  width: 60%;
+  width: 70%;
   padding-left:10px;
   display: inline-block;
   text-align: left;

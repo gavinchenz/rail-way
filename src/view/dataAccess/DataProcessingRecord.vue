@@ -16,8 +16,13 @@
       </ul>
     </div>
     <div class="table-box">
-      <Table class="table-content" border :columns="columns" :data="data"></Table>
-      <Page class="table-page" :total="100" show-sizer></Page>
+        <Table  class="table-content" border :data="tableData" :columns="tableColumns" :loading="loading"></Table>
+            <div style="margin: 10px;overflow: hidden">
+                <div style="float: left;">
+                    <Page class="table-page" :total="100" :current="1" @on-change="changePage"></Page>
+                </div>
+            </div>
+        </div>
     </div>
   </div>
 </template>
@@ -31,174 +36,161 @@ export default {
   data () {
     return {
       dataDate: '',
-      columns: [
-        {
-            title: '乘车日期',
-            key: 'date',
-            sortable: true
-        },
-        {
-            title: '车次',
-            key: 'trainNumber',
-            sortable: true
-        },
-        {
-            title: '发站',
-            key: 'departureStation',
-            sortable: true
-        },
-        {
-            title: '到站',
-            key: 'destination',
-            sortable: true
-        },
-        {
-            title: '车厢',
-            key: 'carriage',
-            sortable: true
-        },
-        {
-            title: '席位',
-            key: 'seat',
-            sortable: true
-        },
-        {
-            title: '证件类型',
-            key: 'certificatesType',
-            sortable: true
-        },
-        {
-            title: '证件号',
-            key: 'idNumber',
-            sortable: true
-        },
-        {
-            title: '姓名',
-            key: 'name',
-            sortable: true
-        },
-        {
-            title: '售处',
-            key: 'sellingPlace',
-            sortable: true
+            loading: false,
+            tableData: this.mockTableData(),
+            tableColumns: [
+            {
+                title: '数据日期',
+                key: 'date', 
+                sortable: true           
+            },
+            {
+                title: '数据类型',
+                key: 'dataType',
+                sortable: true
+            },
+            {
+                title: '数据数据(M)',
+                key: 'dataes',
+                sortable: true
+            },
+            {
+                title: '清洗状态',
+                key: 'cleaningState',
+                sortable: true
+            },
+            {
+                title: '清洗数据量',
+                key: 'cleaningAmount',
+                sortable: true
+            },
+            {
+                title: '清洗时间',
+                key: 'cleaningTime',
+                sortable: true
+            },
+            {
+                title: '入库数据量',
+                key: 'warehouseDataVolume',
+                sortable: true
+            },
+            {
+                title: '入库时间',
+                key: 'warehouseDataTime',
+                sortable: true
+            },
+            {
+                title: '入库条数',
+                key: 'warehouseDataAmount',
+                sortable: true
+            }
+          ]    
         }
-      ],
-      data: [
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
+    },
+    methods: {
+        mockTableData () {
+            let data = [];
+            for (let i = 0; i < 10; i++) {
+                data.push({
+                        date:new Date().toLocaleString(),
+                        dataType: "是",
+                        dataes:800,
+                        cleaningState:new Date().toLocaleString(),
+                        cleaningAmount:350,
+                        cleaningTime:new Date().toLocaleString(),
+                        warehouseDataVolume:350,
+                        warehouseDataTime:new Date().toLocaleString(),
+                        warehouseDataAmount: 352150
+                    },
+                    {
+                        date:new Date().toLocaleString(),
+                        dataType: "是",
+                        dataes:800,
+                        cleaningState:new Date().toLocaleString(),
+                        cleaningAmount:350,
+                        cleaningTime:new Date().toLocaleString(),
+                        warehouseDataVolume:350,
+                        warehouseDataTime:new Date().toLocaleString(),
+                        warehouseDataAmount: 352150
+                    },
+                    {
+                        date:new Date().toLocaleString(),
+                        dataType: "是",
+                        dataes:800,
+                        cleaningState:new Date().toLocaleString(),
+                        cleaningAmount:350,
+                        cleaningTime:new Date().toLocaleString(),
+                        warehouseDataVolume:350,
+                        warehouseDataTime:new Date().toLocaleString(),
+                        warehouseDataAmount: 352150
+                    },
+                    {
+                        date:new Date().toLocaleString(),
+                        dataType: "是",
+                        dataes:800,
+                        cleaningState:new Date().toLocaleString(),
+                        cleaningAmount:350,
+                        cleaningTime:new Date().toLocaleString(),
+                        warehouseDataVolume:350,
+                        warehouseDataTime:new Date().toLocaleString(),
+                        warehouseDataAmount: 352150
+                    },
+                    {
+                        date:new Date().toLocaleString(),
+                        dataType: "是",
+                        dataes:800,
+                        cleaningState:new Date().toLocaleString(),
+                        cleaningAmount:350,
+                        cleaningTime:new Date().toLocaleString(),
+                        warehouseDataVolume:350,
+                        warehouseDataTime:new Date().toLocaleString(),
+                        warehouseDataAmount: 352150
+                    },
+                    {
+                        date:new Date().toLocaleString(),
+                        dataType: "是",
+                        dataes:800,
+                        cleaningState:new Date().toLocaleString(),
+                        cleaningAmount:350,
+                        cleaningTime:new Date().toLocaleString(),
+                        warehouseDataVolume:350,
+                        warehouseDataTime:new Date().toLocaleString(),
+                        warehouseDataAmount: 352150
+                    },
+                    {
+                        date:new Date().toLocaleString(),
+                        dataType: "是",
+                        dataes:800,
+                        cleaningState:new Date().toLocaleString(),
+                        cleaningAmount:350,
+                        cleaningTime:new Date().toLocaleString(),
+                        warehouseDataVolume:350,
+                        warehouseDataTime:new Date().toLocaleString(),
+                        warehouseDataAmount: 352150
+                    },
+                    {
+                        date:new Date().toLocaleString(),
+                        dataType: "是",
+                        dataes:800,
+                        cleaningState:new Date().toLocaleString(),
+                        cleaningAmount:350,
+                        cleaningTime:new Date().toLocaleString(),
+                        warehouseDataVolume:350,
+                        warehouseDataTime:new Date().toLocaleString(),
+                        warehouseDataAmount: 352150
+                })
+            }
+            return data;
         },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
+        changePage () {
+            // 这里直接改变模拟数据，实际使用场景应该从服务器获取数据。
+            this.tableData = this.mockTableData();
         }
-      ]
     }
-  }
-};
+}
 </script>
 
-<style scoped lang="scss">
+<style scoped >
 .header-box{
   height:100px;
 }

@@ -494,3 +494,114 @@ export const saveOperGroupInitUse = (id) => {
 export const updatePwd = (sendData) => {
     return fetch(`uf/userinfo/updatePwd?oldPwd=${sendData.oldPwd}&newPwd=${sendData.newPwd}&confirmPwd=${sendData.confirmPwd}`, {}, 'POST')
 }
+
+/**
+ * 重点人员-获取list
+ */
+export const getPersonnelList = (sendData) => {
+  return fetch('/uf/personnel/queryPersonnel', {
+    page: sendData.page.pageNumber,
+    size: sendData.page.size,
+    sort: sendData.page.sort,
+    xm: sendData.xm,
+    sfzh: sendData.sfzh,
+    cph: sendData.cph,
+    jg: sendData.jg,
+    jtzz: sendData.jtzz,
+  })
+}
+/**
+ * 重点人员保存
+ */
+export const savePersonnel = (sendData) => {
+  return fetch('uf/personnel/save', sendData, 'POST')
+}
+/**
+ * 重点人员删除
+ */
+export const deletePersonnel = (id) => {
+  return fetch('/uf/personnel/deletePersonnel/{id}', '', 'DELETE')
+}
+
+
+/**
+ *   字典保存和修改
+ */
+export const saveDictGroups = (sendData) => {
+  return fetch('cm/CaseDiction/saveCaseDiction', sendData, "POST")
+}
+
+/**
+ *   字典删除
+ */
+export const deleteDictGroups = (sendData) => {
+  return fetch('cm/CaseDiction/delete', sendData, "POST")
+}
+/**
+ *   字典信息
+ */
+// export const getDictGroups = (sendData) => {
+//   return fetch('cm/CaseDiction/queryCaseDiction', {
+//     page: sendData.page.pageNumber,
+//     size: sendData.page.size,
+//     sort: sendData.page.sort,
+//     code: sendData.code,
+//     name: sendData.name,
+//     parentCode: sendData.parentCode
+//   })
+// }
+
+
+// create by zenghao
+/**
+ *  案件信息管理
+ */
+export const caseinfoQueryCaseInfo = (sendData) => {
+  return fetch('cm/caseinfo/queryCaseInfo', {
+    cissynchrocase: sendData.cissynchrocase,
+    page: sendData.page.pageNumber,
+    size: sendData.page.size,
+    sort: sendData.page.sort,
+    issynchroCase: sendData.issynchroCase,
+    caseName: sendData.caseName,
+    objName: sendData.objName,
+    identify: sendData.identify,
+    ctypecode: sendData.ctypecode,
+    cstatus: sendData.cstatuscode,
+    caseLevelcode:sendData.caseLevelcode,
+    ccategorycode:sendData.ccategorycode,
+    cturncasecategorycode:sendData.cturncasecategorycode,
+    cassistcategorycode:sendData.cassistcategorycode
+  })
+}
+/**
+ *  获取新增案件中下拉框数据
+ */
+export const findCaseDictionByParent = (data) => {
+  return fetch('cm/CaseDiction/findCaseDictionByParent', {
+    parentCode: data
+  },'GET')
+}
+/**
+ *  手动结案
+ */
+export const caseobjectFinishCaseInfo = (id) => {
+  return fetch(`cm/caseinfo/finishCaseInfo/${id}`,{
+    "caseid":id
+  },'POST')
+}
+/**
+ *  删除单独案件
+ */
+export const caseinfoDeleteCaseInfo = (id) => {
+  return fetch(`cm/caseinfo/deleteCaseInfo/${id}`,{},'DELETE')
+}
+/**
+ *  同步案件
+ */
+export const caseSynchronization = (sendData) => {
+  return fetch("cm/caseSynchronization/caseAcess",{
+    "type":sendData.type,
+    "caseid":sendData.caseId
+  })
+}

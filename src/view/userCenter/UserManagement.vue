@@ -137,7 +137,7 @@
         <span ref="header">上传用户信息</span>
       </p>
       <div>
-          <Row v-auth="1-1-1-8" style="vertical-align: middle">
+          <Row style="vertical-align: middle"> //v-auth="1-1-1-8"v-auth="1-1-1-8"
             <Col span="5"style="text-align: center;margin-top:10px"><span>模板</span></Col>
             <Col span="19">
               <a href="api/uf/userinfo/download"><Button style="background: #1c2438;color: #fff;margin-bottom:10px" icon="ios-cloud-download">下载模板</Button></a>
@@ -174,7 +174,7 @@
       </div>
       <div slot="footer">
         <Button type="primary" @click="" :loading="loadingStatus" v-if="file !== null">{{ loadingStatus ? '上传...' : '上传' }}</Button>
-        <Button type="ghost" v-auth="1-1-1-7"  title="清空所选文件" @click="clear">清空</Button>
+        <Button type="ghost"   title="清空所选文件" @click="clear">清空</Button> //v-auth="1-1-1-7"
       </div>
     </Modal>
     <!--上传用户信息end-->
@@ -294,11 +294,11 @@ export default {
                     icon: 'edit'
                   },
                   attrs:{title:"编辑"},
-                  directives: [{
+                 /* directives: [{
                     name: 'auth',
                     value: -1,
                     expression: '1-1-1-2'
-                  }],
+                  }],*/
                   style: {
                     marginRight: '10px',
                     color: '#2d8cf0',
@@ -323,11 +323,11 @@ export default {
                     width: '23px',
                     height: '23px'
                   },
-                  directives: [{
+                  /*directives: [{
                     name: 'auth',
                     value: -1,
                     expression: '1-1-1-3'
-                  }],
+                  }],*/
                   on: {
                     click: () => {
                       this.delData(params);
@@ -343,11 +343,11 @@ export default {
                     shape: 'circle',
                     icon: 'reply'
                   },
-                  directives: [{
+                 /* directives: [{
                     name: 'auth',
                     value: -1,
                     expression: '1-1-1-5'
-                  }],
+                  }],*/
                   attrs:{title:"恢复"},
                   style: {
                     color: '#ff9900',

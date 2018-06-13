@@ -5,20 +5,30 @@
         <BreadcrumbItem to="/ComprehensiveQuery?condition=2">综合查询</BreadcrumbItem>
         <BreadcrumbItem>窗口信息维护</BreadcrumbItem>
     </Breadcrumb>
-    <div class="header-box">
-      <ul class="window-info-maintenance">
-        <li class="header-li">
-          <label class="tit-label">售处编号</label>
-          <Input class="tit-input" v-model="SaleNumber" placeholder="请输入售处编号" clearable style="width: 200px"></Input>
-          <label class="tit-label">售处名称</label>
-          <Input class="tit-input" v-model="SaleName" placeholder="请输入售处名称" clearable style="width: 200px"></Input>
-          <label class="tit-label">售处站名</label>
-          <Input class="tit-input" v-model="SaleStationName" placeholder="请输入售处站名" clearable style="width: 200px"></Input>
-          <Button class="btn" type="primary">查询</Button>
-          <Button class="btn" type="ghost">重置</Button>
-        </li>
-      </ul>
-    </div>
+    <Form :model="formItem" class="header-from">s
+        <FormItem class="form-item">
+            <Row :gutter="16">
+                <Col span="2" class="col-label">售处编号</Col>
+                <Col span="4">
+                    <Input v-model="formItem.SaleNumber" placeholder="请输入售处编号" clearable></Input>
+                </Col>
+                <Col span="2" class="col-label">售处名称</Col>
+                <Col span="4">
+                    <Input v-model="formItem.SaleName" placeholder="请输入售处名称" clearable></Input>
+                </Col>
+                <Col span="2" class="col-label">售处站名</Col>
+                <Col span="4">
+                    <Input v-model="formItem.SaleStationName" placeholder="请输入售处站名" clearable></Input>
+                </Col>
+                <Col span="2" class="col-label">
+                    <Button type="primary" icon="ios-search" @click="getSearch" >查询</Button>
+                </Col>
+                <Col span="2" class="col-label">
+                    <Button type="ghost" @click="resat" icon="refresh">重置</Button>
+                </Col>
+            </Row>
+        </FormItem>
+    </Form>
     <div class="table-box">
       <div class="btn-box">
         <Button class="commom-btn" type="success" icon="plus">新增</Button>
@@ -39,10 +49,11 @@ export default {
   },
   data () {
     return {
-      animal: '所有',
-      SaleNumber: '',
-      SaleName: '',
-      SaleStationName: '',
+        formItem: {
+            SaleNumber: '',
+            SaleName: '',
+            SaleStationName: ''
+        }, 
       columns: [
         {
             title: '乘车日期',
@@ -210,47 +221,6 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-// .header-box{
-//   margin:15px 10px 0;
-//   border:1px solid #eeeff1;
-//   height:100px;
-//   padding:15px;
-//   border-radius:5px;
-//   font-size: 14px;
-//   color:#000;
-//   text-align: center;
-//   line-height: 50px;
-//   .header-li{
-//     height:50px;
-//     text-align: left;
-//     margin:3px 0;
-//     .tit-label{
-//       float:left;
-//       margin:0 10px;
-//       vertical-align: middle;
-//     }
-//     .tit-input{
-//       float:left;
-//       margin-left:5px;
-//       line-height:50px;
-//     }
-//     .btn{
-//       margin-left:20px;
-//     }
-//   }
-// }
-// .table-box{
-//   margin:15px 10px 0;
-//   .table-content{
-//     height:700px;
+<style scoped >
 
-//   }
-//   .btn-box{
-//     height:50px;
-//   }
-//   .table-page{
-//     margin:15px 0;
-//   }
-// }
 </style>
