@@ -1,7 +1,7 @@
 <template>
   <div class="vue-body">
     <Breadcrumb class="router-box">
-        <BreadcrumbItem to="index">首页</BreadcrumbItem>
+        <BreadcrumbItem to="/index">首页</BreadcrumbItem>
         <BreadcrumbItem to="/SystemManagement?condition=5">系统管理</BreadcrumbItem>
         <BreadcrumbItem>模型参数设置</BreadcrumbItem>
     </Breadcrumb>      
@@ -22,8 +22,8 @@
       </Row>
       <Row>
         <Col span="24">
-          <Button type="success" @click="addSettingFn"><Icon type="plus-round"></Icon>&nbsp;新增</Button>
-          <Button type="error"><Icon type="close-round"></Icon>&nbsp;批量删除</Button>
+          <Button type="success" size='small' @click="addSettingFn"><Icon type="plus-round"></Icon>&nbsp;新增</Button>
+          <Button type="error" size='small'><Icon type="close-round"></Icon>&nbsp;批量删除</Button>
         </Col>
       </Row>
         <Table height="700" :columns="columns" :data="data" size="small" style="margin-top: 5px" stripe></Table><br>

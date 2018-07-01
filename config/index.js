@@ -13,7 +13,7 @@ module.exports = {
     proxyTable: {
         '/api': {
             target: 'http://192.168.1.94:8889/api',
-            // target: 'http://1.94:8889/api',
+            // target: 'http://192.168.1.98:8889/api',
             changeOrigin: true,
             pathRewrite: {
                 '^/api': '/'//这里用‘/api’代替target里面的地址，调用'http://localhost:8080/user/add'，可写成‘/api/user/add’
@@ -22,7 +22,7 @@ module.exports = {
     },
 
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
+    host: '0.0.0.0', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,

@@ -1,15 +1,8 @@
 <template>
   <div class="search-components">
-    <select class="search-select" v-model="selected">
-      <option  value="">全部</option>
-      <option>手机号码</option>
-      <option>身份证</option>
-      <option>车次</option>
-      <option>票号</option>
-    </select>
-    <input type="text" class="search-input" v-model="searchMsg" placeholder="可输入您要查找的相关信息"/>
-    <button class="search-btn" @click="getSearchMsg"><i class="iconfont icon-search"></i></button>
-    <button class="search-btn" @click="getUpMsg"><i class="iconfont icon-up"></i></button>
+    <input type="text" class="search-input" v-model="searchMsg" placeholder="多个查询条件请用空格隔开"/>
+    <button class="search-btn" @click="changeRouter(0)"><i class="iconfont icon-search"></i></button>
+    <button class="search-btn" @click="changeRouter(1)"><i class="iconfont icon-up"></i></button>
   </div>
 </template>
 
@@ -19,17 +12,19 @@ export default {
   name: 'SearchComponents',
   data () {
     return {
-      selected:"",
       searchMsg:""
     }
   },
   methods:{
-    getSearchMsg(searchStr){
-      this.$router.push({ name: 'QueryResult', params: { userId: searchStr }})
-    },
-    getUpMsg(searchStr){
-      this.$router.push({ name: 'Upload', params: { userId: searchStr }})
-    }    
+    changeRouter(index){
+      const msg=this.searchMsg
+      console.log(msg)
+      if(index==0){
+        this.$router.push({name:'QueryResult',params:{msg}})
+      }else{
+        this.$router.push({path:'/Upload'})
+      }
+    }  
   }
 };
 </script>

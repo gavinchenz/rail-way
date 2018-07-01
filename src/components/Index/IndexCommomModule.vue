@@ -18,7 +18,7 @@ export default {
   methods:{
 
   }
-}
+};
 </script>
 
 <style scoped>
@@ -28,14 +28,15 @@ export default {
   height:33%;
   margin:20px;
   border:2px solid #6F95DE;
+  padding-top:5px;
   background: rgba(13, 25, 74, 0.7); 
-  padding-top:10px;
   color:#fff;
   box-shadow:0 0 3px 4px #4065A0;
   border-radius: 8px;
+  text-align: center;
 }
 .common-module  .iconfont{
-  display: block;
+  display: inline-block;
   height: 30px;
   font-size:30px;
 }

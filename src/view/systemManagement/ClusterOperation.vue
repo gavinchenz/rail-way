@@ -1,7 +1,7 @@
 <template>
   <div class="vue-body">
     <Breadcrumb class="router-box">
-        <BreadcrumbItem to="index">首页</BreadcrumbItem>
+        <BreadcrumbItem to="/index">首页</BreadcrumbItem>
         <BreadcrumbItem to="/SystemManagement?condition=5">系统管理</BreadcrumbItem>
         <BreadcrumbItem>集群运行</BreadcrumbItem>
     </Breadcrumb> 

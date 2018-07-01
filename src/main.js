@@ -7,57 +7,15 @@ import "./assets/style/common.css"
 //引入字体小图标
 import "./assets/style/iconfont.css"
 
+//引入jQuery的table导出excel插件
+import $ from 'jquery'
+import './assets/script/jquery.table2excel.min.js'
+
 // router
 import Router from 'vue-router'
 Vue.use(Router)
 
-//引入ivew
-import iView from 'iview'
-// import '!style-loader!css-loader'
-import 'iview/dist/styles/iview.css'
-Vue.use(iView)
-
-//引入vue-easytable
-import 'vue-easytable/libs/themes-base/index.css'
-import {VTable,VPagination} from 'vue-easytable'
-
-Vue.component(VTable.name,VTable);
-Vue.component(VPagination.name,VPagination);
-
-//全局引入echarts
-import echarts from "echarts"
-Vue.prototype.$echarts = echarts
-
-// eventBus
-window.eventBus = new Vue();
-
-//vuex
-import store from './vuex/store'
-
-//utils
-import { tools,exportsObj } from './utils/tools'
-Vue.prototype.$tools = tools;
-Vue.prototype.$clearObj = exportsObj;
-
 import router from './router'
-
-import $ from 'jquery'
-
-import axios from "./axios"
-
-import Swiper from 'vue-awesome-swiper'
-Vue.use(Swiper)
-
-// global directive to check user Auth
-Vue.directive("auth", {
-    bind: function(el, binding) {
-        let prop = binding.expression;
-        let map = store.state.auth;
-        if (!map.has(prop)) {
-            el.parentNode.removeChild(el);
-        }
-    }.bind(this)
-});
 
 // check auth when change router
 router.beforeEach((to, from, next) => {
@@ -107,4 +65,51 @@ new Vue({
         return createElement(App);
     }
 })
+
+//引入ivew
+import iView from 'iview'
+// import '!style-loader!css-loader'
+import 'iview/dist/styles/iview.css'
+Vue.use(iView)
+
+//引入vue-easytable
+import 'vue-easytable/libs/themes-base/index.css'
+import {VTable,VPagination} from 'vue-easytable'
+
+Vue.component(VTable.name,VTable);
+Vue.component(VPagination.name,VPagination);
+
+//全局引入echarts
+import echarts from "echarts"
+Vue.prototype.$echarts = echarts
+
+// eventBus
+window.eventBus = new Vue();
+
+//vuex
+import store from './vuex/store'
+
+//utils
+import { tools,exportsObj } from './utils/tools'
+Vue.prototype.$tools = tools;
+Vue.prototype.$clearObj = exportsObj;
+
+
+import axios from "./axios"
+
+import Swiper from 'vue-awesome-swiper'
+Vue.use(Swiper)
+
+// global directive to check user Auth
+Vue.directive("auth", {
+    bind: function(el, binding) {
+        let prop = binding.expression;
+        let map = store.state.auth;
+        if (!map.has(prop)) {
+            el.parentNode.removeChild(el);
+        }
+    }.bind(this)
+});
+
+
 

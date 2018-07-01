@@ -1,16 +1,22 @@
 <template>
-  <Row class="vm-table vm-panel">
-    <div class="panel-body">
-      <div v-if="$store.state.auth!=null">
-        <LogSearch :searchInfo="searchData" @search="search"></LogSearch>
-        <Table title="日志列表" :columns="tableColumns" :data="tableData" size="small" height="520" @on-sort-change="sortClick" stripe></Table>
-        <br>
-        <Paging :pages="searchData.page" @pageChange="pageChange" style="padding-bottom: 100px"></Paging>
+  <div class="vue-body"> 
+    <Breadcrumb class="router-box" separator="/">
+      <BreadcrumbItem to="/index">首页</BreadcrumbItem>
+      <BreadcrumbItem to="/SystemManagement?condition=5">系统管理</BreadcrumbItem>  
+      <BreadcrumbItem to="/caseManageList">执法日志</BreadcrumbItem>
+    </Breadcrumb>
+    <Row class="vm-table vm-panel">
+      <div class="panel-body">
+        <div v-if="$store.state.auth!=null">
+          <LogSearch :searchInfo="searchData" @search="search"></LogSearch>
+          <Table title="日志列表" :columns="tableColumns" :data="tableData" size="small" height="520" @on-sort-change="sortClick" stripe></Table>
+          <br>
+          <Paging :pages="searchData.page" @pageChange="pageChange" style="padding-bottom: 100px"></Paging>
+        </div>
+        <NoPermission v-else></NoPermission>
       </div>
-      <NoPermission v-else></NoPermission>
-    </div>
-  </Row>
-
+    </Row>
+  </div>
 </template>
 <script>
   import {logList} from '@/service/getData'

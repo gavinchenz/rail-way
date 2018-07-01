@@ -32,8 +32,8 @@
                 'SET_AUTH'
             ]),
 
-            // 获取用户信息
-            async getCurrentInfoFn() {
+            // 获取用户信息 这个函数不需要
+           /* async getCurrentInfoFn() {
               try{
                 let res = await getCurrentInfo();
                 if(res.statusCode !== 200) return process_error(res);
@@ -48,16 +48,16 @@
                    this.SET_AUTH(ocodeList);
                    this.authList = ocodeList;
               }catch(err){ console.log(err)}
-            },
+            },*/
 
             // 输出版权信息和版本信息
             exportCopyRightInfo(){
                 console.info(`系统名称：${sysInfo.LOGO_TITLE} \n版本信息：${sysInfo.VERSION} \n版权信息：${sysInfo.FOOTER_COPYRIGHT}`);
-            }            
+            }
         },
         mounted() {
           this.exportCopyRightInfo();
-          this.getCurrentInfoFn()
+          //this.getCurrentInfoFn()
         }
     };
 </script>

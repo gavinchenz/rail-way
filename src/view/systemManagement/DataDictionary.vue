@@ -1,91 +1,93 @@
 <template>
-  <Row class="vm-table vm-panel">
-    <section v-if="authList>=0">
-      <div class="panel-heading">
-        <Breadcrumb separator=">">
-          <BreadcrumbItem href="#">字典管理</BreadcrumbItem>
-        </Breadcrumb>
-      </div>
-      <Row style="height:75px;" class="DictlistStyle">
-        <Form>
-          <Row style="margin-bottom: -15px">
-            <FormItem :label-width="1">
-              <Button type="info" icon="plus-round" @click="openaddAndEditWin">新增字典</Button>
-            </FormItem>
-          </Row>
-          <Row type="flex" justify="start" align="top">
-            <Col span="4" order="1" class="gridHeight">
-              <FormItem :label-width="70" label="字典编码">
-                <Input v-model="searchData.code" placeholder="字典编码" size="small"></Input>
+ <div class="vue-body"> 
+  <Breadcrumb class="router-box" separator="/">
+    <BreadcrumbItem to="/index">首页</BreadcrumbItem>
+    <BreadcrumbItem to="/SystemManagement?condition=5">系统管理</BreadcrumbItem>
+    <BreadcrumbItem>字典管理</BreadcrumbItem>
+  </Breadcrumb> 
+  <div class="panel-heading">
+    <Row class="vm-table vm-panel">
+      <section v-if="authList>=0">
+        <Row style="height:75px;" class="DictlistStyle">
+          <Form>
+            <Row type="flex" justify="start" align="top">
+              <Col span="4" order="1" class="gridHeight">
+                <FormItem :label-width="70" label="字典编码">
+                  <Input v-model="searchData.code" placeholder="字典编码" size="small"></Input>
+                </FormItem>
+              </Col>
+              <Col span="4" order="2" class="gridHeight">
+                <FormItem :label-width="70" label="字典名称">
+                  <Input v-model="searchData.name" placeholder="字典名称" size="small"></Input>
+                </FormItem>
+              </Col>
+              <Col span="8" order="3" class="gridHeight">
+                <FormItem>
+                  &nbsp;
+                  <Button type="info" @click="search" icon="search" size="small">搜索</Button>
+                  <Button type="ghost" @click="resat" icon="refresh" size="small">重置</Button>
+                </FormItem>
+              </Col>
+            </Row>
+            <Row style="margin-top: -20px">
+              <FormItem :label-width="1">
+                <Button type="info" icon="plus-round" size="small" @click="openaddAndEditWin">新增字典</Button>
               </FormItem>
-            </Col>
-            <Col span="4" order="2" class="gridHeight">
-              <FormItem :label-width="70" label="字典名称">
-                <Input v-model="searchData.name" placeholder="字典名称" size="small"></Input>
-              </FormItem>
-            </Col>
-            <Col span="8" order="3" class="gridHeight">
-              <FormItem>
-                &nbsp;
-                <Button type="info" @click="search" icon="search">搜索</Button>
-                <Button type="ghost" @click="resat" icon="refresh">重置</Button>
-              </FormItem>
-            </Col>
-          </Row>
-        </Form>
-      </Row>
-      <Row class="DictlistStyle">
-        <Tabs :value="tabName" type="card" @on-click="tabClick" @on-tab-remove="tabClose">
-          <TabPane label="父级字典列表" name="parentName">
-            <Table border title="字典列表" @on-row-click="clickRowFun" :row-class-name="rowClassName" :loading="showLoading" :columns="columns" :data="childDataJsonArr['parentName'].data" size="small" @on-sort-change="sortColumnFn"></Table>
-          </TabPane>
-          <TabPane v-for="(item ,index) in items" :key="item" :label="item" :closable=true :name="item">
-            <Table border :title="item" :row-class-name="rowClassName" :loading="showLoading" :columns="columns" :data="childDataJsonArr[item].data" size="small" @on-sort-change="sortColumnFn"></Table>
-          </TabPane>
-        </Tabs>
-
-        <!--<Paging :pages="childDataJsonArr[tabName].search.page" @pageChange="pageChangeFn"></Paging>-->
-        <Paging :pages="pageSize" @pageChange="pageChangeFn"></Paging>
-      </Row>
-
-      <Modal v-model="addAndEditWin" :title="titleText" @on-visible-change="winChange">
-        <div>
-          <Form :model="addAndEditData" label-position="right" :label-width="150" :rules="addAndEditDataRult" ref="formCustom">
-            <FormItem :v-if="true===disabledFlag.code" label="字典编号" prop="code">
-              <Input type="text" v-model="addAndEditData.code" :placeholder="addAndEditData.code" :disabled="disabledFlag.code" style="width:70%"> </Input>
-            </FormItem>
-            </br>
-            <FormItem label="字典名称" prop="name">
-              <Input type="text" v-model="addAndEditData.name" :placeholder="addAndEditData.name" style="width:70%"></Input>
-            </FormItem>
-            </br>
-            <FormItem label="字典描述" prop="describe">
-              <Input type="textarea" v-model="addAndEditData.describe" :placeholder="addAndEditData.describe" style="width:70%"></Input>
-            </FormItem>
-            </br>
-            <FormItem v-show="disabledFlag.parentShow&&disabledFlag.parentCode" label="父级编码" prop="describe">
-              <Input type="text" v-model="addAndEditData.parentCode" :disabled="disabledFlag.parentCode" :placeholder="addAndEditData.parentCode" style="width:70%"></Input>
-            </FormItem>
-            <FormItem label="字典顺序" prop="sort">
-              <Input type="text" v-model="addAndEditData.sort" style="width:70%"></Input>
-            </FormItem>
+            </Row>
           </Form>
-        </div>
-        <div slot="footer" style="text-align:center">
-          <Button type="success" @click="submitCaseDiction(addAndEditData,'formCustom')">提交</Button>
-          <Button type="success" @click="closeCaseDiction(addAndEditData,'formCustom')">取消</Button>
-        </div>
-      </Modal>
-    </section>
-    <NoPermission v-else></NoPermission>
-  </Row>
+        </Row>
+        <Row class="DictlistStyle">
+          <Tabs :value="tabName" type="card" @on-click="tabClick" @on-tab-remove="tabClose">
+            <TabPane label="父级字典列表" name="parentName">
+              <Table border title="字典列表" @on-row-click="clickRowFun" :row-class-name="rowClassName" :loading="showLoading" :columns="columns" :data="childDataJsonArr['parentName'].data" size="small" @on-sort-change="sortColumnFn"></Table>
+            </TabPane>
+            <TabPane v-for="(item ,index) in items" :key="item" :label="item" :closable=true :name="item">
+              <Table border :title="item" :row-class-name="rowClassName" :loading="showLoading" :columns="columns" :data="childDataJsonArr[item].data" size="small" @on-sort-change="sortColumnFn"></Table>
+            </TabPane>
+          </Tabs>
+
+          <!--<Paging :pages="childDataJsonArr[tabName].search.page" @pageChange="pageChangeFn"></Paging>-->
+          <Paging :pages="pageSize" @pageChange="pageChangeFn"></Paging>
+        </Row>
+
+        <Modal v-model="addAndEditWin" :title="titleText" @on-visible-change="winChange">
+          <div>
+            <Form :model="addAndEditData" label-position="right" :label-width="150" :rules="addAndEditDataRult" ref="formCustom">
+              <FormItem :v-if="true===disabledFlag.code" label="字典编号" prop="code">
+                <Input type="text" v-model="addAndEditData.code" :placeholder="addAndEditData.code" :disabled="disabledFlag.code" style="width:70%"> </Input>
+              </FormItem>
+              </br>
+              <FormItem label="字典名称" prop="name">
+                <Input type="text" v-model="addAndEditData.name" :placeholder="addAndEditData.name" style="width:70%"></Input>
+              </FormItem>
+              </br>
+              <FormItem label="字典描述" prop="describe">
+                <Input type="textarea" v-model="addAndEditData.describe" :placeholder="addAndEditData.describe" style="width:70%"></Input>
+              </FormItem>
+              </br>
+              <FormItem v-show="disabledFlag.parentShow&&disabledFlag.parentCode" label="父级编码" prop="describe">
+                <Input type="text" v-model="addAndEditData.parentCode" :disabled="disabledFlag.parentCode" :placeholder="addAndEditData.parentCode" style="width:70%"></Input>
+              </FormItem>
+              <FormItem label="字典顺序" prop="sort">
+                <Input type="text" v-model="addAndEditData.sort" style="width:70%"></Input>
+              </FormItem>
+            </Form>
+          </div>
+          <div slot="footer" style="text-align:center">
+            <Button type="success" @click="submitCaseDiction(addAndEditData,'formCustom')">提交</Button>
+            <Button type="success" @click="closeCaseDiction(addAndEditData,'formCustom')">取消</Button>
+          </div>
+        </Modal>
+      </section>
+      <NoPermission v-else></NoPermission>
+    </Row>
+  </div>  
+</div>
 </template>
 
 
 <script>
-  import { getDictGroups } from '../../service/getData'
-  import { saveDictGroups } from '../../service/getData'
-  import { deleteDictGroups } from '../../service/getData'
+  import { getDictGroups,saveDictGroups,deleteDictGroups } from '../../service/getData'
   import Paging from '../../components/common/tools/paging'
   import NoPermission from '../../components/common/tools/noPermission.vue' //无权限查看的模板
   import { process_error } from '../../config/process_request_conf'

@@ -8,9 +8,9 @@
         </div>
         <p class="content-left-up-p changeP">快速查询</p>
         <search-components></search-components>
+        <index-notice></index-notice>
       </div>
       <div class="content-right">
-        <index-notice></index-notice>
         <index-data-situation></index-data-situation>
       </div>
     </div>
@@ -132,14 +132,14 @@ export default {
       window.open(routeData.href, '_blank');
     }
   },
-  created(){
-    homeSecondaryPageRouterApi.getSecondaryPageRouterDataList((data)=> {
-      this.routerList=data;
-      console.log(this.routerList);
-      this.currentRouterList=data[0];
-      console.log(this.currentRouterList);
-    });
-  },
+  // created(){
+  //   homeSecondaryPageRouterApi.getSecondaryPageRouterDataList((data)=> {
+  //     this.routerList=data;
+  //     console.log(this.routerList);
+  //     this.currentRouterList=data[0];
+  //     console.log(this.currentRouterList);
+  //   });
+  // },
 };
 </script>
 

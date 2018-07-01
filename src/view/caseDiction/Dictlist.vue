@@ -26,7 +26,6 @@
                         </Col>
                         <Col span="8" order="3" class="gridHeight">
                         <FormItem>
-                            &nbsp;
                             <Button type="info" @click="search" icon="search">搜索</Button>
                             <Button type="ghost" @click="resat" icon="refresh">重置</Button>
                         </FormItem>

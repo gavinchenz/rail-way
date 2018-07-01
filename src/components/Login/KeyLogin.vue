@@ -42,7 +42,7 @@ export default {
 }
 .key-btn{
   float:right;
-  width:53%;
+  width:57%;
   border:none;
   border-radius:  0 8px 8px 0;
   height: 38px;

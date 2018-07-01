@@ -6,23 +6,6 @@
     <div class="search-bar">
       <Form ref="searchInfo" :model="searchInfo" inline>
         <Row style="margin-bottom: -15px">
-          <FormItem :label-width="1">
-            <Button type="info" icon="plus-round" @click="addCase">新增案件</Button>
-            <Button type="success" icon="loop" v-if="radioFilter ==='0'" @click="synchronizeNewCase(1)">同步新增案件</Button>
-            <!--<Button type="success" icon="loop" @click="synchronizeNewCase(0)">同步所有案件</Button>-->
-          </FormItem>
-        </Row>
-        <Row style="margin-bottom: -15px">
-          <FormItem :label-width="1">
-            <RadioGroup v-model="radioFilter" @on-change="radioSelect" size="small" type="button">
-                <Radio label="2">全部</Radio>
-                <Radio label="1">手动录入案件</Radio>
-                <Radio label="0">同步案件</Radio>
-            </RadioGroup>
-          </FormItem>
-        </Row>
-        
-        <Row style="margin-bottom: -15px">
           <FormItem :label-width="60" label="案件名称">
             <Input v-model="searchInfo.caseName" placeholder="案件名称" style="width: 120px" size="small"></Input>
           </FormItem>
@@ -66,10 +49,22 @@
             </Select>            
           </FormItem>
           <FormItem>
-            <Button type="info" @click="search" icon="search">搜索</Button>
-            <Button type="ghost" @click="resat" icon="refresh">重置</Button>
+            <Button type="info" @click="search" size='small' icon="search">搜索</Button>
+            <Button type="ghost" @click="resat" size='small' icon="refresh">重置</Button>
           </FormItem>          
-        </Row>        
+        </Row> 
+        <Row style="margin-bottom: -15px">
+          <FormItem :label-width="1">
+            <RadioGroup v-model="radioFilter" @on-change="radioSelect" size="small" type="button">
+                <Radio label="2">全部</Radio>
+                <Radio label="1">手动录入案件</Radio>
+                <Radio label="0">同步案件</Radio>
+            </RadioGroup>
+            <Button type="info" icon="plus-round" size='small'  @click="addCase">新增案件</Button>
+            <Button type="success" icon="loop"  size='small'  v-if="radioFilter ==='0'" @click="synchronizeNewCase(1)">同步新增案件</Button>
+            <!--<Button type="success" icon="loop" @click="synchronizeNewCase(0)">同步所有案件</Button>-->
+          </FormItem>
+        </Row>    
       </Form>
     </div>
   </Row>

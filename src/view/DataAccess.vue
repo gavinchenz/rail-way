@@ -1,5 +1,5 @@
 <template>
-  <div class="my-home">
+  <div class="my-home">s
    <div class="home-header">
       <a class="login-a" href="javascript:;">
         <img id="login-img" src="../assets/images/login1.png"/>
@@ -16,74 +16,34 @@
         <span class="right-btn signOut">退出</span>
       </div>
      </div>
-   <router-view class="main-content" :is="pageName"/>
+   <router-view class="main-content" />
    <footer class="footer"></footer>   
   </div>
 </template>
 
 <script>
-  import DataAccessSituation from "./dataAccess/DataAccessSituation";
-  import DataFeatureLibrary from "./dataAccess/DataFeatureLibrary";
-  import DataProcessingRecord from "./dataAccess/DataProcessingRecord";
-  //引入路由配置数据
-  // import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
 export default {
   name: 'DataAccess',
-  components:{
-    DataAccessSituation,
-    DataFeatureLibrary,
-    DataProcessingRecord
-  },
   data () {
     return {
       msg:"大数据中心应用系统",
       routerList:[],
       currentRouterList:[],
-      condition:null,
-      pageName:"data-access-situation"
+      condition:null
     }
-  },
-  created(){
-      homeSecondaryPageRouterApi.getSecondaryPageRouterDataList((data)=> {
-        this.routerList=data;
-        console.log(this.routerList);
-        this.currentRouterList=data[0];
-        console.log(this.currentRouterList);
-      });
   },
   methods:{
     changePage:function(index){
        if(index==0){
-        this.pageName="data-access-situation"
+          this.$router.push({path:'/DataAccessSituation'})
        }else if(index==1){
-        this.pageName="data-feature-library"
+          this.$router.push({path:'/DataFeatureLibrary'})
        }else if(index==2){
-        this.pageName="data-processing-record"
+          this.$router.push({path:'/DataProcessingRecord'})
        }
 
        $(".tab").eq(index).addClass("tab1").siblings().removeClass('tab1');
-    },
-    //获取路由参数
-    getParams:function(){
-      // this.condition=this.$route.query.condition
-    },
-    getCurrentRouterList(){
-      if(this.condition==1){
-        this.currentRouterList=this.routerList[0];
-      }else if(this.condition==2){
-        this.currentRouterList=this.routerList[1];
-      }else if(this.condition==3){
-        this.currentRouterList=this.routerList[2];
-      }else if(this.condition==4){
-        this.currentRouterList=this.routerList[3];
-      }else{
-        this.currentRouterList=this.routerList[4];
-      }
-      console.log("wo kan kan "+this.currentRouterList);
     }
-  },
-  watch:{
-
   }
 };
 </script>

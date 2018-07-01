@@ -7,15 +7,15 @@
       </a>
       <p class="header-ul">
         <a class="header-page" @click="changePage(0)">综合研判</a>
-        <a class="header-page" @click="changePage(1)">自定义分析</a>
-        <a class="header-page" @click="changePage(2)">单目标分析</a>
-        <a class="header-page" @click="changePage(3)">多目标分析</a>
+        <!--<a class="header-page" @click="changePage(1)">自定义分析</a>-->
+        <!-- <a class="header-page" @click="changePage(2)">单目标分析</a> -->
+        <!-- <a class="header-page" @click="changePage(3)">多目标分析</a> -->
         <a class="header-page" @click="changePage(4)">涉票建模分析</a>
         <a class="header-page" @click="changePage(5)">涉毒建模分析</a>
         <a class="header-page" @click="changePage(6)">涉恐建模分析</a>
         <a class="header-page" @click="changePage(7)">侵财建模分析</a>
         <a class="header-page" @click="changePage(8)">维稳建模分析</a>
-        <a class="header-page" @click="changePage(9)">中间库</a>
+        <!-- <a class="header-page" @click="changePage(9)">中间库</a> -->
         <a class="header-page" @click="changePage(10)">任务列表</a>
       </p>
       <div class="header-right">
@@ -24,109 +24,50 @@
         <span class="right-btn signOut">退出</span>
       </div>
      </div>
-   <router-view class="main-content" :is="pageName"/>
+   <router-view class="main-content"/>
    <footer class="footer"></footer>
   </div>
 </template>
 
 <script>
-  //建模分析
-  import CustomAnalysis from './modelingAnalysis/CustomAnalysis'
-  import ComprehensiveStudy from './modelingAnalysis/ComprehensiveStudy'
-  import SingleObjectiveAnalysis from './modelingAnalysis/SingleObjectiveAnalysis'
-  import MultiobjectiveAnalysis from './modelingAnalysis/MultiobjectiveAnalysis'
-  import TicketRelatedModelingAnalysis from './modelingAnalysis/TicketRelatedModelingAnalysis'
-  import DrugModelingAnalysis from './modelingAnalysis/DrugModelingAnalysis'
-  import TerrorModelingAnalysis from './modelingAnalysis/TerrorModelingAnalysis'
-  import InvadeMoneyModelingAnalysis from './modelingAnalysis/InvadeMoneyModelingAnalysis'
-  import MainStabilityModelingAnalysis from './modelingAnalysis/MainStabilityModelingAnalysis'
-  import IntermediateLibrary from './modelingAnalysis/IntermediateLibrary'
-  import TaskList from './modelingAnalysis/TaskList'
-
-  //引入路由配置数据
-  // import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
 export default {
   name: 'ModelingAnalysis',
-  components:{
-    CustomAnalysis,
-    ComprehensiveStudy,
-    SingleObjectiveAnalysis,
-    MultiobjectiveAnalysis,
-    TicketRelatedModelingAnalysis,
-    DrugModelingAnalysis,
-    TerrorModelingAnalysis,
-    InvadeMoneyModelingAnalysis,
-    MainStabilityModelingAnalysis,
-    IntermediateLibrary,
-    TaskList
-  },
   data () {
     return {
       msg:"大数据中心应用系统",
       routerList:[],
       currentRouterList:[],
-      condition:null,
-      pageName:"comprehensive-study"
+      condition:null
     }
-  },
-  created(){
-      console.log("created")
-      homeSecondaryPageRouterApi.getSecondaryPageRouterDataList((data)=> {
-        this.routerList=data;
-        console.log(this.routerList);
-        this.currentRouterList=data[0];
-        console.log(this.currentRouterList);
-      });
   },
   methods:{
     changePage:function(index){
        if(index==0){
-        this.pageName="comprehensive-study"
+          this.$router.push({path:'/ComprehensiveStudy'})
        }else if(index==1){
-        this.pageName="custom-analysis"
+          this.$router.push({path:'/CustomAnalysis'})
        }else if(index==2){
-        this.pageName="single-objective-analysis"
+          this.$router.push({path:'/SingleObjectiveAnalysis'})
        }else if(index==3){
-        this.pageName="multiobjective-analysis"
+          this.$router.push({path:'/MultiobjectiveAnalysis'})
        }else if(index==4){
-        this.pageName="ticket-related-modeling-analysis"
+          this.$router.push({path:'/TicketRelatedModelingAnalysis'})
        }else if(index==5){
-        this.pageName="drug-modeling-analysis"
+          this.$router.push({path:'/DrugModelingAnalysis'})
        }else if(index==6){
-        this.pageName="terror-modeling-analysis"
+          this.$router.push({path:'/TerrorModelingAnalysis'})
        }else if(index==7){
-        this.pageName="invade-money-modeling-analysis"
+          this.$router.push({path:'/InvadeMoneyModelingAnalysis'})
        }else if(index==8){
-        this.pageName="main-stability-modeling-analysis"
+          this.$router.push({path:'/MainStabilityModelingAnalysis'})
        }else if(index==9){
-        this.pageName="intermediate-library"
+          this.$router.push({path:'/IntermediateLibrary'})
        }else{
-        this.pageName="task-list"
+          this.$router.push({path:'/TaskList'})
        }
 
        $(".tab").eq(index).addClass("tab1").siblings().removeClass('tab1');
-    },
-    //获取路由参数
-    getParams:function(){
-      // this.condition=this.$route.query.condition
-    },
-    getCurrentRouterList(){
-      if(this.condition==1){
-        this.currentRouterList=this.routerList[0];
-      }else if(this.condition==2){
-        this.currentRouterList=this.routerList[1];
-      }else if(this.condition==3){
-        this.currentRouterList=this.routerList[2];
-      }else if(this.condition==4){
-        this.currentRouterList=this.routerList[3];
-      }else{
-        this.currentRouterList=this.routerList[4];
-      }
-      console.log("wo kan kan "+this.currentRouterList);
     }
-  },
-  watch:{
-
   }
 };
 </script>

@@ -6,8 +6,9 @@
         <p id="login-p">{{msg}}</p>
       </a>
       <p class="header-ul">
-        <a class="header-page" @click="changePage(0)">综合预警</a>
-        <a class="header-page" @click="changePage(1)">预警告警推送</a>
+        <a class="header-page" @click="changePage(0)">预警首页</a>
+        <a class="header-page" @click="changePage(1)">综合预警</a>
+        <a class="header-page" @click="changePage(2)">预警告警推送</a>
       </p>
       <div class="header-right">
         <span class="right-btn fullScreen">全屏</span>
@@ -15,71 +16,33 @@
         <span class="right-btn signOut">退出</span>
       </div>
      </div>
-   <router-view class="main-content" :is="pageName"/>
+    <router-view class="main-content"></router-view>
    <footer class="footer"></footer>
   </div>
 </template>
 
 <script>
-  //综合预警
-  import ComprehensiveEarlyWarning from '@/view/earlyWarning/ComprehensiveEarlyWarning'
-  import WarningPush from '@/view/earlyWarning/WarningPush'
-  //引入路由配置数据
-  // import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
 export default {
   name: 'EarlyWarning',
-  components:{
-    ComprehensiveEarlyWarning,
-    WarningPush
-  },
   data () {
     return {
       msg:"大数据中心应用系统",
-      routerList:[],
-      currentRouterList:[],
-      condition:null,
       pageName:"comprehensive-early-warning"
     }
   },
-  created(){
-      homeSecondaryPageRouterApi.getSecondaryPageRouterDataList((data)=> {
-        this.routerList=data;
-        console.log(this.routerList);
-        this.currentRouterList=data[3];
-        console.log(this.currentRouterList);
-      });
-  },
   methods:{
     changePage:function(index){
-       if(index==0){
+       if(index === 1){
+         this.$router.push({path:'/ComprehensiveEarlyWarning'})
         this.pageName="comprehensive-early-warning"
-       }else if(index==1){
-        this.pageName="warning-push"
+       }else if(index===2){
+         this.$router.push({path:'/WarningPush'})
+       }else if(index === 0){
+         this.$router.push({path:'/earlyWarningHome'})
        }
 
        $(".tab").eq(index).addClass("tab1").siblings().removeClass('tab1');
-    },
-    //获取路由参数
-    getParams:function(){
-      // this.condition=this.$route.query.condition
-    },
-    getCurrentRouterList(){
-      if(this.condition==1){
-        this.currentRouterList=this.routerList[0];
-      }else if(this.condition==2){
-        this.currentRouterList=this.routerList[1];
-      }else if(this.condition==3){
-        this.currentRouterList=this.routerList[2];
-      }else if(this.condition==4){
-        this.currentRouterList=this.routerList[3];
-      }else{
-        this.currentRouterList=this.routerList[4];
-      }
-      console.log("wo kan kan "+this.currentRouterList);
     }
-  },
-  watch:{
-
   }
 };
 </script>
@@ -90,13 +53,13 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  color:#fff;
   justify-content: flex-start;
 }
 .home-header{
   width: 100%;
   height: 50px;
   background: #fff;
+  color: #fff;
   background:rgba(51,57,105,1);
 }
 .login-a{
@@ -108,7 +71,7 @@ export default {
   padding-left:5px;
 }
 #login-img{
-  height:100%; 
+  height:100%;
 }
 #login-p{
   height:100%;

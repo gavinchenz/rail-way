@@ -37,8 +37,15 @@
       </FormItem>
       </Col>
     </Row>
+    <Row style="margin: 10px 0 0;textAlign: left">
+      <!--<Col span="16">-->
+      <!--<FormItem :label-width="10">-->
+        <!--<Button size="small" @click="exportUser" style="background: #495060;color: #fafafa" title="导出用户信息" icon="ios-cloud-download" :disabled="!$store.state.auth.has('1-1-1-6')">导出</Button>-->
+      <!--</FormItem>-->
+      <!--</Col>-->
+    </Row>
     <Row style="margin-bottom: 2px">
-      <Col span="12">
+       <Col span="12">
       <FormItem>
         <RadioGroup v-model="filter" @on-change="radioSelect" size="small" type="button">
           <Radio label="0">全部</Radio>
@@ -47,16 +54,9 @@
           <Radio label="3">已删用户</Radio>
         </RadioGroup>
       </FormItem>
-      </Col>
-      <!--<Col span="16">-->
-      <!--<FormItem :label-width="10">-->
-        <!--<Button size="small" @click="exportUser" style="background: #495060;color: #fafafa" title="导出用户信息" icon="ios-cloud-download" :disabled="!$store.state.auth.has('1-1-1-6')">导出</Button>-->
-      <!--</FormItem>-->
-      <!--</Col>-->
-      <Col span="12" style="text-align: right">
       <FormItem :label-width="10">
-        <Button size="small"  @click="addUserinfo" type="success" icon="plus" title="新增用户信息" >新增</Button> //:disabled="!$store.state.auth.has('1-1-1-2')"
-        <Button size="small" @click="exportUser" style="background: #495060;color: #fafafa" title="导出用户信息" icon="ios-cloud-download" >导出</Button> //:disabled="!$store.state.auth.has('1-1-1-6')"
+        <Button size="small"  @click="addUserinfo" type="success" icon="plus" title="新增用户信息" >新增</Button> <!--   :disabled="!$store.state.auth.has('1-1-1-2')"   -->
+        <Button size="small" @click="exportUser" style="background: #495060;color: #fafafa" title="导出用户信息" icon="ios-cloud-download" >导出</Button> <!--   :disabled="!$store.state.auth.has('1-1-1-6')"   -->
         <!--<Button  @click="addUpload" type="primary"  icon="ios-upload" title="下载模板,批量上传用户信息" size="small" :disabled="!$store.state.auth.has('1-1-1-7')">上传</Button>-->
       </FormItem>
       </Col>

@@ -15,21 +15,20 @@
             <Input v-model="searchInfo.operGroup.gname" placeholder="权限名称" size="small"/>
           </FormItem>
           </Col>
-          <Col span="14">
+          <Col span="6">
           <FormItem>
             <Button type="primary" @click="search" icon="ios-search" size="small">搜索</Button>
             <Button type="ghost" @click="resat" icon="refresh" size="small" style="margin-left: 10px;"> 重置</Button>
           </FormItem>
           </Col>
-          <Col  span="6" style="text-align: right">
+        </Row>
+        <Row style="marginTop: 10px">
+          <Col  span="6" style="text-align: left">
             <FormItem :label-width="50">
               <Button @click="addPower" type="success"  icon="plus" title="新增权限" size="small" >新增</Button> //:disabled="!$store.state.auth.has('1-1-1-13')"
             </FormItem>
           </Col>
         </Row>
-
-
-
       </Form>
   </div>
 </template>

@@ -45,7 +45,6 @@ body {
     font-family: 'Microsoft YaHei', Arial, 'Avenir', Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
     font-size: 14px;
     color: #2c3e50;
 }
@@ -67,6 +66,7 @@ i {
 .vue-body {
     flex: 1;
     text-align: left;
+    padding: 0 50px 50px 50px;
 }
 .panel-heading {
     width: 100%;
@@ -82,6 +82,13 @@ i {
     border:1px solid #eeeff1;
     border-radius: 5px;
     margin:10px;
+}
+.btn-box{
+    margin:10px;
+    padding: 0 20px;
+}
+.btn-box .ivu-row{
+  margin-top: 10px;
 }
 .form-item{
     margin:20px 0;
@@ -116,6 +123,10 @@ i {
 .ivu-icon{
   font-size:16px;
 }
+.btn-box .form-item{
+   margin-right:0;
+}
+
 .header-box{
   margin:15px 10px 0;
   border:1px solid #eeeff1;
@@ -167,3 +178,5 @@ i {
 .table-page{
     margin:15px 0;
 }
+.fieldset{border:1px solid #e6e6e6;margin-bottom: 10px}
+.fieldset .legend{font-size: 16px;margin-left: 20px;padding: 0 10px;}

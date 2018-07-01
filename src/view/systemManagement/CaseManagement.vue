@@ -1,57 +1,60 @@
 <template>
-  <Row class="vm-table vm-panel">
-    <section v-if="authList>=0">
-      <div class="panel-heading">
-        <Breadcrumb separator=">">
-          <BreadcrumbItem to="/caseManageList">案件列表</BreadcrumbItem>
-        </Breadcrumb>
-      </div>
-      <div class="panel-body">
+  <div class="vue-body"> 
+    <Breadcrumb class="router-box" separator="/">
+    <BreadcrumbItem to="/index">首页</BreadcrumbItem>
+    <BreadcrumbItem to="/SystemManagement?condition=5">系统管理</BreadcrumbItem>  
+    <BreadcrumbItem to="/caseManageList">案件列表</BreadcrumbItem>
+  </Breadcrumb>
+  <div class="panel-heading">  
+    <Row class="vm-table vm-panel">
+      <section v-if="authList>=0">
+        <div class="panel-body">
+          <CaseSearch :filter="filter" @filter="filterData" @resat="resatFn" @search="searchFn" :searchInfo="searchData" @addCase="addCaseFn" @loopCase="loopCaseFn" @synchronizeNewCase="synchronizeNewCaseFn"></CaseSearch>
 
-        <CaseSearch :filter="filter" @filter="filterData" @resat="resatFn" @search="searchFn" :searchInfo="searchData" @addCase="addCaseFn" @loopCase="loopCaseFn" @synchronizeNewCase="synchronizeNewCaseFn"></CaseSearch>
+          <Table title="案件列表" :row-class-name="rowClassName" :loading="showLoading" :columns="columns" :data="caseData" @on-sort-change="sortColumnFn"  :stripe="showStripe" size="small" ></Table>
 
-        <Table title="案件列表" :row-class-name="rowClassName" :loading="showLoading" :columns="columns" :data="caseData" @on-sort-change="sortColumnFn"  :stripe="showStripe" size="small" ></Table>
+          <Paging :pages="searchData.page" @pageChange="pageChangeFn"></Paging>
 
-        <Paging :pages="searchData.page" @pageChange="pageChangeFn"></Paging>
+          <!-- 同步案件模态窗 -->
+          <Modal
+            v-model="synchronizeCase"
+            title="案件同步"
+            :closable="false"
+            :mask-closable="false">
+            <p v-if="isAllOrMuch === 1">
+              <Icon type="information-circled" size="24"></Icon>
+              <span class="adjustHeigt">是否进行新增案件的同步？</span>
+            </p>
+            <p v-else>
+              <Icon type="information-circled" size="24"></Icon>
+              <span class="adjustHeigt">是否进行所有案件的同步？</span>
+            </p>
+            <p slot="footer">
+              <Button type="primary" :loading="loading" @click="synchronizeCaseFn">确认</Button>
+              <Button type="primary" :disabled="limitOneRequest !== 0" @click="cancelSynchronizeCaseFn">取消</Button>
+            </p>
+          </Modal>
 
-        <!-- 同步案件模态窗 -->
-        <Modal
-          v-model="synchronizeCase"
-          title="案件同步"
-          :closable="false"
-          :mask-closable="false">
-          <p v-if="isAllOrMuch === 1">
-            <Icon type="information-circled" size="24"></Icon>
-            <span class="adjustHeigt">是否进行新增案件的同步？</span>
-          </p>
-          <p v-else>
-            <Icon type="information-circled" size="24"></Icon>
-            <span class="adjustHeigt">是否进行所有案件的同步？</span>
-          </p>
-          <p slot="footer">
-            <Button type="primary" :loading="loading" @click="synchronizeCaseFn">确认</Button>
-            <Button type="primary" :disabled="limitOneRequest !== 0" @click="cancelSynchronizeCaseFn">取消</Button>
-          </p>
-        </Modal>
+          <!-- 同步案件展示窗口 -->
+          <Modal
+            v-model="caseDisplay"
+            title="同步案件结果">
+            <p v-if="Array.isArray(caseDisplayList) && caseDisplayList.length !==0">
+              <Tag color="blue" v-for="(item,index) in caseDisplayList" :key="index">{{item}}</Tag>
+            </p>
+            <p v-else>暂无案件同步信息！</p>
+            <div slot="footer">
+              <Button type="primary" :loading="loading" @click="confirm">确认</Button>
+            </div>
+          </Modal>
 
-        <!-- 同步案件展示窗口 -->
-        <Modal
-          v-model="caseDisplay"
-          title="同步案件结果">
-          <p v-if="Array.isArray(caseDisplayList) && caseDisplayList.length !==0">
-            <Tag color="blue" v-for="(item,index) in caseDisplayList" :key="index">{{item}}</Tag>
-          </p>
-          <p v-else>暂无案件同步信息！</p>
-          <div slot="footer">
-            <Button type="primary" :loading="loading" @click="confirm">确认</Button>
-          </div>
-        </Modal>
+        </div>
+      </section>
 
-      </div>
-    </section>
-
-    <NoPermission v-else />
-  </Row>
+      <NoPermission v-else />
+    </Row>
+  </div>
+</div>
 </template>
 
 <script>

@@ -1,11 +1,17 @@
 <template>
   <div class="vue-body">
+    <!-- 面包屑 -->
     <Breadcrumb class="router-box">
-        <BreadcrumbItem to="index">首页</BreadcrumbItem>
-        <BreadcrumbItem to="/ComprehensiveQuery?condition=2">综合查询</BreadcrumbItem>
+        <BreadcrumbItem to="/ComprehensiveQuery">返回</BreadcrumbItem>
         <BreadcrumbItem>查询结果</BreadcrumbItem>
     </Breadcrumb>
-    <div class="header-box">
+    <!-- 表格和翻页 -->
+    <div class="table-box">
+        <Table :loading="loading" class="table-content" border :columns="columns" :data="queryResultDataList" @on-sort-change="sortClick"></Table>
+        <Paging class="table-page" :pages="searchData.page" @pageChange="pageChangeFn"></Paging>
+    </div>
+  </div>
+   <!--  <div class="header-box">
       <ul class="query-result">
         <li class="header-li">
           <label class="tit-label">姓名</label>
@@ -22,203 +28,57 @@
           <label class="tit-label">其他关键词</label>
           <Input class="tit-input" v-model="keyWord" placeholder="30-40岁男 南方口音 到西安 到成都" clearable style="width: 800px"></Input>
           <Button class="btn" type="primary">模糊查询</Button>
-        </li>
-<!--         <li class="header-li">
+        </li> -->
+        <!-- <li class="header-li">
           <Button class="btn" type="primary">模糊查询</Button>
           <Button class="btn" type="ghost">重置</Button>
         </li> -->
-      </ul>
-    </div>
-    <div class="table-box">
-      <div class="btn-box">
-        <Button class="commom-btn" type="success" icon="ios-download-outline">抽取到中间库</Button>
-      </div>
-      <Table class="table-content" border :columns="columns" :data="data"></Table>
-      <Page class="table-page" :total="100" show-sizer></Page>
-    </div>
-  </div>
+      <!-- </ul> -->
+    <!-- </div -->
 </template>
 
 <script>
-export default {
-  name: 'QueryResult',
-  data () {
-    return {
-      userName:"",
-      idCard:"",
-      plateNumber:"",
-      nativePlace:"",
-      keyWord:"",
-      columns: [
-        {
-            title: '乘车日期',
-            key: 'date',
-            sortable: true
-        },
-        {
-            title: '车次',
-            key: 'trainNumber',
-            sortable: true
-        },
-        {
-            title: '发站',
-            key: 'departureStation',
-            sortable: true
-        },
-        {
-            title: '到站',
-            key: 'destination',
-            sortable: true
-        },
-        {
-            title: '车厢',
-            key: 'carriage',
-            sortable: true
-        },
-        {
-            title: '席位',
-            key: 'seat',
-            sortable: true
-        },
-        {
-            title: '证件类型',
-            key: 'certificatesType',
-            sortable: true
-        },
-        {
-            title: '证件号',
-            key: 'idNumber',
-            sortable: true
-        },
-        {
-            title: '姓名',
-            key: 'name',
-            sortable: true
-        },
-        {
-            title: '售处',
-            key: 'sellingPlace',
-            sortable: true
+    import {getSingleObjectiveList} from '@/service/getData';//异步请求链接
+    import Paging from '@/components/common/tools/paging';//分页
+    import expandRow from '@/components/systemManagement/operation/OperationExpand-row';//分页
+    import {process_error} from '@/config/process_request_conf' //请求成功返回的状态
+    export default {
+        name: 'QueryResult',
+        components: {Paging, expandRow}, 
+        data () {
+            return {
+                // userName:"",
+                // idCard:"",
+                // plateNumber:"",
+                // nativePlace:"",
+                // keyWord:"",
+                loading: false, //布尔值判断 
+                searchData: {//查询条件
+                    page: {//翻页相关
+                        totalElements: 0,
+                        size: 10,//一页10行
+                        pageNumber: 1,//第一页
+                        sort: "lastModifyTime,desc"//排序，按最后修改时间和降序
+                    },                    
+                    searchMsg:''
+                },    
+                columns: [
+                {title:'序号',type: 'selection',width: 60,fixed: 'left'},
+                {title:'姓名',width: 100,align: 'center',key:'xm',sortable: true},
+                {title:'相似度',width: 100,align: 'center',key:'xsd',sortable: true},
+                {title:'身份证号',width: 300,align: 'center',key:'sfzh',sortable: true},
+                {title:'手机号',width: 200,align: 'center',key:'sjh',sortable: true},
+                {title:'车牌号',width: 150,align: 'center',key:'cph',sortable: true},
+                {title:'籍贯',width: 150,align: 'center',key:'jg',sortable: true},
+                {title:'来源',width: 200,align: 'center',key:'ly',sortable: true},
+                {title:'详细信息',width: 600,align: 'center',key:'xxxx',sortable: true},
+                ],
+                queryResultDataList: []
+            }
         }
-      ],
-      data: [
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        },
-        {
-            date: 'John Brown',
-            trainNumber: 18,
-            departureStation: 'New York No. 1 Lake Park',
-            destination: '2016-10-03',
-            carriage: '2016-10-03',
-            seat: '2016-10-03',
-            certificatesType: '2016-10-03',
-            idNumber: '2016-10-03',
-            name: '2016-10-03',
-            sellingPlace: '2016-10-03',
-        }
-      ]
-    }
-  }
-};
+    };
 </script>
 
 <style scoped >
-.header-box{
-  height:150px;
-}
 
 </style>

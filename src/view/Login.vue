@@ -53,7 +53,7 @@ export default {
       $(".f-li").eq(index).addClass("borderChange").siblings().removeClass("borderChange");
     }  
   }
-}
+};
 </script>
 
 <style scoped>
@@ -125,6 +125,7 @@ export default {
   border-bottom:2px solid #eee;
   cursor: pointer;
   line-height: 35px;
+  text-align: center;
 }
 .borderChange{
   border-bottom:2px solid #007BFF;
@@ -139,5 +140,6 @@ export default {
   color:#fff;
   line-height: 25px;
   letter-spacing: 1.5px;
+  text-align: center;
 }
 </style>

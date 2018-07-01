@@ -1,7 +1,7 @@
 <template>
    <div class="vue-body">
     <Breadcrumb class="router-box">
-        <BreadcrumbItem to="index">首页</BreadcrumbItem>
+        <BreadcrumbItem to="/index">首页</BreadcrumbItem>
         <BreadcrumbItem to="/ModelingAnalysis?condition=3">建模分析</BreadcrumbItem>
         <BreadcrumbItem>涉票建模分析</BreadcrumbItem>
     </Breadcrumb>

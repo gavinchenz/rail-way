@@ -4,10 +4,13 @@
     <div class="data-situation-box" id="myChart">
       
     </div>
+    <!-- <div id="mapid"></div> -->
    </div> 
 </template>
 
 <script>
+  // var mymap=L.map('mapid').setView([39.9788,116.30226],14);
+  
 export default {
   name: 'IndexDataSituation',
   data () {
@@ -50,7 +53,7 @@ export default {
         });
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -78,5 +81,8 @@ export default {
   line-height: 60px;
   border:1px solid #fff;
   margin-bottom: 15px;
+}
+#mapid{
+  height:100%;
 }
 </style>

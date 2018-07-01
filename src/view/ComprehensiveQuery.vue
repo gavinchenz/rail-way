@@ -12,6 +12,10 @@
         <a class="header-page" @click="changePage(3)">售处信息维护</a>
         <a class="header-page" @click="changePage(4)">窗口信息维护</a>
         <a class="header-page" @click="changePage(5)">全国站点信息</a>
+        <a class="header-page" @click="changePage(8)">派出所信息</a>
+        <a class="header-page" @click="changePage(10)">列车车次</a>
+        <a class="header-page" @click="changePage(9)">清洗配置信息</a>
+        <a class="header-page" @click="changePage(11)">座位信息</a>
         <a class="header-page" @click="changePage(6)">查询结果</a>
         <a class="header-page" @click="changePage(7)">上传</a>
       </p>
@@ -21,96 +25,52 @@
         <span class="right-btn signOut">退出</span>
       </div>
      </div>
-   <router-view class="main-content" :is="pageName"/>
+   <router-view class="main-content"/>
    <footer class="footer"></footer>
   </div>
 </template>
 
 <script>
-  // 综合查询
-  import Search from './comprehensiveQuery/Search'
-  import RealNameDataQuery from './comprehensiveQuery/RealNameDataQuery'
-  import KeyStaffBank from './comprehensiveQuery/KeyStaffBank'
-  import SaleInfoMaintenance from './comprehensiveQuery/SaleInfoMaintenance'
-  import WindowInfoMaintenance from './comprehensiveQuery/WindowInfoMaintenance'
-  import NationalSiteInformation from './comprehensiveQuery/NationalSiteInformation'
-  import QueryResult from './comprehensiveQuery/QueryResult'
-  import Upload from './comprehensiveQuery/Upload'
-  //引入路由配置数据
-  // import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
 export default {
   name: 'ComprehensiveQuery',
-  components:{
-    Search,
-    RealNameDataQuery,
-    KeyStaffBank,
-    SaleInfoMaintenance,
-    WindowInfoMaintenance,
-    NationalSiteInformation,
-    QueryResult,
-    Upload
-  },
   data () {
     return {
       msg:"大数据中心应用系统",
       routerList:[],
       currentRouterList:[],
-      condition:null,
-      pageName:"search"
+      condition:null
     }
-  },
-  created(){
-      console.log("created")
-      homeSecondaryPageRouterApi.getSecondaryPageRouterDataList((data)=> {
-        this.routerList=data;
-        console.log(this.routerList);
-        this.currentRouterList=data[0];
-        console.log(this.currentRouterList);
-      });
   },
   methods:{
     changePage:function(index){
        if(index==0){
-        this.pageName="search"
+          this.$router.push({path:'/Search'})
        }else if(index==1){
-        this.pageName="real-name-data-query"
+          this.$router.push({path:'/RealNameDataQuery'})
        }else if(index==2){
-        this.pageName="key-staff-bank"
+          this.$router.push({path:'/KeyStaffBank'})
        }else if(index==3){
-        this.pageName="sale-info-maintenance"
+          this.$router.push({path:'/SaleInfoMaintenance'})
        }else if(index==4){
-        this.pageName="window-info-maintenance"
+          this.$router.push({path:'/WindowInfoMaintenance'})
        }else if(index==5){
-        this.pageName="national-site-information"
+          this.$router.push({path:'/NationalSiteInformation'})
        }else if(index==6){
-        this.pageName="query-result"
+          this.$router.push({path:'/QueryResult'})
+       }else if(index==8){
+          this.$router.push({path:'/PoliceStation'})
+       }else if(index==9){
+          this.$router.push({path:'/CleanConfig'})
+       }else if(index==10){
+         this.$router.push({path:'/Trains'})
+       }else if(index==11){
+         this.$router.push({path:'/SeatRank'})
        }else{
-        this.pageName="upload"
+          this.$router.push({path:'/Upload'})
        }
 
        $(".tab").eq(index).addClass("tab1").siblings().removeClass('tab1');
-    },
-    //获取路由参数
-    getParams:function(){
-      // this.condition=this.$route.query.condition
-    },
-    getCurrentRouterList(){
-      if(this.condition==1){
-        this.currentRouterList=this.routerList[0];
-      }else if(this.condition==2){
-        this.currentRouterList=this.routerList[1];
-      }else if(this.condition==3){
-        this.currentRouterList=this.routerList[2];
-      }else if(this.condition==4){
-        this.currentRouterList=this.routerList[3];
-      }else{
-        this.currentRouterList=this.routerList[4];
-      }
-      console.log("wo kan kan "+this.currentRouterList);
     }
-  },
-  watch:{
-
   }
 };
 </script>
@@ -121,7 +81,6 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  color:#fff;
   justify-content: flex-start;
 }
 .main-content{
@@ -136,6 +95,7 @@ export default {
   height: 50px;
   background: #fff;
   background:rgba(51,57,105,1);
+  color:#fff;
 }
 .login-a{
   width:300px;
@@ -146,7 +106,7 @@ export default {
   padding-left:5px;
 }
 #login-img{
-  height:100%; 
+  height:100%;
 }
 #login-p{
   height:100%;

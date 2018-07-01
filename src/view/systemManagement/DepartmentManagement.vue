@@ -1,7 +1,7 @@
 <template >
   <div class="vue-body">
     <Breadcrumb class="router-box">
-        <BreadcrumbItem to="index">首页</BreadcrumbItem>
+        <BreadcrumbItem to="/index">首页</BreadcrumbItem>
         <BreadcrumbItem to="/SystemManagement?condition=5">系统管理</BreadcrumbItem>
         <BreadcrumbItem>部门管理</BreadcrumbItem>
     </Breadcrumb>      
@@ -55,7 +55,7 @@
           <Col span="3"  style="text-align: right">  //v-auth="1-1-2-2"
           <Form>
             <FormItem :label-width="10">
-              <Button  @click="addModal()" style="margin-right: 10px"  type="success"  icon="plus" title="新增机构信息" >新增</Button>
+              <Button  @click="addModal()" style="margin-right: 10px" size='small' type="success"  icon="plus" title="新增机构信息" >新增</Button>
             </FormItem>
           </Form>
           </Col>

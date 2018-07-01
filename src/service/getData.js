@@ -7,7 +7,7 @@ import { headerConfig } from '@/utils/config'
  *   账号密码登录
  */
 export const accountLogin = (username, password, remenber) => {
-        return fetch('authenticate', { username, password, remenber }, 'GET')
+        return fetch('uf/login/goLogin', { username, password, remenber }, 'GET')
     }
     /**
      *   获取用户信息
@@ -15,12 +15,12 @@ export const accountLogin = (username, password, remenber) => {
 export const getCurrentInfo = () => {
         return fetch('uf/userinfo/getCurrentInfo')
     }
-    /**
+/*    /!**
      *   字典信息
-     */
+     *!/
 export const getDictGroups = () => {
     return fetch('sysDictGroupsFlat')
-}
+}*/
 
 /**
  *   推送信息
@@ -496,60 +496,278 @@ export const updatePwd = (sendData) => {
 }
 
 /**
+ * 实名制数据查询-获取list
+ */
+export const getRealNameDataList = (sendData) => {
+    return fetch('out/caseInterface/queryEsParameter',{
+        pageNo: sendData.page.pageNumber,
+        pageSize: sendData.page.size,
+       // sort: sendData.page.sort,
+        //checkbox:sendData.checkbox,
+        chengCheRiQi:sendData.busDate,
+        shouPiaoShiJian:sendData.bookingDate,
+        zhengJianHao:sendData.inputId
+    })
+}
+
+/**
+ * 售处信息维护-获取list
+ */
+export const getSaleInfoList = (sendData) => {
+    return fetch('/uf/sell/querySell',{
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        scbh:sendData.scbh,
+        scmc:sendData.scmc,
+        sczm:sendData.sczm
+    })
+}
+
+    /**
+     * 售处信息维护-保存
+     */
+export const saveSaleInfo = (sendData) => {
+        return fetch('/uf/sell/save', sendData, 'POST')
+    }
+
+    /**
+     * 售处信息维护-删除
+     */
+export const deleteSaleInfo = (id) => {
+    return fetch('/uf/sell/deleteSell/' + id, '', 'DELETE')
+}
+
+    /**
+     * 售处信息维护-查看
+     */
+export const watchSaleInfo = (id) => {
+    return fetch('/uf/sell/getSellByid/' + id, '', 'WATCH')
+}
+
+/**
+ * 窗口信息维护-获取list
+ */
+export const getWindowInfoList = (sendData) => {
+    return fetch('/cm/ticketwindow/queryTicketWindow',{
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+      scZm:sendData.scZm,
+      scName:sendData.scName,
+      windowName:sendData.windowName
+    })
+}
+
+    /**
+     * 窗口信息维护-保存
+     */
+export const saveWindowInfo = (sendData) => {
+        return fetch('/cm/ticketwindow/save', sendData, 'POST')
+    }
+
+    /**
+     * 窗口信息维护-删除
+     */
+export const deleteWindowInfo = (id) => {
+    return fetch('/cm/ticketwindow/deleteTicketWindow/' + id, '', 'DELETE')
+}
+
+    /**
+     * 窗口信息维护-查看
+     */
+export const watchWindowInfo = (id) => {
+    return fetch('/cm/ticketwindow/getTicketWindowByid/' + id, '', 'WATCH')
+}
+/**
+ * 获取售处站名和名称
+ */
+export const getScZmAndNameResult = () =>{
+     return fetch('cm/ticketwindow/getScZmAndNameResult')
+}
+/**
+ * 全国站点信息-获取list
+ */
+export const getNationalSiteInfoList = (sendData) => {
+        return fetch('/cm/natioalsite/queryNatioalSite', {
+            page: sendData.page.pageNumber,
+            size: sendData.page.size,
+            sort: sendData.page.sort,
+          stationdepartment: sendData.stationdepartment,
+          stationname: sendData.stationname
+        })
+    }
+
+    /**
+     * 全国站点信息-保存
+     */
+export const saveNationalSiteInfo = (sendData) => {
+        return fetch('/cm/natioalsite/save', sendData, 'POST')
+    }
+
+    /**
+     * 全国站点信息-删除
+     */
+export const deleteNationalSiteInfo = (id) => {
+    return fetch('/cm/natioalsite/deleteNatioalSite/' + id, '', 'DELETE')
+}
+
+    /**
+     * 售处信息维护-查看
+     */
+export const watchNationalSiteInfo = (id) => {
+    return fetch('url' + id, '', 'WATCH')
+}
+
+/**
  * 重点人员-获取list
  */
-export const getPersonnelList = (sendData) => {
-  return fetch('/uf/personnel/queryPersonnel', {
+export const getPersonnerList = (sendData) => {
+    return fetch('/uf/personner/queryPersonner', {
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        xm: sendData.xm,
+        sfzh: sendData.sfzh,
+        cph: sendData.cph,
+        jg: sendData.jg,
+        jtzz: sendData.jtzz,
+    })
+}
+    /**
+     * 重点人员保存
+     */
+export const savePersonner = (sendData) => {
+        return fetch('uf/personner/save', sendData, 'POST')
+    }
+    /**
+     * 重点人员删除
+     */
+export const deletePersonner = (id) => {
+    return fetch('/uf/personner/deletePersonner/' + id, '', 'DELETE')
+}
+
+/**
+ * 根据id获取重点人员
+ */
+export const getPersonnerByid = (id) => {
+  return fetch('/uf/personner/getPersonnerByid/' + id, '', 'GET')
+}
+
+/**
+ * 获取diction中的人员类别
+ */
+export const getDictionForRylb = () =>{
+  return fetch('/uf/personner/getDictionForRylb')
+}
+
+/**
+ * 派出所信息-获取list
+ */
+export const getPoliceStationList = (sendData) => {
+    return fetch('/uf/policestainfo/queryPolicestainfo', {
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        name: sendData.name
+    })
+}
+    /**
+     * 派出所信息保存
+     */
+export const savePoliceStation = (sendData) => {
+        return fetch('/uf/policestainfo/save', sendData, 'POST')
+    }
+    /**
+     * 派出所信息删除
+     */
+export const deletePoliceStation = (id) => {
+    return fetch('/uf/policestainfo/deletePolicestainfo/' + id, '', 'DELETE')
+}
+/**
+ * 根据id获取派出所信息
+ */
+export const getPolicestainfoByid = (id) => {
+  return fetch('/uf/policestainfo/getPolicestainfoByid/' + id, '', 'GET')
+}
+
+/**
+ * 清洗配置信息-获取list
+ */
+export const getCleanConfigList = (sendData) => {
+    return fetch('/uf/cleanconfig/queryCleanConfig', {
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        rule: sendData.rule
+    })
+}
+    /**
+     * 清洗配置信息保存
+     */
+export const saveCleanConfig = (sendData) => {
+        return fetch('/uf/cleanconfig/save', sendData, 'POST')
+    }
+    /**
+     * 清洗配置信息删除
+     */
+export const deleteCleanConfig = (id) => {
+    return fetch('/uf/cleanconfig/deleteCleanConfig/' + id, '', 'DELETE')
+}
+
+/**
+ * 获取数据源表
+ */
+export const getConfigDataSource = () =>{
+  return fetch('/uf/cleanconfig/getConfigDataSource')
+}
+/**
+ * 根据id获取清洗配置信息
+ */
+export const getCleanConfigByid = (id) => {
+  return fetch('/uf/cleanconfig/getCleanConfigByid/' + id, '', 'GET')
+}
+export const isdateSwitch = (id) => {
+  return fetch('/uf/cleanconfig/isdateSwitch/' + id,'','GET')
+}
+/**
+ * 获取座位席别信息
+ */
+export const querySeatRank = (sendData) =>{
+  return fetch('/uf/seatrank/querySeatRank',{
     page: sendData.page.pageNumber,
     size: sendData.page.size,
     sort: sendData.page.sort,
-    xm: sendData.xm,
-    sfzh: sendData.sfzh,
-    cph: sendData.cph,
-    jg: sendData.jg,
-    jtzz: sendData.jtzz,
+    seatTypeName: sendData.seatTypeName
   })
 }
-/**
- * 重点人员保存
- */
-export const savePersonnel = (sendData) => {
-  return fetch('uf/personnel/save', sendData, 'POST')
-}
-/**
- * 重点人员删除
- */
-export const deletePersonnel = (id) => {
-  return fetch('/uf/personnel/deletePersonnel/{id}', '', 'DELETE')
-}
-
 
 /**
  *   字典保存和修改
  */
 export const saveDictGroups = (sendData) => {
-  return fetch('cm/CaseDiction/saveCaseDiction', sendData, "POST")
+    return fetch('cm/CaseDiction/saveCaseDiction', sendData, "POST")
 }
 
 /**
  *   字典删除
  */
 export const deleteDictGroups = (sendData) => {
-  return fetch('cm/CaseDiction/delete', sendData, "POST")
-}
-/**
- *   字典信息
- */
-// export const getDictGroups = (sendData) => {
-//   return fetch('cm/CaseDiction/queryCaseDiction', {
-//     page: sendData.page.pageNumber,
-//     size: sendData.page.size,
-//     sort: sendData.page.sort,
-//     code: sendData.code,
-//     name: sendData.name,
-//     parentCode: sendData.parentCode
-//   })
-// }
+        return fetch('cm/CaseDiction/delete', sendData, "POST")
+    }
+    /**
+     *   字典信息
+     */
+    export const getDictGroups = (sendData) => {
+      return fetch('cm/CaseDiction/queryCaseDiction', {
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        code: sendData.code,
+        name: sendData.name,
+        parentCode: sendData.parentCode
+      })
+    }
 
 
 // create by zenghao
@@ -557,51 +775,213 @@ export const deleteDictGroups = (sendData) => {
  *  案件信息管理
  */
 export const caseinfoQueryCaseInfo = (sendData) => {
-  return fetch('cm/caseinfo/queryCaseInfo', {
-    cissynchrocase: sendData.cissynchrocase,
-    page: sendData.page.pageNumber,
-    size: sendData.page.size,
-    sort: sendData.page.sort,
-    issynchroCase: sendData.issynchroCase,
-    caseName: sendData.caseName,
-    objName: sendData.objName,
-    identify: sendData.identify,
-    ctypecode: sendData.ctypecode,
-    cstatus: sendData.cstatuscode,
-    caseLevelcode:sendData.caseLevelcode,
-    ccategorycode:sendData.ccategorycode,
-    cturncasecategorycode:sendData.cturncasecategorycode,
-    cassistcategorycode:sendData.cassistcategorycode
-  })
-}
-/**
- *  获取新增案件中下拉框数据
- */
+        return fetch('cm/caseinfo/queryCaseInfo', {
+            cissynchrocase: sendData.cissynchrocase,
+            page: sendData.page.pageNumber,
+            size: sendData.page.size,
+            sort: sendData.page.sort,
+            issynchroCase: sendData.issynchroCase,
+            caseName: sendData.caseName,
+            objName: sendData.objName,
+            identify: sendData.identify,
+            ctypecode: sendData.ctypecode,
+            cstatus: sendData.cstatuscode,
+            caseLevelcode: sendData.caseLevelcode,
+            ccategorycode: sendData.ccategorycode,
+            cturncasecategorycode: sendData.cturncasecategorycode,
+            cassistcategorycode: sendData.cassistcategorycode
+        })
+    }
+    /**
+     *  获取新增案件中下拉框数据
+     */
 export const findCaseDictionByParent = (data) => {
-  return fetch('cm/CaseDiction/findCaseDictionByParent', {
-    parentCode: data
-  },'GET')
-}
-/**
- *  手动结案
- */
+        return fetch('cm/CaseDiction/findCaseDictionByParent', {
+            parentCode: data
+        }, 'GET')
+    }
+    /**
+     *  手动结案
+     */
 export const caseobjectFinishCaseInfo = (id) => {
-  return fetch(`cm/caseinfo/finishCaseInfo/${id}`,{
-    "caseid":id
-  },'POST')
-}
-/**
- *  删除单独案件
- */
+        return fetch(`cm/caseinfo/finishCaseInfo/${id}`, {
+            "caseid": id
+        }, 'POST')
+    }
+    /**
+     *  删除单独案件
+     */
 export const caseinfoDeleteCaseInfo = (id) => {
-  return fetch(`cm/caseinfo/deleteCaseInfo/${id}`,{},'DELETE')
-}
-/**
- *  同步案件
- */
+        return fetch(`cm/caseinfo/deleteCaseInfo/${id}`, {}, 'DELETE')
+    }
+    /**
+     *  同步案件
+     */
 export const caseSynchronization = (sendData) => {
-  return fetch("cm/caseSynchronization/caseAcess",{
-    "type":sendData.type,
-    "caseid":sendData.caseId
-  })
+    return fetch("cm/caseSynchronization/caseAcess", {
+        "type": sendData.type,
+        "caseid": sendData.caseId
+    })
+}
+
+
+/**
+ * 单目标分析-获取list
+ */
+export const getSingleObjectiveList = (sendData) => {
+    return fetch('url', {
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        sjfw: sendData.dateRange,
+        sfzh: sendData.inputId
+    })
+}
+
+/**
+ * 多目标分析-获取list
+ */
+export const getmultiObjectiveList = (sendData) => {
+    return fetch('url', {
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        sjfw: sendData.dateRange,
+        sfzh: sendData.inputId
+    })
+}
+
+/**
+ * 涉毒建模分析-获取list
+ */
+export const getDrugModelingDataList = (sendData) => {
+    return fetch('url', {
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        yclx: sendData.abnormalType,
+        qsz: sendData.startStation,
+        jsz: sendData.endStation,
+        kssj: sendData.startDate,
+        jssj: sendData.endDate
+    })
+}
+
+/**
+ * 涉恐建模分析-获取list
+ */
+export const getTerrorModelingDataList = (sendData) => {
+    return fetch('url', {
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        yclx: sendData.abnormalType,
+        qsz: sendData.startStation,
+        jsz: sendData.endStation,
+        kssj: sendData.startDate,
+        jssj: sendData.endDate
+    })
+}
+
+/**
+ * 侵财建模分析-获取list
+ */
+export const getInvadeMoneyModelDataList = (sendData) => {
+    return fetch('url', {
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        yclx: sendData.abnormalType,
+        qsz: sendData.startStation,
+        jsz: sendData.endStation,
+        kssj: sendData.startDate,
+        jssj: sendData.endDate
+    })
+}
+
+/**
+ * 维稳建模分析-获取list
+ */
+export const getMainStabilityModelingDataList = (sendData) => {
+    return fetch('url', {
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        yclx: sendData.abnormalType,
+        qsz: sendData.startStation,
+        jsz: sendData.endStation,
+        kssj: sendData.startDate,
+        jssj: sendData.endDate
+    })
+}
+
+/**
+ * 任务列表-获取list
+ */
+export const getTaskListDataList = (sendData) => {
+    return fetch('url', {
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        aj: sendData.aj,
+        rwmc: sendData.rwmc,
+        lb: sendData.lb
+    })
+}
+
+    /**
+     * 任务列表删除
+     */
+export const deleteTaskListData = (id) => {
+    return fetch('/uf/personner/deletePersonner/' + id, '', 'DELETE')
+}
+
+/**
+ * 中间库-获取list
+ */
+export const getIntermediateLibraryList = (sendData) => {
+    return fetch('url', {
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        zjkmc: sendData.libraryName
+    })
+}
+
+/**
+ * 数据接入及处理记录-获取list
+ */
+export const getDataProcessingRecordList = (sendData) => {
+    return fetch('uf/dataaccess/getDataProcessingRecordList', {
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        datadate: sendData.dataDate
+    })
+}
+
+/**
+ * 数据接入统计
+ */
+export const queryDataaccesscount = ()=>{
+  return fetch("uf/dataaccess/queryDataaccesscount")
+}
+
+/**
+ * 数据接入特征库及处理记录-获取list
+ */
+export const queryDatasubject = ()=>{
+  return fetch("uf/datasubject/queryDatasubject")
+}
+
+
+/**
+ * 综合研判-获取list
+ */
+export const getComprehensiveStudyDataList = (sendData) => {
+    return fetch('uf/dataaccess/getDataProcessingRecordList', {
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+    })
 }

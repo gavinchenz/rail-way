@@ -23,106 +23,48 @@
         <span class="right-btn signOut">退出</span>
       </div>
      </div>
-   <router-view class="main-content" :is="pageName"/>
+   <router-view class="main-content"/>
    <footer class="footer"></footer>
   </div>
 </template>
 
 <script>
-  //系统管理
-
-  import AccountManagement from './systemManagement/AccountManagement'
-  import DepartmentManagement from './systemManagement/DepartmentManagement'
-  import AuthirityManagement from './systemManagement/AuthirityManagement'
-  import DataDictionary from './systemManagement/DataDictionary'
-  import SystemConfiguration from './systemManagement/SystemConfiguration'
-  import CaseManagement from './systemManagement/CaseManagement'
-  import LawEnforcementLog from './systemManagement/LawEnforcementLog'
-  import ModelParameterSetting from './systemManagement/ModelParameterSetting'
-  // import SystemConfiguration from './systemManagement/SystemConfiguration'
-  import InterfacePush from './systemManagement/InterfacePush'
-  import ClusterOperation from './systemManagement/ClusterOperation'
-
-  //引入路由配置数据
-  // import homeSecondaryPageRouterApi from '../api/homeSecondaryPageRouterApi';
 export default {
   name: 'SystemManagement',
-  components:{
-    AccountManagement,
-    DepartmentManagement,
-    AuthirityManagement,
-    DataDictionary,
-    SystemConfiguration,
-    CaseManagement,
-    ModelParameterSetting,
-    LawEnforcementLog,
-    InterfacePush,
-    ClusterOperation
-  },
   data () {
     return {
       msg:"大数据中心应用系统",
       routerList:[],
       currentRouterList:[],
-      condition:null,
-      pageName:"account-management"
+      condition:null
     }
-  },
-  created(){
-      // homeSecondaryPageRouterApi.getSecondaryPageRouterDataList((data)=> {
-      //   this.routerList=data;
-      //   console.log(this.routerList);
-      //   this.currentRouterList=data[0];
-      //   console.log(this.currentRouterList);
-      // });
   },
   methods:{
     changePage:function(index){
        if(index==0){
-        this.pageName="model-parameter-setting"
+          this.$router.push({path:'/ModelParameterSetting'})
        }else if(index==1){
-        this.pageName="account-management"
+          this.$router.push({path:'/AccountManagement'})
        }else if(index==2){
-        this.pageName="department-management"
+          this.$router.push({path:'/DepartmentManagement'})
        }else if(index==3){
-        this.pageName="authirity-management"
+          this.$router.push({path:'/AuthirityManagement'})
        }else if(index==4){
-        this.pageName="data-dictionary"
+          this.$router.push({path:'/DataDictionary'})
        }else if(index==5){
-        this.pageName="system-configuration"
+          this.$router.push({path:'/SystemConfiguration'})
        }else if(index==6){
-        this.pageName="case-management"
+          this.$router.push({path:'/CaseManagement'})
        }else if(index==7){
-        this.pageName="law-enforcement-log"
+          this.$router.push({path:'/LawEnforcementLog'})
        }else if(index==8){
-        this.pageName="interface-push"
+          this.$router.push({path:'/InterfacePush'})
        }else{
-        this.pageName="cluster-operation"
+          this.$router.push({path:'/ClusterOperation'})
        }
 
        $(".tab").eq(index).addClass("tab1").siblings().removeClass('tab1');
-    },
-    //获取路由参数
-    getParams:function(){
-      // this.condition=this.$route.query.condition
-    },
-    getCurrentRouterList(){
-      if(this.condition==1){
-        this.currentRouterList=this.routerList[0];
-      }else if(this.condition==2){
-        this.currentRouterList=this.routerList[1];
-      }else if(this.condition==3){
-        this.currentRouterList=this.routerList[2];
-      }else if(this.condition==4){
-        this.currentRouterList=this.routerList[3];
-      }else{
-        this.currentRouterList=this.routerList[4];
-      }
-      console.log("wo kan kan "+this.currentRouterList);
     }
-  },
-  watch:{
-
   }
 };
 </script>

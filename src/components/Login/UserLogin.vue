@@ -1,35 +1,65 @@
 <template>
   <div class="user-login">
-    <input type="text" class="user-input" placeholder="请输入用户名" v-model="userName" @blur="isAccoed()"/>
-    <input type="password" class="user-input" placeholder="请输入密码" v-model="userPass" @blur="isAccoed()"/>
-    <span class="user-spanMsg">{{spanMsg}}</span>
-    <input class="user-btn" type="submit" value="登录" @click.once="getUserId()"/>
+    <input type="text" class="user-input" placeholder="请输入用户名" v-model="username"/>
+    <input type="password" class="user-input" placeholder="请输入密码" v-model="password"/>
+    <span class="user-spanMsg"></span>
+    <div class="login-form mart40">
+      <Button type="primary" @click='isLogin' class='user-btn'>登陆</Button>
+    </div>
   </div>
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
+import {accountLogin,getDictGroups} from '@/service/getData'
+import {process_error} from '@/config/process_request_conf'
 export default {
-  name: 'UserLogin',
-  data () {
+  name: "VmLogin",
+  data() {
     return {
-      userName:"",
-      userPass:"",
-      spanMsg:""
+      username: "",
+      password: "",
+      remenber: false,
+      loginSign:0
+    };
+  },
+  methods: {
+    ...mapMutations([
+      'CHANGE_LOGIN_STATUS',
+      'SET_USERINFO',
+      'SET_AUTH',
+      'SET_DICT_GROUPS'
+    ]),
+   /* ...mapActions([
+      'getDictGroups'
+    ]),*/
+
+    async isLogin () {
+      if (!this.username || !this.password) {
+        let msg = !!this.username ? `请输入密码!` : `请输入用户名!`;
+        return this.$Message.error(msg);
+      }
+      await accountLogin(this.username,this.password,this.remenber)
+        .then(loginInfo => {
+          if(loginInfo.statusCode !== 200) return process_error(loginInfo);
+          let userInfo = loginInfo.data; // 用户信息
+          let authInfo = loginInfo.data.ocodeList; // 资源信息
+          sessionStorage.setItem('token', loginInfo.data.cardId);
+          this.SET_USERINFO(userInfo);
+          this.CHANGE_LOGIN_STATUS(true);
+          this.SET_AUTH(authInfo);
+        /*this.getDictGroups();*/
+          this.loginSign = 1;
+          this.$router.push({path: "/index"});
+        })
+        .catch(err => console.log(err))
     }
   },
-  methods:{
-    isAccoed:function(){
-      if(this.userName=="" || this.userName=="请输入用户名"){
-        this.spanMsg="请输入用户名";
-      }else if(this.userPass=="" || this.userPass=="请输入密码"){
-        this.spanMsg="请输入密码";
-      }else{
-        this.spanMsg="";
-      }
-    },
-    getUserId:function(){
-
+  mounted(){
+    document.onkeydown = (e) => {
+      if (e.keyCode === 13 && this.loginSign === 0) this.isLogin();
     }
+
   }
 };
 </script>
@@ -51,24 +81,19 @@ export default {
   border-radius: 8px;
   text-indent: 10px;
   line-height:38px;
-  font-size:12px; 
+  font-size:12px;
   background: rgba(30, 35, 94, 0.5);
   color:#fff;
   outline:none;
   box-shadow:0 0 3px 2px #4065A0;
   margin-bottom:20px;
 }
+.mart40{
+  text-align:center;
+}
 .user-btn{
-  height: 38px;
-  line-height:38px;
-  font-size:16px;
-  color:#fff;
-  outline:none;
-  background: #007BFF;
-  border:none;
-  border-radius: 8px;
-  cursor: pointer;
-  letter-spacing: 15px;
+  width:250px;
+  display:inline-block;
 }
 .user-spanMsg{
   height: 10px;

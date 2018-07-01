@@ -30,7 +30,7 @@ export default {
   },
   data () {
     return {
-     searchCommonList:[
+     searchCommonList:[//异步获取，方法
         {
           icon:"icon-account",
           titMsg:"目标查询",
