@@ -5,7 +5,8 @@ import {
 } from '@/utils/config'
 
 import {process_error,checkAuth,getAuthToken,redirectUrl} from './process_request_conf'
-
+//fetch('uf/login/goLogin', { username, password, remenber }, 'POST')
+    
 export default async(url = '', data = {}, type = 'GET',headerConfig = {},method = 'fetch') => {
   type = type.toUpperCase();
   url = `api/${url}`;

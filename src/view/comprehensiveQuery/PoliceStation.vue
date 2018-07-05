@@ -61,8 +61,8 @@
       <Form :model="addInfo" ref="addForm" :rules="ruleValidate">
         <Row>
           <Col span="12">
-            <FormItem label="省/市/区" :label-width=60 prop="ssq">
-              <Cascader :data="areaData" v-model="addInfo.ssq" change-on-select @on-change="getSelectData"></Cascader>
+            <FormItem label="省/市/区" :label-width=75 prop="ssq">
+              <Cascader :data="areaData" v-model="addInfo.ssq" :placeholder="ssqValue" change-on-select @on-change="getSelectData" clearable></Cascader>
             </FormItem>
           </Col>
           <Col span="12">
@@ -126,6 +126,7 @@
         addModal: false,//v-model 新增弹出框开启或关闭
         loading: false, //布尔值判断 用于异步请求的样式
         ids:[],
+        ssqValue:"请选择",
         searchData: {//查询条件
           page: {//翻页相关
           totalElements: 0,
@@ -137,7 +138,7 @@
         },
         addInfo: {//新增弹窗的表单及其需要新增的条件
         //createUID: '1545', //登录用户ID
-          ssq: [],
+          ssq: "",
           name: "",
           address: "",
           phone: "",
@@ -146,12 +147,15 @@
           fulladdress: ""
         },
         ruleValidate: {
+          ssq:[
+            { required: true, message: "请选择省市区"}
+          ],
           name:[
             { required: true, message: "名称不能为空",trigger: "blur"}
           ],
         },
         columns: [
-          {title:'序号',type: 'selection',width: 60,fixed: 'left'},
+          {title:'序号',type: 'selection',width: 60,align: "center",sortable: true},
           {title:'省',width: 100,align: 'center',key:'province',sortable: true},
           {title:'市',width: 100,align: 'center',key:'city',sortable: true},
           {title:'区县',width: 200,align: 'center',key:'area',sortable: true},
@@ -237,6 +241,7 @@
           .then(res => {
             this.$Message.success(res.message);
             this.getListData(this.searchData);
+            this.addInfo.id ='';
           });
       },
       getSelectData(value,selectedData){
@@ -244,7 +249,9 @@
           var seletData = [];
           for(var i in selectedData){
             var obj = selectedData[i];
-            seletData.push({key:obj.value,value:obj.label});
+            if($.inArray(obj.label,selectedData) < 0){
+              seletData.push(obj.label);
+            }
           }
         }
         this.addInfo.ssq = seletData;
@@ -278,6 +285,8 @@
       async addOperationFn() {
         this.toggleAdd = true;
         this.addModal = true;
+        this.ssqValue = '请选择';
+        this.addInfo.ssq = "";
         this.clearSearchInfo();
       },
       //保存新增操作项
@@ -319,7 +328,7 @@
         await getPolicestainfoByid(id)
           .then(res =>{
             this.toggleAdd = false;
-            this.addInfo.ssq = ['27','288','2511'];
+            this.addInfo.ssq = res.data.ssq;
             this.addInfo.name = res.data.name;
             this.addInfo.address = res.data.address;
             this.addInfo.lxdh = res.data.lxdh;
@@ -327,6 +336,7 @@
             this.addInfo.lon = res.data.lon;
             this.addInfo.lat = res.data.lat;
             this.addInfo.fulladdress = res.data.fulladdress;
+            this.ssqValue = res.data.ssqValue;
             this.addInfo.id = res.data.id;
             this.clearSearchInfo();
             this.addModal = true;

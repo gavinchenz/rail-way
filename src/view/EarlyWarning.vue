@@ -10,11 +10,7 @@
         <a class="header-page" @click="changePage(1)">综合预警</a>
         <a class="header-page" @click="changePage(2)">预警告警推送</a>
       </p>
-      <div class="header-right">
-        <span class="right-btn fullScreen">全屏</span>
-        <span class="right-btn lockScreen">锁屏</span>
-        <span class="right-btn signOut">退出</span>
-      </div>
+      <common-screen-btn></common-screen-btn>
      </div>
     <router-view class="main-content"></router-view>
    <footer class="footer"></footer>
@@ -22,8 +18,10 @@
 </template>
 
 <script>
+import CommonScreenBtn from '../components/common/commonScreenBtn';
 export default {
   name: 'EarlyWarning',
+  components:{CommonScreenBtn},
   data () {
     return {
       msg:"大数据中心应用系统",
@@ -85,22 +83,6 @@ export default {
   display:block;
   font-size:10px;
   letter-spacing: 0px;
-}
-.header-right{
-  width:180px;
-  float: right;
-}
-.right-btn{
-  float:left;
-  display:block;
-  width:60px;
-  line-height: 50px;
-  text-align: center;
-  cursor: pointer;
-}
-.right-btn:hover{
-  background:#2D5BA6;
-  font-weight: bold;
 }
 .header-ul{
   float: left;

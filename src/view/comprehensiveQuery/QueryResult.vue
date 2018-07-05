@@ -38,7 +38,7 @@
 </template>
 
 <script>
-    import {getSingleObjectiveList} from '@/service/getData';//异步请求链接
+    import {getQueryResultList} from '@/service/getData';//异步请求链接
     import Paging from '@/components/common/tools/paging';//分页
     import expandRow from '@/components/systemManagement/operation/OperationExpand-row';//分页
     import {process_error} from '@/config/process_request_conf' //请求成功返回的状态
@@ -75,6 +75,39 @@
                 ],
                 queryResultDataList: []
             }
+        },
+        methods:{
+          //获取sessionStorage
+          getMsgFn(){
+            this.searchData.searchMsg = sessionStorage.getItem('Msg');
+            console.log(this.searchData.searchMsg)
+          },
+          //查询
+          searchFn() {
+            let msg = this.searchData["searchMsg"];
+            this.searchData.page.pageNumber = 1;
+            if (msg) {
+              this.getListData(this.searchData);
+            } else {
+              this.$Message.warning("查询内容不能为空!");
+            }
+          },
+          //列表请求
+          async getListData(sendData) {
+            this.loading = true;
+            await getQueryResultList(sendData)
+              .then(res => {
+                this.loading = false;
+                this.queryResultDataList = res.data.content;
+                console.log(this.queryResultDataList);
+                this.searchData.page.totalElements = res.data.totalElements;
+              });
+          },
+        },
+        mounted(){
+          this.getMsgFn();
+          this.searchFn();
+          this.getListData(this.searchData);
         }
     };
 </script>

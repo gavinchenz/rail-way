@@ -17,10 +17,10 @@ export default {
   },
   methods:{
     changeRouter(index){
-      const msg=this.searchMsg
-      console.log(msg)
       if(index==0){
-        this.$router.push({name:'QueryResult',params:{msg}})
+        sessionStorage.setItem('Msg',this.searchMsg);
+        this.$router.push({name:'QueryResult'})
+
       }else{
         this.$router.push({path:'/Upload'})
       }

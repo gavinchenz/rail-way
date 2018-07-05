@@ -131,8 +131,7 @@
       components: {Paging, expandRow},
       data () {
         return {
-          isTrue:false,
-          flag:true,
+          flag:false,
           toggleAdd: true,//v-if 新增时添加或编辑图标切换
           addModal: false,//v-model 新增弹出框开启或关闭
           loading: false, //布尔值判断 用于异步请求的样式
@@ -175,42 +174,82 @@
             ]
           },
           columns: [
-            {title:'序号',type: 'selection',width: 60},
+            {title:'序号',type: 'selection',width: 60,align: "center"},
             {title:'下标',width: 200,align: 'center',key:'filedindex',sortable: true},
             {title:'清洗规则',width: 200,align: 'center',key:'rule',sortable: true},
             {title:'注释',width: 200,align: 'center',key:'filedname',sortable: true},
             {title:'数据源来源',width: 200,align: 'center',key:'datatype',sortable: true},
             { title: '数据日期', key: 'isdate',width: 150, align: 'center',
               render: (h, params) => {
-                var _this=this
+                          var switchBtns = document.getElementsByTagName('i-switch');
+                          var _this = this;
+                          for(var i=0;i<switchBtns.length;i++){
+                            switchBtns[i].onchange = function(){
+                              for(var i=0;i<switchBtns.length;i++){
+                                switchBtns[i]['disabled']= true;
+                                _this.flag= true
+                              }
+                              this['disabled'] = false;
+                              _this.flag= false
+                            }
+                            // return false;
+                          }
                 return h('div', [
                   h('i-switch', { //数据库1是已处理，0是未处理
                       props: {
                         type: 'primary',
                         size: 'large',
                         value: params.row.isdate === "1", //控制开关的打开或关闭状态，官网文档属性是value
-                        disabled:_this.isTrue
-                      },
-                      class:{
-                        switchBtn:true
+                        disabled:false
                       },
                       style:{
-                        disabled: _this.flag
+                        switchBtn:true
                       },
                       on: {
-                        'on-change': (value) => {//触发事件是on-change,用双引号括起来，
-                          //参数value是回调值，并没有使用到
-                          // this.switch(params.row); //params.index是拿到table的行序列，可以取到对应的表格值
-                          if(!value){
-                              // console.log(value)                            
-                            _this.flag=false;           
-                           }else{
-                            _this.flag=true;
-                           }
-                            if(_this.flag==true && _this.isTrue==false){
-                                  _this.isTrue=!_this.isTrue
-                               }   
-                        }
+                        // 'on-change': (value) => {//触发事件是on-change,用双引号括起来，
+                        // //   //参数value是回调值，并没有使用到
+                        // //   // this.switch(params.row); //params.index是拿到table的行序列，可以取到对应的表格值
+                        // //   if(value){
+                        // //       // console.log(value)
+                        // //     _this.flag=false;
+                        // //    }else{
+                        // //     _this.flag=true;
+                        // //    }
+                        // //     if(_this.flag==true && _this.isTrue==false){
+                        // //           _this.isTrue=!_this.isTrue
+                        // //        }
+                        // // }
+                        //   var switchBtns = document.getElementsByTagName('i-switch');
+                        //   var _this = this;
+                        //   for(var i=0;i<switchBtns.length;i++){
+                        //     switchBtns[i].onchange = function(){
+                        //       for(var i=0;i<switchBtns.length;i++){
+                        //         // switchBtns[i].disabled=true;
+                        //         _this.flag= true
+                        //       }
+                        //       // this.disabled=false;
+                        //       _this.flag= false
+                        //     }
+                        //     return false;
+                        //   }
+                        // }
+                        // 'on-change': (value) => {//触发事件是on-change,用双引号括起来，
+                        //   //参数value是回调值，并没有使用到
+                        //   // this.switch(params.row); //params.index是拿到table的行序列，可以取到对应的表格值
+                        //   var switchBtns = document.getElementsByTagName('i-switch');
+                        //   var _this = this;
+                        //   if(value){
+                        //     for(var i=0;i<switchBtns.length;i++){
+                        //       switchBtns[i].onchange = function(){
+                        //         for(var i=0;i<switchBtns.length;i++){
+                        //           _this.flag=!_this.flag
+                        //         }
+                        //         _this.flag= false
+                        //       }
+                        //       return false;
+                        //     }  
+                        //   }
+                        // }     
                       }
                     }, [
                       h('span', {
@@ -237,12 +276,12 @@
               render: (h, params) => {
                 return h("div", [h("Button", {
                     props: {
-                      type: "success",
+                      type: 'success',
                       size: 'small'
                     },
                     attrs: { title: "编辑" },
                     style: {
-                       marginRight: '5px'
+                      marginRight: '5px'
                     },
                     on: {
                       click: () => {
@@ -253,12 +292,12 @@
                   ),
                     h("Button", {
                         props: {
-                          type: "error",
+                          type: 'error',
                           size: 'small'
                         },
                         attrs: { title: "删除" },
                         style: {
-                           marginRight: '5px'
+                         marginRight: '5px'
                         },
                         on: {
                           click: () => {
@@ -292,7 +331,7 @@
           .then(res => {
             this.loading = false;
             this.cleanConfigDataList = res.data.content;
-            // console.log(this.cleanConfigDataList);
+            console.log(this.cleanConfigDataList);
             this.searchData.page.totalElements = res.data.totalElements;
           });
       },

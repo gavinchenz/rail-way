@@ -24,10 +24,6 @@ export default {
     SearchComponents,
     SearchCommonModule
   },
-  mounted(){
-    console.log(this.$router.query)
-    console.log(this.$router.query)
-  },
   data () {
     return {
      searchCommonList:[//异步获取，方法
@@ -104,7 +100,7 @@ export default {
   text-align:left;
   text-indent: 10px;
   font-size:14px;
-  background: url(../../assets/images/bg-03.jpg) no-repeat;
+  background: url(../../assets/images/bg-10.png) no-repeat;
   background-size:cover;
 }
 .search-box{
@@ -137,7 +133,7 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  align-items: flex-start;  
+  align-items: flex-start;
   align-content:flex-start;
 }
 </style>

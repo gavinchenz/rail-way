@@ -10,20 +10,18 @@
         <a class="header-page" @click="changePage(1)">数据特征专题库</a>
         <a class="header-page" @click="changePage(2)">数据接入及处理记录</a>
       </p>
-      <div class="header-right">
-        <span class="right-btn fullScreen">全屏</span>
-        <span class="right-btn lockScreen">锁屏</span>
-        <span class="right-btn signOut">退出</span>
-      </div>
+      <common-screen-btn></common-screen-btn>
      </div>
    <router-view class="main-content" />
-   <footer class="footer"></footer>   
+   <footer class="footer"></footer>
   </div>
 </template>
 
 <script>
+import CommonScreenBtn from '../components/common/commonScreenBtn';
 export default {
   name: 'DataAccess',
+  components:{CommonScreenBtn},
   data () {
     return {
       msg:"大数据中心应用系统",
@@ -72,7 +70,7 @@ export default {
   padding-left:5px;
 }
 #login-img{
-  height:100%; 
+  height:100%;
 }
 #login-p{
   height:100%;
@@ -86,22 +84,6 @@ export default {
   display:block;
   font-size:10px;
   letter-spacing: 0px;
-}
-.header-right{
-  width:180px;
-  float: right;
-}
-.right-btn{
-  float:left;
-  display:block;
-  width:60px;
-  line-height: 50px;
-  text-align: center;
-  cursor: pointer;
-}
-.right-btn:hover{
-  background:#2D5BA6;
-  font-weight: bold;
 }
 .header-ul{
   float: left;

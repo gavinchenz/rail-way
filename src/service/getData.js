@@ -511,6 +511,18 @@ export const getRealNameDataList = (sendData) => {
 }
 
 /**
+ * 查询结果-获取list
+ */
+export const getQueryResultList = (sendData) => {
+    return fetch('url',{
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        searchMsg:sendData.searchMsg
+    })
+}
+
+/**
  * 售处信息维护-获取list
  */
 export const getSaleInfoList = (sendData) => {
@@ -852,6 +864,20 @@ export const getmultiObjectiveList = (sendData) => {
 }
 
 /**
+ * 涉票建模分析-获取list
+ */
+export const getTicketRelatedModelList = (sendData) => {
+    return fetch('url', {
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        abnormalType:sendData.abnormalType,
+        startDate: sendData.startDate,
+        endDate: sendData.endDate,
+    })
+}
+
+/**
  * 涉毒建模分析-获取list
  */
 export const getDrugModelingDataList = (sendData) => {
@@ -864,6 +890,24 @@ export const getDrugModelingDataList = (sendData) => {
         jsz: sendData.endStation,
         kssj: sendData.startDate,
         jssj: sendData.endDate
+    })
+}
+
+/**
+ * 涉毒建模分析-开始分析
+ */
+export const getDrugAnalysisList = (sendData) => {
+    return fetch('url', {
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        yclx: sendData.abnormalType,
+        qsz: sendData.startStation,
+        jsz: sendData.endStation,
+        kssj: sendData.startDate,
+        jssj: sendData.endDate,
+        mxmc: sendData.mxmc,
+        sfcy: sendData.sfcy
     })
 }
 
@@ -896,6 +940,24 @@ export const getInvadeMoneyModelDataList = (sendData) => {
         jsz: sendData.endStation,
         kssj: sendData.startDate,
         jssj: sendData.endDate
+    })
+}
+
+/**
+ * 侵财建模分析-开始分析
+ */
+export const getInvadeMoneyAnalysisList = (sendData) => {
+    return fetch('url', {
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        yclx: sendData.abnormalType,
+        qsz: sendData.startStation,
+        jsz: sendData.endStation,
+        kssj: sendData.startDate,
+        jssj: sendData.endDate,
+        mxmc: sendData.mxmc,
+        sfcy: sendData.sfcy
     })
 }
 
@@ -945,6 +1007,32 @@ export const getIntermediateLibraryList = (sendData) => {
         size: sendData.page.size,
         sort: sendData.page.sort,
         zjkmc: sendData.libraryName
+    })
+}
+
+
+/**
+ * 中标人员-查看详情-获取list
+ */
+export const getBidDetailsList = (sendData) => {
+    return fetch('url',{
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        bidder:sendData.bidder
+    })
+}
+
+
+/**
+ * 查看涉票详情-获取list
+ */
+export const getTicketRelatedDetailList = (sendData) => {
+    return fetch('url',{
+        page: sendData.page.pageNumber,
+        size: sendData.page.size,
+        sort: sendData.page.sort,
+        ticketRelated:sendData.ticketRelated
     })
 }
 

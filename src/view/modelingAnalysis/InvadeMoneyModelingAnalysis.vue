@@ -37,7 +37,7 @@
                 <Row :gutter="12">
                     <Col span="2" class="col-label" style='text-align:left'>时间间隔</Col>
                     <Col span="4">
-                        <Input v-model="searchData.timeInterval" placeholder="请输入时间间隔" clearable></Input>
+                        <Input v-model="searchData.timeInterval" placeholder="请输入数字,单位以小时记算" clearable></Input>
                     </Col>
                     <Col span="2" class="col-label">频次</Col>
                     <Col span="4">
@@ -67,7 +67,7 @@
                         <Button type="primary" icon="ios-download-outline" @click="searchFn" >导入数据</Button>
                     </Col>
                     <Col span="4" class="col-label col-btn" style="marginLeft:50px"> 
-                        <Button type="success" icon="ios-search" @click="searchFn" >开始分析</Button>
+                        <Button type="success" icon="ios-search" @click="startAnalysisFn" >开始分析</Button>
                     </Col>
                 </Row>
             </FormItem>
@@ -78,11 +78,43 @@
              @on-sort-change="sortClick"></Table>
       <Paging class="table-page" :pages="searchData.page" @pageChange="pageChangeFn"></Paging>
     </div>
+    <!-- 新增模型 -->
+    <Modal v-model="addModal" width="600" @on-cancel="coloseModal('addForm')">
+      <p slot="header">
+        <Icon class="titleColor" type="edit"></Icon>
+        <span class="titleColor">新增模型</span>
+      </p>
+      <Form :model="addInfo" ref="addForm" :rules="ruleValidate">
+        <Row>
+          <Col span="12">
+            <FormItem label="模型名称" :label-width=75 prop="mxmc">
+              <Input v-model="addInfo.mxmc" placeholder="请输入模型名称"/>
+            </FormItem>
+          </Col>
+          <Col span="12">
+            <FormItem label="是否常用" style="margin-left: 40px">
+              <RadioGroup v-model="addInfo.sfcy" size="small">
+                <Radio label="true" style="margin-left:40px">
+                  <span>是</span>
+                </Radio>
+                <Radio label="false" style="margin-left:10px">
+                  <span>否</span>
+                </Radio>
+              </RadioGroup>
+            </FormItem>
+          </Col>
+        </Row>
+      </Form>
+      <div slot="footer">
+        <Button type="ghost" @click="coloseModal('addForm')">取消</Button>
+        <Button type="primary" @click="saveModalInfo('addForm')">保存</Button>
+      </div>
+    </Modal>
   </div>
 </template>
 
 <script>
-  import { getInvadeMoneyModelDataList } from "@/service/getData";//异步请求链接
+  import { getInvadeMoneyModelDataList,getInvadeMoneyAnalysisList } from "@/service/getData";//异步请求链接
   import Paging from "@/components/common/tools/paging";//分页
   import expandRow from "@/components/systemManagement/operation/OperationExpand-row";//分页
   import { process_error } from "@/config/process_request_conf"; //请求成功返回的状态
@@ -92,6 +124,7 @@
     data() {
       return {
         loading: false, //布尔值判断
+        addModal: false,//v-model 新增弹出框开启或关闭
         isValue:null,        
         searchData: {//查询条件
           page: {//翻页相关
@@ -108,6 +141,18 @@
           frequency2:'',
           startDate:'',
           endDate:'',
+        },
+        addInfo: {//新增弹窗的表单及其需要新增的条件
+            //createUID: '1545', //登录用户ID
+            mxmc:'',
+            sfcy: ''
+        }, 
+        concatData:[],
+        ruleValidate: {//新增弹窗表单addInfo的验证规则
+            //人员类别
+            mxmc:[
+                { required: true, message: "模型名称不能为空"}
+            ]
         },
         columns: [
           { title: "序号", type: "selection", fixed: 'left', width: 60, align: "center" },
@@ -210,7 +255,7 @@
       };
     },
     methods: {
-      //
+      //根据radio中value的值来改变筛选条件
       changeConditionFn(theValue){
           console.log(theValue)
           if(theValue==1 || theValue==2 || theValue==4){
@@ -219,6 +264,40 @@
               this.isValue=0;
           }
       },
+      //开始分析
+      startAnalysisFn(){
+          this.addModal = true;
+      },
+      //保存新增操作项
+      saveModalInfo(name) {
+          this.$refs[name].validate((valid) => {
+              if (valid) {
+                  console.log(this.searchData);
+                  console.log(this.addInfo);
+                  //别忘了写个方法把addInfo和searchData拼起来
+                  // this.concatData = (this.addInfo).concat(this.searchData);
+                  // console.log(this.concatData)
+                  this.getAnalysisFn(this.addInfo);// this.concatData
+                  this.$refs[name].resetFields();
+                  this.addModal = false;
+              } else {
+                  this.$Message.error("请在补充表单字段后再做提交操作");
+              }
+          });
+      },             
+      //新增，编辑保存请求
+      async getAnalysisFn(sendData) {
+          await getInvadeMoneyAnalysisList(sendData)
+            .then(res => {
+              this.$Message.success(res.message);//???分析后的处理，需求暂时未定
+              // this.getListData(this.searchData);
+          });
+      }, 
+      //关闭弹窗
+      coloseModal(name) {
+          this.addModal = false;
+          this.$refs[name].resetFields();
+      }, 
       //列表请求table
       async getListData(sendData) {
         this.loading = true;

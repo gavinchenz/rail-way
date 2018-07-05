@@ -12,59 +12,10 @@ import $ from 'jquery'
 import './assets/script/jquery.table2excel.min.js'
 
 // router
-import Router from 'vue-router'
-Vue.use(Router)
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
 
 import router from './router'
-
-// check auth when change router
-router.beforeEach((to, from, next) => {
-    // 禁用浏览器后退操作
-    window.history.pushState(null,null,document.URL);
-    window.addEventListener('popstate',function(){
-        history.pushState(null,null,document.URL);
-    });
-
-    iView.LoadingBar.start();
-
-    if (to.matched.some(record => record.meta.requireAuth)){
-        if (!auth.loggedIn()){
-            next({ path: '/' });
-        } else {
-            next();
-        }
-    }else{
-        next();
-    }
-});
-
-// import {routerMode} from './utils/config.js'
-
-// const router = new Router({
-//     mode: routerMode,
-//     scrollBehavior: () => ({ // 滚动条滚动的行为，不加这个默认就会记忆原来滚动条的位置
-//         y: 0
-//     }),
-//     routes,
-//     strict:process.env.NODE_ENV !== 'production'
-// })
-
-router.afterEach((to, from) => {
-    iView.LoadingBar.finish();
-});
-
-Vue.config.productionTip = false
-
-new Vue({
-    el: '#app',
-    router,
-    axios,
-    store,
-    components: { App },
-    render: (createElement) => {
-        return createElement(App);
-    }
-})
 
 //引入ivew
 import iView from 'iview'
@@ -94,22 +45,108 @@ import { tools,exportsObj } from './utils/tools'
 Vue.prototype.$tools = tools;
 Vue.prototype.$clearObj = exportsObj;
 
+//引入资源请求插件
+import axios from "axios";
 
-import axios from "./axios"
+//使用axios插件
+Vue.prototype.$axios=axios;
+
+//token全局默认配置
+axios.defaults.headers.common['Authentication-Token'] = store.state.token;
+
+// 添加请求拦截器
+axios.interceptors.request.use(config => {
+    // 在发送请求之前做些什么
+    //判断是否存在token，如果存在将每个页面header都添加token
+    if(store.state.token){
+        config.headers.common['Authentication-Token'] = store.state.token;
+        // config.headers.Authorization = `token ${store.state.token}`;
+    }
+    return config;
+    }, error => {
+        // 对请求错误做些什么
+        return Promise.reject(error);
+});
+
+// http response 拦截器
+axios.interceptors.response.use(
+    response => {
+        return response;
+    },
+    error => {
+        if (error.response) {
+            switch (error.response.status) {
+                case 401:
+                this.$store.commit('del_token');
+                router.replace({
+                path: '/login',
+                query: {redirect: router.currentRoute.fullPath}//登录成功后跳入浏览的当前页面
+            })
+        }
+    }
+    return Promise.reject(error.response.data)
+})
 
 import Swiper from 'vue-awesome-swiper'
 Vue.use(Swiper)
 
-// global directive to check user Auth
-Vue.directive("auth", {
-    bind: function(el, binding) {
-        let prop = binding.expression;
-        let map = store.state.auth;
-        if (!map.has(prop)) {
-            el.parentNode.removeChild(el);
-        }
-    }.bind(this)
+router.afterEach((to, from) => {
+    iView.LoadingBar.finish();
 });
 
+Vue.config.productionTip = false
+
+new Vue({
+    el: '#app',
+    router,
+    axios,
+    store,
+    components: { App },
+    render: (createElement) => {
+        return createElement(App);
+    }
+})
 
 
+// global directive to check user Auth
+// Vue.directive("auth", {
+//     bind: function(el, binding) {
+//         let prop = binding.expression;
+//         let map = store.state.auth;
+//         if (!map.has(prop)) {
+//             el.parentNode.removeChild(el);
+//         }
+//     }.bind(this)
+// });
+
+// // check auth when change router
+// router.beforeEach((to, from, next) => {
+//     // 禁用浏览器后退操作
+//     window.history.pushState(null,null,document.URL);
+//     window.addEventListener('popstate',function(){
+//         history.pushState(null,null,document.URL);
+//     });
+
+//     iView.LoadingBar.start();
+
+//     if (to.matched.some(record => record.meta.requireAuth)){
+//         if (!auth.loggedIn()){
+//             next({ path: '/' });
+//         } else {
+//             next();
+//         }
+//     }else{
+//         next();
+//     }
+// });
+
+// import {routerMode} from './utils/config.js'
+
+// const router = new Router({
+//     mode: routerMode,
+//     scrollBehavior: () => ({ // 滚动条滚动的行为，不加这个默认就会记忆原来滚动条的位置
+//         y: 0
+//     }),
+//     routes,
+//     strict:process.env.NODE_ENV !== 'production'
+// })

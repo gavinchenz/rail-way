@@ -148,7 +148,7 @@ export default {
   height:100%;
   display:flex;
   flex-direction: column;
-  background: url(../assets/images/bg-03.jpg) no-repeat;
+  background: url(../assets/images/bg-10.png) no-repeat;
   background-size:cover;
 }
 .index-content{

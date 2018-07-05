@@ -99,26 +99,15 @@
           { title: "姓名", key: "xm", width: 100, align: "center",sortable: true },
           { title: "证件类型", key: "zjlx", width: 150, align: "center",sortable: true },
           { title: "证件号", key: "zjbh", width: 250, align: "center",sortable: true },
-          { title: "乘车日期", key: "ccrq", width: 150, align: "center",sortable: true },
-          { title: "乘车时间", key: "ccsj", width: 150, align: "center",sortable: true },
-          { title: "票号", key: "ph", width: 100, align: "center",sortable: true },
-          { title: "车次", key: "cc", width: 100, align: "center",sortable: true },
-          { title: "发站", key: "fz", width: 100, align: "center",sortable: true },
-          { title: "到站", key: "dz", width: 100, align: "center",sortable: true },
-          { title: "车厢号", key: "cxh", width: 100, align: "center",sortable: true },
-          { title: "席别", key: "xb", width: 100, align: "center",sortable: true },
-          { title: "座位号", key: "zwh", width: 100, align: "center",sortable: true },
-          { title: "票种", key: "pz", width: 100, align: "center",sortable: true },
-          { title: "票价", key: "pj", width: 100, align: "center",sortable: true },
-          { title: "售票处", key: "spc", width: 100, align: "center",sortable: true },
-          { title: "窗口", key: "ck", width: 100, align: "center",sortable: true },
-          { title: "售票时间", key: "spsj", width: 150, align: "center",sortable: true },
+          { title: "性别", key: "xb", width: 150, align: "center",sortable: true },
+          { title: "籍贯", key: "jg", width: 150, align: "center",sortable: true },
+          { title: "年龄", key: "nl", width: 100, align: "center",sortable: true },
+          { title: "中标次数", key: "zbcs", width: 150, align: "center",sortable: true },
           {
             title: '操作',
             width: 150,
             align: 'center',
             key: 'center',
-            fixed:'right',
             render: (h, params) => {
               return h("div", [h ('Button', {
                           props: {
@@ -161,78 +150,11 @@
             xm:'张某',
             zjlx:'身份证',
             zjbh:610114197708157312,
-            ccrq:'2017-12-1',
-            ccsj:'05:25',
-            ph:'T1',
-            cc:'T123',
-            fz:'西安',
-            dz:'成都',
-            cxh:11,
-            xb:'上铺',
-            zwh:'A1',
-            pz:'',
-            pj:'',
-            spc:'',
-            ck:'',
-            spsj:'2017-11-15'
-          },
-          {
-            xm:'李某',
-            zjlx:'身份证',
-            zjbh:610114198707201474,
-            ccrq:'2017-11-12',
-            ccsj:'09:30',
-            ph:'T2',
-            cc:'T321',
-            fz:'成都',
-            dz:'西安',
-            cxh:18,
-            xb:'硬座',
-            zwh:'A1',
-            pz:'',
-            pj:'',
-            spc:'',
-            ck:'',
-            spsj:'2017-10-12'
-          },
-                              {
-            xm:'王某',
-            zjlx:'身份证',
-            zjbh:610114197708157312,
-            ccrq:'2017-12-1',
-            ccsj:'05:25',
-            ph:'T1',
-            cc:'T123',
-            fz:'西安',
-            dz:'成都',
-            cxh:11,
-            xb:'上铺',
-            zwh:'A1',
-            pz:'',
-            pj:'',
-            spc:'',
-            ck:'',
-            spsj:'2017-11-15'
-          },
-          {
-            xm:'刘某',
-            zjlx:'身份证',
-            zjbh:610114197708157312,
-            ccrq:'2017-12-1',
-            ccsj:'05:25',
-            ph:'T1',
-            cc:'T123',
-            fz:'西安',
-            dz:'成都',
-            cxh:11,
-            xb:'上铺',
-            zwh:'A1',
-            pz:'',
-            pj:'',
-            spc:'',
-            ck:'',
-            spsj:'2017-11-15'
-          },          
+            xb:'女',
+            jg:'汉',
+            nl:'37',
+            zbcs:'8',
+          }         
         ]//table里的数据，异步获取列表信息
       }  
     },
@@ -303,21 +225,10 @@
               }
           });
       },
-      //列表行查看
-      // async watchData(id) {
-      //     this.clearSearchInfo();
-      //     await watchSaleInfo(id)
-      //     .then(res => {
-      //         if (res.statusCode !== 200) return process_error(res);
-      //             this.$Message.success(res.message);
-      //             this.getListData(this.searchData)
-      //         }).catch(err => {
-      //             this.$Message.error(err.message)
-      //     })
-      // },
       //列表查看
       showRowData(id){
-          this.watchData(id);
+          sessionStorage.setItem('bidderId',id);
+          this.$router.push({path:'/BidDetails'}) 
       },
       async sortClick(column) {
           if (column.order != 'normal') {

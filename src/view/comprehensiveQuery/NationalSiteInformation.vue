@@ -7,7 +7,7 @@
         <BreadcrumbItem>全国站点信息</BreadcrumbItem>
     </Breadcrumb>
     <!-- 查询条件 -->
-    <Form :model="searchData" class="header-from">s
+    <Form :model="searchData" class="header-from">
         <FormItem class="form-item">
             <Row :gutter="16">
                 <Col span="2" class="col-label">所属局</Col>

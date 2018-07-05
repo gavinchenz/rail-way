@@ -1,6 +1,6 @@
 <template>
     <Row class="vm-table vm-panel">
-        <section v-if="authList.indexOf('0-3') > -1">
+        <section v-if="1 > -1">
             <div class="panel-heading">
                 <Breadcrumb separator=">">
                     <BreadcrumbItem href="#">字典管理</BreadcrumbItem>

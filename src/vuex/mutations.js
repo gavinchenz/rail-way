@@ -1,11 +1,13 @@
 import {
-    CHANGE_LOGIN_STATUS,
-    SET_USERINFO,
-    SET_DICT_GROUPS,
-    SET_AUTH,
-    CLEAR_AUTH,
-    SAVE_CASE_OBJ_SIGN,
-    SAVE_INVESTIGATE_TREE
+    CHANGE_LOGIN_STATUS,//改变登录状态
+    SET_USERINFO,//保存用户信息
+    SET_DICT_GROUPS,//设置命令组
+    SET_AUTH,//保存auth
+    CLEAR_AUTH,//删除auth
+    SAVE_CASE_OBJ_SIGN,//保存案件标识
+    SAVE_INVESTIGATE_TREE,//保存调查树
+    set_token,
+    del_token
 } from './mutation-type.js'
 
 import {setStore, getStore} from '../config/mUtils'
@@ -60,5 +62,13 @@ export default {
                 state.dictGroups.set(key, val);
             }
         }
+    },
+    [set_token](state, token) {
+        state.token = token
+        sessionStorage.token = token
+    },
+    [del_token](state) {
+        state.token = ''
+        sessionStorage.removeItem('token')
     }
 }

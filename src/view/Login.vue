@@ -17,8 +17,8 @@
       <footer class="f-footer">
         <p class="f-p">{{technicalTel}}</p>
         <p class="f-p">{{company}}</p>
-      </footer>   
-    </form> 
+      </footer>
+    </form>
   </div>
 </template>
 
@@ -48,10 +48,10 @@ export default {
         this.tabName="user-login";
       }else{
         this.loginTit="Key登录";
-        this.tabName="key-login";     
+        this.tabName="key-login";
       }
       $(".f-li").eq(index).addClass("borderChange").siblings().removeClass("borderChange");
-    }  
+    }
   }
 };
 </script>
@@ -60,7 +60,7 @@ export default {
 .my-login{
   width:100%;
   height:100%;
-  background: url(../assets/images/bg-03.jpg) no-repeat;
+  background: url(../assets/images/bg-10.png) no-repeat;
   background-size:cover;
 }
 #login-header{

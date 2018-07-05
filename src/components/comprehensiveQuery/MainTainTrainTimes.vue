@@ -17,7 +17,7 @@
       <div style="margin-bottom: 10px">
         <Button type="success"><Icon type="plus-round"></Icon>&nbsp;新增</Button>
         <Button type="primary"><Icon type="forward"></Icon>&nbsp;导入</Button>
-        <Button type="info"><Icon type="archive"></Icon>&nbsp;下载模板</Button>
+        <Button type="info" @click="downloadfiel"><Icon type="archive"></Icon>&nbsp;下载模板</Button>
         <Button type="error"><Icon type="close" size="12"></Icon>&nbsp;批量删除</Button>
         <Button type="ghost" @click="goBackFn" style="float: right">返回</Button>
       </div>
@@ -102,6 +102,10 @@
       };
     },
     methods:{
+      //下载模板
+      downloadfiel(){
+        location.href='api/cm/train/downloadfiel/sk';
+      },
       //维护列车时刻
       mainTainTrainTimes(){},
       //修改
@@ -116,7 +120,8 @@
       },
       //返回到列车车次
       goBackFn(){
-        this.$router.push({path:'/Trains'})
+        this.$router.push({path:'/Trains'});
+          this.trainFlag = 'cc';
       }
     },
     mounted(){

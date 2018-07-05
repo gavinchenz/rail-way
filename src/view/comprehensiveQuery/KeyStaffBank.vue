@@ -45,7 +45,7 @@
         <Row>
           <Col span="2" style="text-align: right">
             <FormItem>
-              <Button type="success" icon="plus-round" @click="addOperationFn" size="small">新增</Button>
+              <Button type="success" icon="plus-round" @click="addOperationFn">新增</Button>
             </FormItem>
           </Col>
         </Row>

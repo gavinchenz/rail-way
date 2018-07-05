@@ -4,7 +4,7 @@
     <input type="password" class="user-input" placeholder="请输入密码" v-model="password"/>
     <span class="user-spanMsg"></span>
     <div class="login-form mart40">
-      <Button type="primary" @click='isLogin' class='user-btn'>登陆</Button>
+      <Button type="primary" @click='isLogin' class='user-btn'>登录</Button>
     </div>
   </div>
 </template>
@@ -35,6 +35,7 @@ export default {
     ]),*/
 
     async isLogin () {
+      //登录验证
       if (!this.username || !this.password) {
         let msg = !!this.username ? `请输入密码!` : `请输入用户名!`;
         return this.$Message.error(msg);
@@ -44,15 +45,28 @@ export default {
           if(loginInfo.statusCode !== 200) return process_error(loginInfo);
           let userInfo = loginInfo.data; // 用户信息
           let authInfo = loginInfo.data.ocodeList; // 资源信息
-          sessionStorage.setItem('token', loginInfo.data.cardId);
-          this.SET_USERINFO(userInfo);
+          //根据store中set_token方法将token保存至localStorage/sessionStorage中，data["Authentication-Token"]，获取token的value值
+          // this.$store.commit('set_token', data["Authentication-Token"]);
+          sessionStorage.setItem('token', loginInfo.data.cardId);//保存token
+          this.SET_USERINFO(userInfo);// loginInfo.data
           this.CHANGE_LOGIN_STATUS(true);
-          this.SET_AUTH(authInfo);
+          this.SET_AUTH(authInfo);//loginInfo.data.ocodeList
         /*this.getDictGroups();*/
           this.loginSign = 1;
           this.$router.push({path: "/index"});
+
+          // if (store.state.token) {
+          // this.$router.push('/index')
+          // console.log(store.state.token)
+          // } else {
+          // this.$router.replace('/login');
+          // }
         })
-        .catch(err => console.log(err))
+        .catch(err =>{
+          // this.loginSign = 0;
+          // this.$Message.error('账号或密码错误');
+          console.log(err)
+        })
     }
   },
   mounted(){

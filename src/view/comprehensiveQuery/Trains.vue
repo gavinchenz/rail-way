@@ -25,10 +25,15 @@
         </FormItem>
       </Form>
       <div style="margin-bottom: 10px">
-        <Button type="success" @click="addModalFn"><Icon type="plus-round"></Icon>&nbsp;新增</Button>
-        <Button type="primary"><Icon type="forward"></Icon>&nbsp;导入</Button>
-        <Button type="info"><Icon type="archive"></Icon>&nbsp;下载模板</Button>
-        <Button type="error"><Icon type="close" size="12"></Icon>&nbsp;批量删除</Button>
+        <Button type="success" @click="addModalFn" size='small'><Icon type="plus-round"></Icon>&nbsp;新增</Button>
+        <Upload
+                 ref="upload"
+                 :show-upload-list="false"
+                 action="api/cm/train/importFile/cc" style="display: inline-block">
+          <Button type="primary" size='small'><Icon type="forward"></Icon>&nbsp;导入</Button>
+        </Upload>
+        <Button type="info" @click="downloadfiel" size='small'><Icon type="archive"></Icon>&nbsp;下载模板</Button>
+        <Button type="error" size='small'><Icon type="close" size="12"></Icon>&nbsp;批量删除</Button>
       </div>
       <Table stripe :columns="columns" :data="tableList" :loading="showLoading" @on-selection-change="checkedTableRow" height="600" size="small" style="margin-bottom: 10px"></Table>
       <Paging :pages="searchData.page" @pageChange="pageChangeFn"></Paging>
@@ -81,11 +86,10 @@
                 </FormItem>
               </Col>
             </Row>
-          </Row>
         </Form>
         <div slot="footer">
-          <Button type="ghost" @click="closeAddModal">关闭</Button>
-          <Button type="primary" @click="saveAddModal" v-if="addFromDisabled === false">确定</Button>
+          <Button type="ghost" @click="closeAddModal">取消</Button>
+          <Button type="primary" @click="saveAddModal" v-if="addFromDisabled === false">保存</Button>
         </div>
       </Modal>
     </div>
@@ -93,15 +97,16 @@
 </template>
 
 <script>
-  import Paging from '@/components/common/tools/paging' //二次封装的分页组件，可以减少页面代码
+  import Paging from '@/components/common/tools/paging'
   export default {
-    name: "Trains",
     components: {Paging},
+    name: "Trains",
     data() {
       return {
         showLoading:false, //表格是否执行正在加载中，可以在请求前设置true，请求成功后更改为false
         addModal:false, //弹窗是否处于打开状态,增，查，改操作
         addFromDisabled:false, //判断查看打开了弹窗，禁用表单为不可编辑
+        file:null,
         columns:[
           {type: 'selection',width: 60,align: 'center'},
           {type: 'index',title:'序号',width: 60,align: 'center'},
@@ -218,6 +223,11 @@
       };
     },
     methods:{
+      //上传文件前
+      handleUpload (file) {
+        this.file = file;
+        return false;
+      },
       //表格复选框
       checkedTableRow(data){
         console.log(data)  //返回已选行的数据
@@ -235,6 +245,10 @@
         this.iconType = 'plus-round';
         this.addModal = true;
         this.clearAddform();
+      },
+      //下载模板
+      downloadfiel(){
+        location.href='api/cm/train/downloadfiel/cc';
       },
       //维护列车时刻
       mainTainTrainTimes(id){
